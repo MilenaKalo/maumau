@@ -1,10 +1,5 @@
 package org.groupone;
 
-/**
- * Hello world!
- *
- */
-//Test
 public class App
 {
     public static void main( String[] args )
