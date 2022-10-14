@@ -7,7 +7,7 @@ public class SpielerHand {
     //Attribute
     private int anzahlKarten;
     private List<Karte> karten;
-    private Mensch mensch;
+    private Spieler spieler;
 
     //Getter und Setter
     public int getAnzahlKarten() {
@@ -26,19 +26,19 @@ public class SpielerHand {
         this.karten = karten;
     }
 
-    public Mensch getMensch() {
-        return mensch;
+    public Spieler getSpieler() {
+        return spieler;
     }
 
-    public void setMensch(Mensch mensch) {
-        this.mensch = mensch;
+    public void setSpieler(Spieler spieler) {
+        this.spieler = spieler;
     }
 
     //Konstruktor
-    public SpielerHand(int anzahlKarten, List<Karte> karten, Mensch mensch) {
+    public SpielerHand(int anzahlKarten, List<Karte> karten, Spieler spieler) {
         this.anzahlKarten = anzahlKarten;
         this.karten = karten;
-        this.mensch = mensch;
+        this.spieler = spieler;
     }
 
 }

@@ -33,6 +33,14 @@ public class Spieler {
         this.punkte = punkte;
     }
 
+    public SpielerHand getSpielerHand() {
+        return spielerHand;
+    }
+
+    public void setSpielerHand(SpielerHand spielerHand) {
+        this.spielerHand = spielerHand;
+    }
+
     //Konstruktor
     public Spieler(long id, String name, int punkte) {
         this.id = id;

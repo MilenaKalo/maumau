@@ -5,6 +5,9 @@ public class Karte {
     //Attribute
     private String kartenFarbe;
     private String kartenWert;
+    private SpielerHand spielerHand;
+    private AblageStapel ablageStapel;
+    private ZiehStapel ziehStapel;
 
     //Getter und Setter
     public String getKartenFarbe() {
