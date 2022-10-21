@@ -9,6 +9,7 @@ public class Spiel {
     private int runde;
     private AblageStapel ablageStapel;
     private ZiehStapel ziehStapel;
+    private Spieler aktiverSpieler;
 
     //Getter und Setter
     public List<Spieler> getSpielerListe() {
@@ -41,6 +42,14 @@ public class Spiel {
 
     public void setZiehStapel(ZiehStapel ziehStapel) {
         this.ziehStapel = ziehStapel;
+    }
+
+    public Spieler getAktiverSpieler() {
+        return aktiverSpieler;
+    }
+
+    public void setAktiverSpieler(Spieler aktiverSpieler) {
+        this.aktiverSpieler = aktiverSpieler;
     }
 
     //Konstruktor
