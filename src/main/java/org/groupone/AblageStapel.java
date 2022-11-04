@@ -26,9 +26,18 @@ public class AblageStapel {
         this.ablagekarten = ablagekarten;
     }
 
+    public String getZulaessigeFarbe() {
+        return zulaessigeFarbe;
+    }
+
+    public void setZulaessigeFarbe(String zulaessigeFarbe) {
+        this.zulaessigeFarbe = zulaessigeFarbe;
+    }
+
     //Konstruktor
     public AblageStapel(int anzahlKarten, List<Karte> ablagekarten) {
         this.anzahlKarten = anzahlKarten;
         this.ablagekarten = ablagekarten;
     }
+
 }

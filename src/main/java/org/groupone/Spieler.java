@@ -7,6 +7,10 @@ public class Spieler {
     private String name;
     private int punkte;
     private SpielerHand spielerHand;
+    private boolean mauGesagt;
+    private int strafziehen;
+    private String wunschfarbe;
+    private boolean aussetzen;
 
     //Getter und Setter
     public long getId() {
@@ -39,6 +43,14 @@ public class Spieler {
 
     public void setSpielerHand(SpielerHand spielerHand) {
         this.spielerHand = spielerHand;
+    }
+
+    public boolean isMauGesagt() {
+        return mauGesagt;
+    }
+
+    public void setMauGesagt(boolean mauGesagt) {
+        this.mauGesagt = mauGesagt;
     }
 
     //Konstruktor
