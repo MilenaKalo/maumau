@@ -48,4 +48,28 @@ public class Spieler {
         this.punkte = punkte;
     }
 
+
+    public int getStrafziehen() {
+        return strafziehen;
+    }
+
+    public void setStrafziehen(int strafziehen) {
+        this.strafziehen = strafziehen;
+    }
+
+    public String getWunschfarbe() {
+        return wunschfarbe;
+    }
+
+    public void setWunschfarbe(String wunschfarbe) {
+        this.wunschfarbe = wunschfarbe;
+    }
+
+    public boolean isAussetzen() {
+        return aussetzen;
+    }
+
+    public void setAussetzen(boolean aussetzen) {
+        this.aussetzen = aussetzen;
+    }
 }

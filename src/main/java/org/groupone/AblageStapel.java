@@ -7,6 +7,7 @@ public class AblageStapel {
     //Attribute
     private int anzahlKarten;
     private List<Karte> ablagekarten;
+    private String zulaessigeFarbe;
 
     //Getter und Setter
     public int getAnzahlKarten() {
