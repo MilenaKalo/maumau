@@ -1,6 +1,6 @@
-package org.groupone;
+package classes;
 
-public class Npc extends Spieler{
+public class Npc extends Spieler {
 
     //Konstruktor
     public Npc(long id, String name, int punkte) {

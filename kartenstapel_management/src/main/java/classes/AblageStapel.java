@@ -1,4 +1,4 @@
-package org.groupone;
+package classes;
 
 import java.util.List;
 

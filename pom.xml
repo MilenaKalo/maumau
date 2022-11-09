@@ -6,7 +6,14 @@
 
   <groupId>org.groupone</groupId>
   <artifactId>maumau</artifactId>
+  <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
+  <modules>
+    <module>spiel_management</module>
+    <module>spieler_management</module>
+    <module>spielregeln_management</module>
+    <module>kartenstapel_management</module>
+  </modules>
 
   <name>maumau</name>
   <!-- FIXME change it to the project's website -->

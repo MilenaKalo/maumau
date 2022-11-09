@@ -1,4 +1,6 @@
-package org.groupone;
+package classes;
+
+import classes.SpielerHand;
 
 public class Spieler {
 

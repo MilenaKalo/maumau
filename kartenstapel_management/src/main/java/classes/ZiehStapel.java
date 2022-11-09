@@ -1,4 +1,6 @@
-package org.groupone;
+package classes;
+
+import classes.Karte;
 
 import java.util.List;
 

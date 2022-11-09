@@ -1,4 +1,8 @@
-package org.groupone;
+package classes;
+
+import classes.AblageStapel;
+import classes.Spieler;
+import classes.ZiehStapel;
 
 import java.util.List;
 

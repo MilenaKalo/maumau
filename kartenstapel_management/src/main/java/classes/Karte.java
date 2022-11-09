@@ -1,4 +1,4 @@
-package org.groupone;
+package classes;
 
 public class Karte {
 

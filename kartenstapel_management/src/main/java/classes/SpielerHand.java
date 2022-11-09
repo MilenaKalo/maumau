@@ -1,13 +1,16 @@
-package org.groupone;
+package classes;
+
+import classes.Karte;
+
 
 import java.util.List;
 
 public class SpielerHand {
 
-    //Attribute
+    //Attributem
     private int anzahlKarten;
     private List<Karte> karten;
-    private Spieler spieler;
+
 
     //Getter und Setter
     public int getAnzahlKarten() {
@@ -26,19 +29,13 @@ public class SpielerHand {
         this.karten = karten;
     }
 
-    public Spieler getSpieler() {
-        return spieler;
-    }
 
-    public void setSpieler(Spieler spieler) {
-        this.spieler = spieler;
-    }
 
     //Konstruktor
-    public SpielerHand(int anzahlKarten, List<Karte> karten, Spieler spieler) {
+    public SpielerHand(int anzahlKarten, List<Karte> karten) {
         this.anzahlKarten = anzahlKarten;
         this.karten = karten;
-        this.spieler = spieler;
+
     }
 
 }
