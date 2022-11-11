@@ -1,6 +1,18 @@
 # Default ignored files
 /shelf/
 /workspace.xml
+#hinzugefühte Files
+compiler.xml
+encodings.xml
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.logs
+*.iml
+.idea/
+.eclipse
 # Editor-based HTTP Client requests
 /httpRequests/
 # Datasource local storage ignored files
