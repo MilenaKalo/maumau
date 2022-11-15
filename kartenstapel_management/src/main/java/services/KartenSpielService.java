@@ -1,5 +1,9 @@
 package services;
 
+import classes.Karte;
+
+import java.util.List;
+
 public interface KartenSpielService {
 
     /**
@@ -14,7 +18,7 @@ public interface KartenSpielService {
      * @param karteList Liste aus Karten die gemischt werden sollen
      * @return die fertig gemischte Kartenliste
      */
-    //  List<Karte> mischeKarten(List<Karte> karteList );
+      List<Karte> mischeKarten(List<Karte> karteList );
 
     /**
      * das Spiel wird erzeugt
@@ -31,5 +35,5 @@ public interface KartenSpielService {
      * @param kartenWerte -> Der Werte der Karten
      * @return karte -> Die erzeugte Karte
      */
-    //  Karte karteErzeugt(List<String> kartenFarben, List<String> kartenWerte);
+      Karte karteErzeugt(List<String> kartenFarben, List<String> kartenWerte);
 }

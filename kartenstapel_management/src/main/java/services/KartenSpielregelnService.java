@@ -1,5 +1,8 @@
 package services;
 
+import classes.AblageStapel;
+import classes.Karte;
+
 public interface KartenSpielregelnService {
     /**
      * Prüft ob die Karte gelegt werden kann
@@ -7,6 +10,6 @@ public interface KartenSpielregelnService {
      * @param ablageStapel der Stapel wo die Karte draufgelegt werden soll
      * @return true wenn die Karte abgelegt werden kann
      */
-    //   boolean prüfeKarte(Karte karte, AblageStapel ablageStapel);
+      boolean prüfeKarte(Karte karte, AblageStapel ablageStapel);
 
 }

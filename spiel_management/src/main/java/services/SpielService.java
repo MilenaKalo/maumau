@@ -26,14 +26,14 @@ public interface SpielService {
      * @param spiel Spiel wo der nächste Spieler in der Liste genommen wird
      * @return der Spieler der nun an der Reihe ist
      */
-    //  Spieler nächsterSpielerIstDran(Spiel spiel);
+     Spieler nächsterSpielerIstDran(Spiel spiel);
 
     /**
      * Spiel wird beendet
      * (Methode die in der KLasse Spiel angesiedelt wird)
      * @param spiel Spiel das beendet wird
      */
-    //  void beendeSpiel(Spiel spiel);
+     void beendeSpiel(Spiel spiel);
 
 
 }

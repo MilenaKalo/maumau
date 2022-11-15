@@ -18,4 +18,14 @@ public class SpielImpl implements SpielService {
 
     }
 
+    @Override
+    public Spieler nächsterSpielerIstDran(Spiel spiel) {
+        return null;
+    }
+
+    @Override
+    public void beendeSpiel(Spiel spiel) {
+
+    }
+
 }
