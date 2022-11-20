@@ -6,7 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="maumau" />
+        <module name="kartenstapel_management" />
+        <module name="spielregeln_management" />
+        <module name="spiel_management" />
+        <module name="spieler_management" />
         <module name="KBE" />
       </profile>
     </annotationProcessing>
