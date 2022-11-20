@@ -1,7 +1,9 @@
 package services;
 
+import classes.AblageStapel;
 import classes.Spiel;
 import classes.Spieler;
+import classes.ZiehStapel;
 
 import java.util.List;
 
@@ -34,6 +36,15 @@ public interface SpielService {
      * @param spiel Spiel das beendet wird
      */
      void beendeSpiel(Spiel spiel);
+
+    /**
+     * das Spiel wird erzeugt
+     * bereitet das spiel vor, erzeugt die Karten und mischt die karten und verteilt
+     * @param ablageStapel
+     * @param ziehStapel
+     * @param spieler
+     */
+    void spielErzeugt(AblageStapel ablageStapel, ZiehStapel ziehStapel, Spieler spieler);
 
 
 }

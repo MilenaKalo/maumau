@@ -7,6 +7,6 @@ import services.KartenSpielregelnService;
 public class KartenSpielregelnImpl implements KartenSpielregelnService {
     @Override
     public boolean prüfeKarte(Karte karte, AblageStapel ablageStapel) {
-        return false;
+        return true;
     }
 }

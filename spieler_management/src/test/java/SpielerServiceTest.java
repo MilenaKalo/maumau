@@ -18,8 +18,6 @@ public class SpielerServiceTest {
     @InjectMocks
     private SpielerService spielerService = new SpielerImpl();
 
-
-
     @Test
     public void erhöhePunktTest() {
         //setup
