@@ -22,6 +22,6 @@ public interface SpielregelnService {
      * prüft ob es eine Wunschfarbe bei dem Spiel existiert
      * @param spieler Spieler bei dem ds Attribut Wunschfarbe geprüft wird in dem geprüft werden soll
      */
-    void prüfeWunschfarbe(Spieler spieler );
+    void prüfeWunschfarbe(Spieler spieler);
 
 }

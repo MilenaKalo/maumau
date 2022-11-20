@@ -39,7 +39,7 @@ public interface SpielService {
 
     /**
      * das Spiel wird erzeugt
-     * bereitet das spiel vor, erzeugt die Karten und mischt die karten und verteilt
+     * bereitet das spiel vor, erzeugt die Karten, mischt sie und verteilt sie
      * @param ablageStapel
      * @param ziehStapel
      * @param spieler
