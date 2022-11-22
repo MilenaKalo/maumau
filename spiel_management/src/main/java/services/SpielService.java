@@ -46,5 +46,9 @@ public interface SpielService {
      */
     void spielErzeugt(AblageStapel ablageStapel, ZiehStapel ziehStapel, Spieler spieler);
 
-
+    /**
+     * zeigt den Gewinner des Spiels an
+     * @param spieler der Spieler der gewonnen hat
+     */
+    void gibGewinneraus(Spieler spieler);
 }

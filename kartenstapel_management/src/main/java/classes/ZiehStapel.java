@@ -1,9 +1,6 @@
 package classes;
 
-import classes.Karte;
-
 import java.util.List;
-
 public class ZiehStapel {
 
     //Attribute

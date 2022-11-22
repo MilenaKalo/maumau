@@ -1,13 +1,14 @@
 package implementation;
 
 import classes.Spieler;
+import classes.SpielerHand;
 import classes.ZiehStapel;
 import services.SpielregelnService;
 
 public class SpielregelnImpl implements SpielregelnService {
 
     @Override
-    public void siebenGelegt() {
+    public void siebenGelegt(SpielerHand spielerhand, ZiehStapel ziehstapel) {
 
     }
 

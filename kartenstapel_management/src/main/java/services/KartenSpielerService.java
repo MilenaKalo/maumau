@@ -5,21 +5,19 @@ import classes.SpielerHand;
 import classes.ZiehStapel;
 
 public interface KartenSpielerService {
-    void legeKarteAb(SpielerHand spielerhand, Karte karte);
 
-    void zieheKarte(SpielerHand spielerhand, ZiehStapel ziehStapel);
     /**
      *Spieler können Karten ablegen die die gleiche Farbe oder Wert haben
-     * @param spiel Das Spiel wo die Karte von der Spielerhand in den Ablagestapel geht
-     * @param spieler Spieler der die Karte ablegen muss
+     * @param spielerhand Hand des Spielers, die eine Karte ablegen soll
      * @param karte die Karte die abgelegt wird
      */
-     // void legeKarteAb(SpielerHand spielerhand, Karte karte);
+    void legeKarteAb(SpielerHand spielerhand, Karte karte);
 
     /**
      * Spieler muss Karte ziehen weil er keine passende Karte mehr hat.
-     * @param spiel Spiel wo die Karte vom Spieler vom Ziehstapel gezogen wird
+     * @param spielerhand Hand des Spielers, die eine Karte aufnehmen muss
+     * @param ziehStapel Stapel, von dem eine Karte entnommen werden soll
      */
-     // void zieheKarte(SpielerHand spielerhand, ZiehStapel ziehStapel);
+    void zieheKarte(SpielerHand spielerhand, ZiehStapel ziehStapel);
 
 }

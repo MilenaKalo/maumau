@@ -1,5 +1,4 @@
 package classes;
-
 public class Karte {
 
     //Attribute

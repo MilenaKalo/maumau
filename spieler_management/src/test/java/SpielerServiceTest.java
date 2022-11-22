@@ -1,4 +1,8 @@
+import classes.Karte;
 import classes.Spieler;
+import classes.SpielerHand;
+import implementation.KartenSpielImpl;
+import implementation.KartenSpielerImpl;
 import implementation.SpielerImpl;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
@@ -12,11 +16,17 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
 import services.SpielerService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @RunWith(MockitoJUnitRunner.class)
 public class SpielerServiceTest {
     @InjectMocks
     private SpielerService spielerService = new SpielerImpl();
+
+    @Mock
+    private KartenSpielerImpl kartenSpielerImpl;
 
     @Test
     public void erhöhePunktTest() {
@@ -27,7 +37,6 @@ public class SpielerServiceTest {
         int punkteErwartet = 2;
 
          //actual
-
         spielerService.erhöhePunkt(spieler);
 
         // assert
@@ -36,7 +45,25 @@ public class SpielerServiceTest {
 
     @Test
     public void maumauTest() {
-       // was sollen wir hier testen ?
+       //Setup
+        Spieler spieler = new Spieler(1L, "Max Mustermann", 0);
+        List<Karte> kartenListe = new ArrayList<>();
+        Karte herzBube = new Karte("Herz", "Bube");
+        Karte pikAss = new Karte("Pik", "Ass");
+        kartenListe.add(herzBube);
+        kartenListe.add(pikAss);
+        SpielerHand spielerHand = new SpielerHand(2, kartenListe);
+        spieler.setSpielerHand(spielerHand);
+        //Erwartet
+        boolean t = true;
+
+        //actual
+        Mockito.doNothing().when(kartenSpielerImpl).legeKarteAb(spieler.getSpielerHand(),
+                spieler.getSpielerHand().getKarten().get(1));
+        spielerService.sageMau(spieler);
+
+        //assert
+        Assertions.assertEquals(t, spieler.isMauGesagt());
     }
 
     @Test

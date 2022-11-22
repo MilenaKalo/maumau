@@ -13,11 +13,6 @@ public class SpielerImpl implements SpielerService {
     }
 
     @Override
-    public void gibGewinneraus(Spieler spieler) {
-
-    }
-
-    @Override
     public void maumau(Spieler spieler) {
 
     }

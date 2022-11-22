@@ -15,7 +15,6 @@ public class KartenSpielregelnTest {
 
     @InjectMocks
     private KartenSpielregelnService kartenSpielregelnService = new KartenSpielregelnImpl();
-
     @Test
     public void prüfeKarteTest(){
 

@@ -13,12 +13,6 @@ public interface SpielerService {
     void erhöhePunkt(Spieler spieler);
 
     /**
-     * zeigt den Gewinner des Spiels an
-     * @param spieler der Spieler der gewonnen hat
-     */
-     void gibGewinneraus(Spieler spieler);
-
-    /**
      * Die letzte Karte wurd abgelegt und der Spieler muss MauMau sagen.
      * @param spieler Spieler der  maumau sagt
      */
@@ -30,12 +24,10 @@ public interface SpielerService {
      */
     void sageMau(Spieler spieler);
 
-
     /**
      * Setzt das Mau-Attribut auf false zurück
      * @param spieler Spieler der sein Mau verspielt hat
      */
     void mauZuruecksetzen(Spieler spieler);
-
 
 }
