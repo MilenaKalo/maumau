@@ -10,18 +10,11 @@ import java.util.List;
 public interface SpielService {
 
     /**
-     *Erstellt eine zufällige Reihenflge in der die Spieler zum Zug kommen
+     *Erstellt eine zufällige Reihenfolge in der die Spieler zum Zug kommen
      * (Methode wird der Klasse Spiel zugeorndet)
      * @return  Liste der Reihenfolge der Spieler
      */
-    List<Spieler> erstelleSpielerReihenfolge();
-
-    /**
-     * Jeder Spieler der am Spiel teilnimmt erhält 5 Karten am Anfang
-     * (Methode der KLasse Spiel)
-     * @param spiel Spiel wo die Karte am Anfang ausgegeben wird
-     */
-    void gebeKartenAusAmAnfang(Spiel spiel);
+    List<Spieler> erstelleSpielerReihenfolge(List<Spieler> spielerliste);
 
     /**
      * Nächster Spieler dran
@@ -35,20 +28,28 @@ public interface SpielService {
      * (Methode die in der KLasse Spiel angesiedelt wird)
      * @param spiel Spiel das beendet wird
      */
-     void beendeSpiel(Spiel spiel);
-
-    /**
-     * das Spiel wird erzeugt
-     * bereitet das spiel vor, erzeugt die Karten, mischt sie und verteilt sie
-     * @param ablageStapel
-     * @param ziehStapel
-     * @param spieler
-     */
-    void spielErzeugt(AblageStapel ablageStapel, ZiehStapel ziehStapel, Spieler spieler);
+     String beendeSpiel(Spiel spiel);
 
     /**
      * zeigt den Gewinner des Spiels an
-     * @param spieler der Spieler der gewonnen hat
+     * @param spiel das Spiel wo der Gewinner ermittelt werden soll
      */
-    void gibGewinneraus(Spieler spieler);
+    Spieler gibGewinneraus(Spiel spiel);
+
+    /**
+     * gibt den Spieler zurück der als nächstes dran ist
+     * @param spiel Spiel in dem die Spielerreihenfole geprüft wird
+     * @return der Spieler der nun dran ist
+     */
+    Spieler aussetzen(Spiel spiel);
+
+    /**
+     * das Spiel wird erzeugt und die Karten werden verteilt
+     * @param spielerListe Liste mit Spielern die Karten erhalten
+     * @param runde die Runde "0" wird gesetzt
+     * @param ablageStapel der Ablagestapel erhält Karten
+     * @param ziehStapel Ziehstapel der Karten erhält
+     * @return das vorbereitete Spiel
+     */
+    Spiel erstelleSpiel(List<Spieler> spielerListe, int runde, AblageStapel ablageStapel, ZiehStapel ziehStapel);
 }

@@ -18,10 +18,4 @@ public interface SpielregelnService {
      */
      void mauStrafe(Spieler spieler, ZiehStapel ziehStapel);
 
-    /**
-     * prüft ob es eine Wunschfarbe bei dem Spiel existiert
-     * @param spieler Spieler bei dem ds Attribut Wunschfarbe geprüft wird in dem geprüft werden soll
-     */
-    void prüfeWunschfarbe(Spieler spieler);
-
 }

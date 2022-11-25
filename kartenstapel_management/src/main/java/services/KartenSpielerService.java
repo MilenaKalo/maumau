@@ -1,5 +1,6 @@
 package services;
 
+import classes.AblageStapel;
 import classes.Karte;
 import classes.SpielerHand;
 import classes.ZiehStapel;
@@ -9,9 +10,9 @@ public interface KartenSpielerService {
     /**
      *Spieler können Karten ablegen die die gleiche Farbe oder Wert haben
      * @param spielerhand Hand des Spielers, die eine Karte ablegen soll
-     * @param karte die Karte die abgelegt wird
+     * @param ablagestapel der Stapel der die abgelegte Karte erhält
      */
-    void legeKarteAb(SpielerHand spielerhand, Karte karte);
+    void legeKarteAb(SpielerHand spielerhand, Karte karte, AblageStapel ablagestapel);
 
     /**
      * Spieler muss Karte ziehen weil er keine passende Karte mehr hat.

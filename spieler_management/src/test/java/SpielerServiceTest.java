@@ -1,3 +1,4 @@
+import classes.AblageStapel;
 import classes.Karte;
 import classes.Spieler;
 import classes.SpielerHand;
@@ -54,22 +55,28 @@ public class SpielerServiceTest {
         kartenListe.add(pikAss);
         SpielerHand spielerHand = new SpielerHand(2, kartenListe);
         spieler.setSpielerHand(spielerHand);
+
+        Karte kreuzVier = new Karte("Kreuz", "Vier");
+
+        List<Karte> ablageListe = new ArrayList<>();
+        ablageListe.add(kreuzVier);
+
+        int anzahlAblageKarten = 1;
+
+        AblageStapel ablageStapel = new AblageStapel(anzahlAblageKarten, ablageListe);
+
         //Erwartet
         boolean t = true;
 
         //actual
         Mockito.doNothing().when(kartenSpielerImpl).legeKarteAb(spieler.getSpielerHand(),
-                spieler.getSpielerHand().getKarten().get(1));
+                spieler.getSpielerHand().getKarten().get(1), ablageStapel);
         spielerService.sageMau(spieler);
 
         //assert
         Assertions.assertEquals(t, spieler.isMauGesagt());
     }
 
-    @Test
-    public void gibGewinnerAusTest(){
-        // vielleicht eher in Spiel ??
-    }
 
     @Test
     public void sageMauTest() {

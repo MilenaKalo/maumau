@@ -35,6 +35,27 @@ public class KartenSpielregelnTest {
 
     }
 
+    @Test
+    public void prüfeKarteTestWunschFarbe(){
+
+        //Setup
+        Karte herzBube = new Karte("Herz", "Bube");
+        Karte herzNeun = new Karte("Herz", "Neun");
+
+        int anzahlAblageKarten = 1;
+        List<Karte> kartenAblageListe = new ArrayList<>();
+        kartenAblageListe.add(herzBube);
+        AblageStapel ablageStapel = new AblageStapel(anzahlAblageKarten, kartenAblageListe);
+        ablageStapel.setWunschFarbe("Herz");
+
+        //erwartet
+        boolean erwartet = true;
+
+        //actual
+        Assertions.assertEquals(erwartet, kartenSpielregelnService.prüfeKarte(herzNeun, ablageStapel));
+
+    }
+
 
 
 

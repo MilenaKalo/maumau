@@ -17,8 +17,4 @@ public class SpielregelnImpl implements SpielregelnService {
 
     }
 
-    @Override
-    public void prüfeWunschfarbe(Spieler spieler) {
-
-    }
 }

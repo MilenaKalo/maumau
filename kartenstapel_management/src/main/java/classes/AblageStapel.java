@@ -6,7 +6,7 @@ public class AblageStapel {
     //Attribute
     private int anzahlKarten;
     private List<Karte> ablagekarten;
-    private String zulaessigeFarbe;
+    private String wunschFarbe;
 
     //Getter und Setter
     public int getAnzahlKarten() {
@@ -25,12 +25,12 @@ public class AblageStapel {
         this.ablagekarten = ablagekarten;
     }
 
-    public String getZulaessigeFarbe() {
-        return zulaessigeFarbe;
+    public String getWunschFarbe() {
+        return wunschFarbe;
     }
 
-    public void setZulaessigeFarbe(String zulaessigeFarbe) {
-        this.zulaessigeFarbe = zulaessigeFarbe;
+    public void setWunschFarbe(String wunschFarbe) {
+        this.wunschFarbe = wunschFarbe;
     }
 
     //Konstruktor

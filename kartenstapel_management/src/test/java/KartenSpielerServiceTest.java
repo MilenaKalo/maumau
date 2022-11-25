@@ -1,3 +1,4 @@
+import classes.AblageStapel;
 import classes.Karte;
 import classes.SpielerHand;
 import classes.ZiehStapel;
@@ -35,13 +36,57 @@ public class KartenSpielerServiceTest {
 
         SpielerHand spielerHand = new SpielerHand(anzahlKarten, kartenListe);
 
+        Karte kreuzVier = new Karte("Kreuz", "Vier");
+
+        List<Karte> ablageListe = new ArrayList<>();
+        ablageListe.add(kreuzVier);
+
+        int anzahlAblageKarten = 1;
+
+        AblageStapel ablageStapel = new AblageStapel(anzahlAblageKarten, ablageListe);
+
         // erwartet
         int erwartet = 2;
 
         // actual
-        kartenSpielerService.legeKarteAb(spielerHand, kartenListe.get(2));
+        kartenSpielerService.legeKarteAb(spielerHand, kartenListe.get(2), ablageStapel);
 
         Assertions.assertEquals(erwartet, spielerHand.getAnzahlKarten());
+    }
+
+    @Test
+    public void legeKarteAbWunschFarbeTest(){
+        //Setup
+        Karte herzBube = new Karte("Herz", "Bube");
+        Karte pikAss = new Karte("Pik", "Ass");
+        Karte karoZehn = new Karte("Karo", "Zehn");
+
+        List<Karte> kartenListe = new ArrayList<>();
+        kartenListe.add(herzBube);
+        kartenListe.add(pikAss);
+        kartenListe.add(karoZehn);
+
+        int anzahlKarten = 3;
+
+        SpielerHand spielerHand = new SpielerHand(anzahlKarten, kartenListe);
+
+        Karte kreuzVier = new Karte("Kreuz", "Vier");
+
+        List<Karte> ablageListe = new ArrayList<>();
+        ablageListe.add(kreuzVier);
+
+        int anzahlAblageKarten = 1;
+
+        AblageStapel ablageStapel = new AblageStapel(anzahlAblageKarten, ablageListe);
+
+        //erwartet
+        String erwartet = "herz";
+
+        //actual
+        kartenSpielerService.legeKarteAb(spielerHand, spielerHand.getKarten().get(0), ablageStapel);
+
+        //assertion
+        Assertions.assertEquals(erwartet, ablageStapel.getWunschFarbe());
     }
 
     @Test

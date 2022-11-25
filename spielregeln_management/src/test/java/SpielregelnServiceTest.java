@@ -96,26 +96,4 @@ public class SpielregelnServiceTest {
 
     }
 
-    @Test
-    public void prüfeWunschfarbeVorhandenTest() {
-        //Setup
-        //Spieler
-        Spieler spieler = new Spieler(1, "Max Mustermann", 0);
-        spieler.setWunschfarbe("Herz");
-
-        //expected
-        String erwartet = "Herz";
-
-        //actual
-        spielregelnService.prüfeWunschfarbe(spieler);
-
-        //assert
-        Assertions.assertEquals(erwartet, spieler.getWunschfarbe());
-
-    }
-
-    @Test
-    public void prüfeWunschfarbeNichtVorhandenTest2() {
-
-    }
 }
