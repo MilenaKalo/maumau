@@ -10,7 +10,6 @@
         <module name="spielregeln_management" />
         <module name="spiel_management" />
         <module name="spieler_management" />
-        <module name="KBE" />
       </profile>
     </annotationProcessing>
   </component>
