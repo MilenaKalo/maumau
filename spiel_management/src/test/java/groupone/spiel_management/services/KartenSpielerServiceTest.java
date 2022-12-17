@@ -1,11 +1,12 @@
-package groupone.kartenstapel_management.services;
+package groupone.spiel_management.services;
 
 import groupone.kartenstapel_management.classes.AblageStapel;
 import groupone.kartenstapel_management.classes.Karte;
 import groupone.kartenstapel_management.classes.SpielerHand;
 import groupone.kartenstapel_management.classes.ZiehStapel;
-import groupone.kartenstapel_management.implementation.KartenSpielerImpl;
 
+
+import groupone.spiel_management.implementation.KartenSpielerImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

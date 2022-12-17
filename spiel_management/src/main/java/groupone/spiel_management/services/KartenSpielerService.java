@@ -1,4 +1,4 @@
-package groupone.kartenstapel_management.services;
+package groupone.spiel_management.services;
 
 import groupone.kartenstapel_management.classes.AblageStapel;
 import groupone.kartenstapel_management.classes.Karte;

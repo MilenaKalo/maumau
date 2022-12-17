@@ -29,4 +29,15 @@ public interface SpielerService {
      */
     void mauZuruecksetzen(Spieler spieler);
 
+    /**
+     * Spieler wird erstellt
+     * @param id Id des Spielers
+     * @param name Name des Spielers
+     * @param punkte Punkte des Spielers
+     *
+     * @return Spieler der erstellt wurde
+     */
+    Spieler spielerErstellen(long id, String name, int punkte);
+
+
 }

@@ -106,4 +106,19 @@ public class SpielerServiceTest {
         // assert
         Assertions.assertEquals(erwartet, spieler.isMauGesagt());
     }
+
+    @Test
+    public void spielerErstellenTest() {
+        //setup
+        Spieler spieler = new Spieler(1L, "Max Muster", 1);
+        //erwartet
+
+        Spieler erwartet = spieler;
+        //actual
+
+        Spieler actual = spielerService.spielerErstellen(1L, "Max Muster", 1);
+
+        // assert
+        Assertions.assertEquals(erwartet.getName(), actual.getName());
+    }
 }

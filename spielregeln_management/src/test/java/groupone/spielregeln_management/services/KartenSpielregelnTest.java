@@ -1,8 +1,8 @@
-package groupone.kartenstapel_management.services;
+package groupone.spielregeln_management.services;
 
 import groupone.kartenstapel_management.classes.AblageStapel;
 import groupone.kartenstapel_management.classes.Karte;
-import groupone.kartenstapel_management.implementation.KartenSpielregelnImpl;
+import groupone.spielregeln_management.implementation.KartenSpielregelnImpl;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -13,8 +13,8 @@ import java.util.List;
 
 public class KartenSpielregelnTest {
 
+    KartenSpielregelnService kartenSpielregelnService = new KartenSpielregelnImpl();
 
-    private KartenSpielregelnService kartenSpielregelnService = new KartenSpielregelnImpl();
     @Test
     public void prüfeKarteTest(){
 
@@ -31,6 +31,7 @@ public class KartenSpielregelnTest {
         boolean erwartet = true;
 
         //actual
+
         Assertions.assertEquals(erwartet, kartenSpielregelnService.prüfeKarte(herzNeun, ablageStapel));
 
     }

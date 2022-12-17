@@ -5,8 +5,6 @@ import groupone.spieler_management.services.SpielerService;
 
 public class SpielerImpl implements SpielerService {
 
-    private SpielerService spielerService;
-
     @Override
     public void erhöhePunkt(Spieler spieler) {
         spieler.setPunkte(spieler.getPunkte() + 1);
@@ -29,6 +27,12 @@ public class SpielerImpl implements SpielerService {
     @Override
     public void mauZuruecksetzen(Spieler spieler) {
         spieler.setMauGesagt(false);
+    }
+
+    @Override
+    public Spieler spielerErstellen(long id, String name, int punkte) {
+        Spieler spieler = new Spieler(id, name, punkte);
+        return spieler;
     }
 
 

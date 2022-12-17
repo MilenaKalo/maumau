@@ -1,8 +1,9 @@
-package groupone.kartenstapel_management.implementation;
+package groupone.spielregeln_management.implementation;
 
 import groupone.kartenstapel_management.classes.AblageStapel;
 import groupone.kartenstapel_management.classes.Karte;
-import groupone.kartenstapel_management.services.KartenSpielregelnService;
+
+import groupone.spielregeln_management.services.KartenSpielregelnService;
 
 public class KartenSpielregelnImpl implements KartenSpielregelnService {
     @Override

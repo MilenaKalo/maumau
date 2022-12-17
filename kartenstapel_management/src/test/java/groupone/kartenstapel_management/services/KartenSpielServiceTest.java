@@ -2,6 +2,7 @@ package groupone.kartenstapel_management.services;
 
 import groupone.kartenstapel_management.classes.AblageStapel;
 import groupone.kartenstapel_management.classes.Karte;
+import groupone.kartenstapel_management.classes.SpielerHand;
 import groupone.kartenstapel_management.classes.ZiehStapel;
 import groupone.kartenstapel_management.implementation.KartenSpielImpl;
 
@@ -26,6 +27,7 @@ public class KartenSpielServiceTest {
 
     List<Karte> ziehStapelKarten = new ArrayList<>();
     List<Karte> ablageStapelKarten = new ArrayList<>();
+
 
     @Test
     public void legeErsteKarteAufAblagestapelTest() {
@@ -98,6 +100,62 @@ public class KartenSpielServiceTest {
 
         Assertions.assertEquals(anzahlAblageStapelErwartet, ablageStapel.getAnzahlKarten());
         Assertions.assertEquals(anzahlZiehStapelErwartet, ziehStapel.getAnzahlKarten());
+    }
+
+    @Test
+    void erstelleZiehstapelTest() {
+
+    	//Setup
+    	ziehStapelKarten.add(herzBube);
+        ziehStapelKarten.add(pikAss);
+        ziehStapelKarten.add(karoNeun);
+        ziehStapelKarten.add(karoZehn);
+
+        //erwartet
+        int anzahlZiehStapelErwartet = 4;
+
+        //actual
+        ZiehStapel ziehStapel = kartenSpielService.erstelleZiehStapel(4, ziehStapelKarten);
+
+        Assertions.assertEquals(anzahlZiehStapelErwartet, ziehStapel.getAnzahlKarten());
+    }
+
+    @Test
+    void erstelleAblagestapelTest(){
+
+     	//Setup
+     	ablageStapelKarten.add(herzBube);
+          ablageStapelKarten.add(pikAss);
+          ablageStapelKarten.add(karoNeun);
+          ablageStapelKarten.add(karoZehn);
+
+          //erwartet
+          int anzahlAblageStapelErwartet = 4;
+
+          //actual
+          AblageStapel ablageStapel = kartenSpielService.erstelleAblageStapel(4, ablageStapelKarten);
+
+          Assertions.assertEquals(anzahlAblageStapelErwartet, ablageStapel.getAnzahlKarten());
+    }
+
+    @Test
+    void erstelleSpielerhandTest(){
+
+     	//Setup
+     	List<Karte> spielerHandKarten = new ArrayList<>();
+     	spielerHandKarten.add(herzBube);
+     	spielerHandKarten.add(pikAss);
+     	spielerHandKarten.add(karoNeun);
+     	spielerHandKarten.add(karoZehn);
+
+     	//erwartet
+     	int anzahlSpielerHandErwartet = 4;
+
+     	//actual
+     	SpielerHand spielerHand = kartenSpielService.erstelleSpielerHand(4, spielerHandKarten);
+
+     	Assertions.assertEquals(anzahlSpielerHandErwartet, spielerHand.getAnzahlKarten());
+
     }
 
 }
