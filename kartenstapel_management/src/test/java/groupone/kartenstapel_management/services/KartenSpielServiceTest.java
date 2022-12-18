@@ -46,7 +46,7 @@ public class KartenSpielServiceTest {
         //erwartet
         int anzahlZiehStapelErwartet = 3;
         int anzahlAblageStapelErwartet = 1;
-        Karte erwarteteKarte = herzBube;
+        Karte erwarteteKarte = karoZehn;
 
         kartenSpielService.legeErsteKarteAufAblagestapel(ziehStapel, ablageStapel);
 

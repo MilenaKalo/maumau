@@ -9,7 +9,8 @@ import groupone.spiel_management.implementation.SpielImpl;
 import groupone.spieler_management.classes.Spieler;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -119,30 +120,7 @@ public class SpielServiceTest {
 
     }
 
-    @Test
-    public void nächsterSpielerIstDranTest(){
-        //Setup
-        //Spielerliste
-        spielerListe.add(spieler1);
-        spielerListe.add(spieler2);
-        spielerListe.add(spieler3);
-        spielerListe.add(spieler4);
 
-        //Ziehkarten
-        for (int i = 0; i < 32; i++) {
-            ziehKarten.add(dummyKarte);
-        }
-
-        //erwartet
-        Spieler erwartet = spieler2;
-
-        //actual
-        Spiel spiel = spielService.erstelleSpiel(spielerListe, runde, ablageStapel, ziehStapel);
-        spielService.nächsterSpielerIstDran(spiel);
-
-        //assert
-        Assertions.assertEquals(erwartet, spiel.getAktiverSpieler());
-    }
 
     @Test
     public void beendeSpielTest(){

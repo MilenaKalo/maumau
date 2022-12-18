@@ -16,11 +16,6 @@ public class SpielImpl implements SpielService {
     }
 
     @Override
-    public Spieler nächsterSpielerIstDran(Spiel spiel) {
-        return null;
-    }
-
-    @Override
     public String beendeSpiel(Spiel spiel) {
         return "Das Spiel wurde beendet!";
     }

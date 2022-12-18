@@ -12,7 +12,10 @@ import java.util.List;
 public class KartenSpielImpl implements KartenSpielService {
     @Override
     public void legeErsteKarteAufAblagestapel(ZiehStapel ziehStapel, AblageStapel ablageStapel) {
-
+        int indexKarte = ziehStapel.getAnzahlKarten()-1;
+        Karte karte = ziehStapel.getZiehkarten().get(indexKarte);
+        ablageStapel.getAblagekarten().add(karte);
+        ziehStapel.getZiehkarten().remove(indexKarte);
     }
 
     @Override
