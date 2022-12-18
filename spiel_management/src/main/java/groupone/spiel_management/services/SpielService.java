@@ -16,12 +16,6 @@ public interface SpielService {
      */
     List<Spieler> erstelleSpielerReihenfolge(List<Spieler> spielerliste);
 
-    /**
-     * Nächster Spieler dran
-     * @param spiel Spiel wo der nächste Spieler in der Liste genommen wird
-     * @return der Spieler der nun an der Reihe ist
-     */
-     Spieler nächsterSpielerIstDran(Spiel spiel);
 
     /**
      * Spiel wird beendet
@@ -36,12 +30,6 @@ public interface SpielService {
      */
     Spieler gibGewinneraus(Spiel spiel);
 
-    /**
-     * gibt den Spieler zurück der als nächstes dran ist
-     * @param spiel Spiel in dem die Spielerreihenfole geprüft wird
-     * @return der Spieler der nun dran ist
-     */
-    Spieler aussetzen(Spiel spiel);
 
     /**
      * das Spiel wird erzeugt und die Karten werden verteilt

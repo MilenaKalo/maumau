@@ -4,7 +4,8 @@ package groupone.spieler_management.services;
 import groupone.kartenstapel_management.classes.AblageStapel;
 import groupone.kartenstapel_management.classes.Karte;
 import groupone.kartenstapel_management.classes.SpielerHand;
-import groupone.kartenstapel_management.implementation.KartenSpielerImpl;
+
+import groupone.spiel_management.services.KartenSpielerService;
 import groupone.spieler_management.classes.Spieler;
 
 import groupone.spieler_management.implementation.SpielerImpl;
@@ -24,7 +25,7 @@ public class SpielerServiceTest {
     private SpielerService spielerService = new SpielerImpl();
 
 
-    private KartenSpielerImpl kartenSpielerImpl;
+    private KartenSpielerService kartenSpielerImpl;
 
     @Test
     public void erhöhePunktTest() {

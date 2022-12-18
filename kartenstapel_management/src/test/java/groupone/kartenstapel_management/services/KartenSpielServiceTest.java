@@ -72,8 +72,8 @@ public class KartenSpielServiceTest {
         //actual
         List<Karte> neuekartenliste = kartenSpielService.mischeKarten(kartenliste);
 
-        Assertions.assertEquals(erwartet, neuekartenliste != kartenliste);
-
+       // Assertions.assertEquals(erwartet, neuekartenliste != kartenliste);
+        Assertions.assertNotEquals(kartenliste, neuekartenliste);
     }
 
     @Test
@@ -92,8 +92,8 @@ public class KartenSpielServiceTest {
         ZiehStapel ziehStapel = new ZiehStapel(anzahlZiehStapel, ziehStapelKarten);
 
         //erwartet
-        int anzahlAblageStapelErwartet = 0;
-        int anzahlZiehStapelErwartet = 0;
+        int anzahlAblageStapelErwartet = 1;
+        int anzahlZiehStapelErwartet = 3;
 
         //actual
         kartenSpielService.kartenDesAblagestapelsDemZiehstapelUebergeben(ablageStapel, ziehStapel);

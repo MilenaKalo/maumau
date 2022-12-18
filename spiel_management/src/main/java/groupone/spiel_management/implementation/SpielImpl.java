@@ -35,8 +35,6 @@ public class SpielImpl implements SpielService {
         return null;
     }
 
-    public Spieler aussetzen(Spiel spiel) {
-        return null;
-    }
+
 
 }

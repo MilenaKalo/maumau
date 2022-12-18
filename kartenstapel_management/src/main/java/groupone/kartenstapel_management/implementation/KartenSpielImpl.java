@@ -19,7 +19,14 @@ public class KartenSpielImpl implements KartenSpielService {
 
     @Override
     public void kartenDesAblagestapelsDemZiehstapelUebergeben(AblageStapel ablageStapel, ZiehStapel ziehStapel) {
+        var x = ablageStapel.getAblagekarten().size(); // oberste Karte des Ablagestapels
+        Karte karte = ablageStapel.getAblagekarten().get(x);
 
+        ziehStapel.setZiehkarten(ablageStapel.getAblagekarten()); // bekommt alle Karten
+        ziehStapel.getZiehkarten().remove(karte);// oberste Karte vom Ablagestapel entfernt
+
+        ablageStapel.getAblagekarten().clear(); // Ablagestapel wird geleert
+        ablageStapel.getAblagekarten().add(karte); //oberste Karte vom Ablagestapel wird auf den Ablagestapel gelegt
     }
 
     @Override

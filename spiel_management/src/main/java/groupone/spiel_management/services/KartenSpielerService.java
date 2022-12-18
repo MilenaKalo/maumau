@@ -8,7 +8,7 @@ import groupone.kartenstapel_management.classes.ZiehStapel;
 public interface KartenSpielerService {
 
     /**
-     *Spieler können Karten ablegen die die gleiche Farbe oder Wert haben
+     * Spieler können Karten ablegen
      * @param spielerhand Hand des Spielers, die eine Karte ablegen soll
      * @param ablagestapel der Stapel der die abgelegte Karte erhält
      */

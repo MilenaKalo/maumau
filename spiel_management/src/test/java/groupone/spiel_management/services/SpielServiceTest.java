@@ -7,7 +7,7 @@ import groupone.spiel_management.implementation.KartenSpielerImpl;
 import groupone.spiel_management.classes.Spiel;
 import groupone.spiel_management.implementation.SpielImpl;
 import groupone.spieler_management.classes.Spieler;
-import org.junit.Test;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -18,7 +18,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(MockitoJUnitRunner.class)
+
 public class SpielServiceTest {
 
     @InjectMocks
@@ -196,30 +196,5 @@ public class SpielServiceTest {
 
     }
 
-    @Test
-    public void aussetzenTest(){
-        //Setup
-        //Setup
-        //Spielerliste
-        spielerListe.add(spieler1);
-        spielerListe.add(spieler2);
-        spielerListe.add(spieler3);
-        spielerListe.add(spieler4);
-
-        //Ziehkarten
-        for (int i = 0; i < 32; i++) {
-            ziehKarten.add(dummyKarte);
-        }
-
-        //erwartet
-        Spieler erwartet = spieler3;
-
-        //actual
-        Spiel spiel = spielService.erstelleSpiel(spielerListe, runde, ablageStapel, ziehStapel);
-        Spieler actual = spielService.aussetzen(spiel);
-
-        //assert
-        Assertions.assertEquals(erwartet, actual);
-    }
 
 }
