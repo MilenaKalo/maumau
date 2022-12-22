@@ -1,6 +1,9 @@
 package groupone.spiel_management.implementation;
 
 import groupone.kartenstapel_management.classes.AblageStapel;
+import groupone.kartenstapel_management.classes.Karte;
+import groupone.kartenstapel_management.classes.SpielerHand;
+import groupone.kartenstapel_management.implementation.KartenSpielImpl;
 import groupone.spiel_management.classes.Spiel;
 import groupone.spieler_management.classes.Spieler;
 import groupone.kartenstapel_management.classes.ZiehStapel;
@@ -9,6 +12,8 @@ import groupone.spiel_management.services.SpielService;
 import java.util.*;
 
 public class SpielImpl implements SpielService {
+
+    KartenSpielImpl kartenSpiel = new KartenSpielImpl();
 
     @Override
     public List<Spieler> erstelleSpielerReihenfolge(List<Spieler> spielerliste) {

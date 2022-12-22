@@ -60,6 +60,7 @@ public class Spieler {
         this.id = id;
         this.name = name;
         this.punkte = punkte;
+
     }
 
 

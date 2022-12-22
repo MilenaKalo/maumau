@@ -17,7 +17,6 @@ import java.util.List;
 
 public class KartenSpielServiceTest {
 
-
     private KartenSpielService kartenSpielService = new KartenSpielImpl();
 
     Karte herzBube = new Karte("Herz", "Bube");
@@ -71,9 +70,10 @@ public class KartenSpielServiceTest {
 
         //actual
         List<Karte> neuekartenliste = kartenSpielService.mischeKarten(kartenliste);
+        boolean actual = neuekartenliste.equals(kartenliste);
 
-       // Assertions.assertEquals(erwartet, neuekartenliste != kartenliste);
-        Assertions.assertNotEquals(kartenliste, neuekartenliste);
+        // Assertions.assertEquals(erwartet, neuekartenliste != kartenliste);
+        Assertions.assertEquals(erwartet,actual);
     }
 
     @Test

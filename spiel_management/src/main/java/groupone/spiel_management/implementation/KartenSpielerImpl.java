@@ -18,6 +18,7 @@ public class KartenSpielerImpl implements KartenSpielerService {
             ablagestapel.setWunschFarbe(karte.getKartenFarbe());
         }
     }
+
     @Override
     public void zieheKarte(SpielerHand spielerhand, ZiehStapel ziehStapel) {
         Karte karte = ziehStapel.getZiehkarten().get(ziehStapel.getZiehkarten().size()-1);

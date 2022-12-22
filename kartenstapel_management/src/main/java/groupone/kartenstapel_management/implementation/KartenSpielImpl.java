@@ -29,7 +29,12 @@ public class KartenSpielImpl implements KartenSpielService {
         var x = ablageStapel.getAblagekarten().size() -1; // oberste Karte des Ablagestapels
         Karte karte = ablageStapel.getAblagekarten().get(x);
 
-        ziehStapel.setZiehkarten(ablageStapel.getAblagekarten()); // bekommt alle Karten
+        List<Karte> hilfsStapel = new ArrayList<>();
+        for (int i = 0; i < ablageStapel.getAblagekarten().size(); i++) {
+            hilfsStapel.add(ablageStapel.getAblagekarten().get(i));
+        }
+
+        ziehStapel.setZiehkarten(hilfsStapel); // bekommt alle Karten
         ziehStapel.getZiehkarten().remove(karte);// oberste Karte vom Ablagestapel entfernt
 
         ablageStapel.getAblagekarten().clear(); // Ablagestapel wird geleert
@@ -55,6 +60,187 @@ public class KartenSpielImpl implements KartenSpielService {
     public SpielerHand erstelleSpielerHand(int anzahlKarten, List<Karte> spielerhandkarten) {
         SpielerHand spielerHand = new SpielerHand(anzahlKarten, spielerhandkarten);
         return spielerHand;
+    }
+
+    @Override
+    public List<Karte> erstelleKarten(){
+        List<Karte> kartenDeck = new ArrayList<>();
+
+        String[] karteFarbe = {"Herz", "Karo", "Pik", "Kreuz"};
+        for(int f = 0; f < karteFarbe.length; f++) {
+            for(int i = 0; i < 8; i++) {
+                String kartenWert;
+                switch(i) {
+                    case 0:
+                        kartenWert = "7";
+                        break;
+                    case 1:
+                        kartenWert = "8";
+                        break;
+                    case 2:
+                        kartenWert = "9";
+                        break;
+                    case 3:
+                        kartenWert = "10";
+                        break;
+                    case 4:
+                        kartenWert = "Bube";
+                        break;
+                    case 5:
+                        kartenWert = "Dame";
+                        break;
+                    case 6:
+                        kartenWert = "König";
+                        break;
+                    case 7:
+                        kartenWert = "Ass";
+                        break;
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + i);
+                }
+                Karte karte = new Karte(karteFarbe[f], kartenWert);
+                kartenDeck.add(karte);
+            }
+        }
+
+        /*
+        for(int i = 0; i < 8; i++) {
+            String kartenWert;
+            switch(i) {
+                case 0:
+                    kartenWert = "7";
+                    break;
+                case 1:
+                    kartenWert = "8";
+                    break;
+                case 2:
+                    kartenWert = "9";
+                    break;
+                case 3:
+                    kartenWert = "10";
+                    break;
+                case 4:
+                    kartenWert = "Bube";
+                    break;
+                case 5:
+                    kartenWert = "Dame";
+                    break;
+                case 6:
+                    kartenWert = "König";
+                    break;
+                case 7:
+                    kartenWert = "Ass";
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + i);
+            }
+            Karte karte = new Karte("Herz", kartenWert);
+            kartenDeck.add(karte);
+        }
+
+        for(int i = 0; i < 8; i++) {
+            String kartenWert;
+            switch(i) {
+                case 0:
+                    kartenWert = "7";
+                    break;
+                case 1:
+                    kartenWert = "8";
+                    break;
+                case 2:
+                    kartenWert = "9";
+                    break;
+                case 3:
+                    kartenWert = "10";
+                    break;
+                case 4:
+                    kartenWert = "Bube";
+                    break;
+                case 5:
+                    kartenWert = "Dame";
+                    break;
+                case 6:
+                    kartenWert = "König";
+                    break;
+                case 7:
+                    kartenWert = "Ass";
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + i);
+            }
+            Karte karte = new Karte("Karo", kartenWert);
+            kartenDeck.add(karte);
+        }
+
+        for(int i = 0; i < 8; i++) {
+            String kartenWert;
+            switch(i) {
+                case 0:
+                    kartenWert = "7";
+                    break;
+                case 1:
+                    kartenWert = "8";
+                    break;
+                case 2:
+                    kartenWert = "9";
+                    break;
+                case 3:
+                    kartenWert = "10";
+                    break;
+                case 4:
+                    kartenWert = "Bube";
+                    break;
+                case 5:
+                    kartenWert = "Dame";
+                    break;
+                case 6:
+                    kartenWert = "König";
+                    break;
+                case 7:
+                    kartenWert = "Ass";
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + i);
+            }
+            Karte karte = new Karte("Pik", kartenWert);
+            kartenDeck.add(karte);
+        }
+
+        for(int i = 0; i < 8; i++) {
+            String kartenWert;
+            switch(i) {
+                case 0:
+                    kartenWert = "7";
+                    break;
+                case 1:
+                    kartenWert = "8";
+                    break;
+                case 2:
+                    kartenWert = "9";
+                    break;
+                case 3:
+                    kartenWert = "10";
+                    break;
+                case 4:
+                    kartenWert = "Bube";
+                    break;
+                case 5:
+                    kartenWert = "Dame";
+                    break;
+                case 6:
+                    kartenWert = "König";
+                    break;
+                case 7:
+                    kartenWert = "Ass";
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + i);
+            }
+            Karte karte = new Karte("Kreuz", kartenWert);
+            kartenDeck.add(karte);
+        }
+        */
+        return kartenDeck;
     }
 
 }
