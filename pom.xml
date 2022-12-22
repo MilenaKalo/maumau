@@ -13,6 +13,8 @@
     <module>spieler_management</module>
     <module>spielregeln_management</module>
     <module>kartenstapel_management</module>
+      <module>ui_management</module>
+      <module>configuration_management</module>
   </modules>
 
   <name>maumau</name>

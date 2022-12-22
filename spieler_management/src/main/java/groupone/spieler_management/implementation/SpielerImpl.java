@@ -1,5 +1,6 @@
 package groupone.spieler_management.implementation;
 
+import groupone.kartenstapel_management.classes.SpielerHand;
 import groupone.spieler_management.classes.Spieler;
 import groupone.spieler_management.services.SpielerService;
 

@@ -8,6 +8,7 @@ import groupone.spiel_management.classes.Spiel;
 import groupone.spiel_management.implementation.SpielImpl;
 import groupone.spiel_management.services.SpielService;
 import groupone.spieler_management.classes.Spieler;
+import groupone.spielregeln_management.implementation.SonderregelnImpl;
 import groupone.spielregeln_management.implementation.SpielregelnImpl;
 
 
@@ -22,7 +23,7 @@ import java.util.List;
 public class SpielregelnServiceTest {
 
     private SpielService spielService = new SpielImpl();
-    private SpielregelnService spielregelnService = new SpielregelnImpl();
+    private SpielregelnService spielregelnService = new SonderregelnImpl();
 
     Karte herzSieben = new Karte("Herz", "Sieben");
     Karte herzAcht = new Karte("Herz", "Acht");

@@ -49,4 +49,11 @@ public interface KartenSpielService {
      * @return der neue Spielerhand
      */
     SpielerHand erstelleSpielerHand(int anzahlKarten, List<Karte> spielerhandkarten);
+
+    /**
+     * erstellt das Kartendeck (insgesamt 32)
+     * @return Das erstellte Kartendeck
+     */
+    List<Karte> erstelleKarten();
+
 }

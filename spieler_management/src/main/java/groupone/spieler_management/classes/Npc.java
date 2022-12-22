@@ -1,5 +1,7 @@
 package groupone.spieler_management.classes;
 
+import groupone.kartenstapel_management.classes.SpielerHand;
+
 public class Npc extends Spieler {
 
     //Konstruktor
