@@ -81,7 +81,7 @@ public class KartenSpielerServiceTest {
         AblageStapel ablageStapel = new AblageStapel(anzahlAblageKarten, ablageListe);
 
         //erwartet
-        String erwartet = "herz";
+        String erwartet = "Herz";
 
         //actual
         kartenSpielerService.legeKarteAb(spielerHand, spielerHand.getKarten().get(0), ablageStapel);

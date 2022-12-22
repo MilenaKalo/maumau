@@ -104,6 +104,4 @@ public class SpielImpl implements SpielService {
         return spiel;
     }
 
-
-
 }
