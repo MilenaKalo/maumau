@@ -110,7 +110,7 @@ public class SpielregelnServiceTest {
         SpielerHand spielerHand = new SpielerHand(1, spielerHandListe);
         spieler.setSpielerHand(spielerHand);
         //expected
-        int erwartet = 3;
+        int erwartet = 2;
 
         //actual
         spielregelnService.mauStrafe(spieler, ziehStapel);
@@ -134,6 +134,12 @@ public class SpielregelnServiceTest {
         for (int i = 0; i < 32; i++) {
             ziehKarten.add(dummyKarte);
         }
+
+        // Ablagestapel
+        List<Karte> ablageKarten2 = new ArrayList<>();
+        ablageKarten2.clear();
+        ablageKarten2.add(herzAcht);
+        AblageStapel stapel = new AblageStapel(1, ablageKarten2);
 
         //erwartet
         Spieler erwartet = spieler3;

@@ -68,8 +68,9 @@ public class SonderregelnImpl implements SpielregelnService {
 
     @Override
     public void mauStrafe(Spieler spieler, ZiehStapel ziehStapel) {
-        Karte karte = ziehStapel.getZiehkarten().get(ziehStapel.getZiehkarten().size());
+        Karte karte = ziehStapel.getZiehkarten().get(ziehStapel.getZiehkarten().size()-1);
         spieler.getSpielerHand().getKarten().add(karte);
+        spieler.getSpielerHand().setAnzahlKarten(spieler.getSpielerHand().getAnzahlKarten()+1);
     }
 
     @Override
@@ -91,9 +92,13 @@ public class SonderregelnImpl implements SpielregelnService {
     @Override
     public Spieler aussetzen(Spiel spiel) {
        AblageStapel ablageStapel =  spiel.getAblageStapel();
+       System.out.println(ablageStapel.getAblagekarten());
        int anzahl = ablageStapel.getAblagekarten().size();
-       Karte karte = ablageStapel.getAblagekarten().get(anzahl);
-       if (karte.getKartenWert().equals("8")) {
+       Karte karte = ablageStapel.getAblagekarten().get(anzahl - 1);
+       System.out.println(karte.getKartenWert());
+       System.out.println(karte.getKartenFarbe());
+       System.out.println(anzahl);
+       if (karte.getKartenWert().equals("Acht")) {
            Spieler aktiverSpieler = spiel.getAktiverSpieler();
 
            int aktiverSpielerIndex =spiel.getSpielerListe().indexOf(aktiverSpieler);

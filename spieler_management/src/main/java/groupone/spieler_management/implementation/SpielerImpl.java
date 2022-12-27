@@ -8,19 +8,23 @@ public class SpielerImpl implements SpielerService {
 
     @Override
     public void erhöhePunkt(Spieler spieler) {
+
         spieler.setPunkte(spieler.getPunkte() + 1);
     }
 
     @Override
     public void maumau(Spieler spieler) {
-        spieler.setMauGesagt(true);
+        boolean b = spieler.getSpielerHand().getAnzahlKarten() == 0;
+        if (b) {
+            spieler.setMaumauGesagt(true);
+        }
     }
 
     @Override
     public void sageMau(Spieler spieler) {
         boolean b = spieler.getSpielerHand().getAnzahlKarten() == 1;
 
-        if (b == true) {
+        if (b) {
             spieler.setMauGesagt(true);
         }
     }
