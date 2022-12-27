@@ -8,16 +8,56 @@ import groupone.spiel_management.classes.Spiel;
 import groupone.spieler_management.classes.Spieler;
 import groupone.spielregeln_management.services.SpielregelnService;
 
+import java.util.List;
+
 public class SonderregelnImpl implements SpielregelnService {
 
     @Override
-    public void siebenGelegt(SpielerHand spielerhand, ZiehStapel ziehStapel) {
-    //muss noch gemacht werden
+    public void siebenGelegt(Spiel spiel) {
+
+    //prüfen ob der Ablagestapel eine 7 enthält
+       AblageStapel ablageStapel = spiel.getAblageStapel();
+       int anzahl = ablageStapel.getAblagekarten().size()-1;
+       Karte karte = ablageStapel.getAblagekarten().get(anzahl);
+    //wenn er eine 7 hat
+       if(karte.getKartenWert().equals("Sieben")){
+           System.out.println("Sieben gelegt");
+              //wenn der Spieler eine 7 hat
+              Spieler aktiverSpieler = spiel.getAktiverSpieler();
+              List<Karte> kartenListe= aktiverSpieler.getSpielerHand().getKarten();
+              for(int i = 0; i<kartenListe.size(); i++) {
+                  //wenn der Spieler eine 7 hat, muss er diese legen
+                  if (kartenListe.get(i).getKartenWert().equals("Sieben")) {
+                      System.out.println("Spieler hat eine Sieben");
+                      Karte k = kartenListe.get(i);
+                      spiel.getAblageStapel().getAblagekarten().add(k);
+                      aktiverSpieler.getSpielerHand().getKarten().remove(k);
+                      nächsterSpielerIstDran(spiel);
+
+                  }
+                  //wenn er keine 7 hat, muss er eine Karte ziehen
+                  else{
+                      System.out.println("Spieler hat keine Sieben");
+                      ZiehStapel ziehStapel = spiel.getZiehStapel();
+                      SpielerHand spielerHand = aktiverSpieler.getSpielerHand();
+                      //erste Karte vom Ziehstapel wird gezogen
+                      spielerHand.getKarten().add(ziehStapel.getZiehkarten().get(ziehStapel.getZiehkarten().size()-1));
+                      ziehStapel.getZiehkarten().remove(ziehStapel.getZiehkarten().get(ziehStapel.getZiehkarten().size()-1));
+                      // zweite Karte vom Ziehstapel wird gezogen
+                      spielerHand.getKarten().add(ziehStapel.getZiehkarten().get(ziehStapel.getZiehkarten().size()-1));
+                      ziehStapel.getZiehkarten().remove(ziehStapel.getZiehkarten().get(ziehStapel.getZiehkarten().size()-1));
+                      nächsterSpielerIstDran(spiel);
+                  }
+              }
+       }
+       else{
+           System.out.println("Sieben wurde nicht gelegt");
+       }
     }
 
     @Override
     public boolean assGelegt(AblageStapel ablageStapel) {
-        int anzahl = ablageStapel.getAblagekarten().size();
+        int anzahl = ablageStapel.getAblagekarten().size()-1;
         Karte karte = ablageStapel.getAblagekarten().get(anzahl);
         if (karte.getKartenWert().equals("Ass")) {
             return true;
@@ -36,13 +76,16 @@ public class SonderregelnImpl implements SpielregelnService {
     public Spieler nächsterSpielerIstDran(Spiel spiel) {
         Spieler aktiverSpieler = spiel.getAktiverSpieler();
         int aktiverSpielerIndex = spiel.getSpielerListe().indexOf(aktiverSpieler);
+        System.out.println(aktiverSpielerIndex);
         int naechsterSpielerIndex;
         if (aktiverSpielerIndex+1 > spiel.getSpielerListe().size()) {
             naechsterSpielerIndex = aktiverSpielerIndex+1-spiel.getSpielerListe().size();
         } else {
             naechsterSpielerIndex = aktiverSpielerIndex+1;
         }
-        return spiel.getSpielerListe().get(naechsterSpielerIndex);
+        System.out.println(naechsterSpielerIndex);
+        spiel.setAktiverSpieler(spiel.getSpielerListe().get(naechsterSpielerIndex));
+        return spiel.getAktiverSpieler();
     }
 
     @Override
@@ -52,15 +95,19 @@ public class SonderregelnImpl implements SpielregelnService {
        Karte karte = ablageStapel.getAblagekarten().get(anzahl);
        if (karte.getKartenWert().equals("8")) {
            Spieler aktiverSpieler = spiel.getAktiverSpieler();
+
            int aktiverSpielerIndex =spiel.getSpielerListe().indexOf(aktiverSpieler);
+           System.out.println("aktiver: "+ aktiverSpielerIndex);
            int naechsterSpielerIndex;
            if (aktiverSpielerIndex+2 > spiel.getSpielerListe().size()) {
                naechsterSpielerIndex = aktiverSpielerIndex+2-spiel.getSpielerListe().size();
            } else {
                naechsterSpielerIndex = aktiverSpielerIndex+2;
            }
+           System.out.println("naechster: "+ naechsterSpielerIndex);
            return spiel.getSpielerListe().get(naechsterSpielerIndex);
        } else {
+           System.out.println("keine Acht");
            return nächsterSpielerIstDran(spiel);
        }
     }
@@ -78,7 +125,7 @@ public class SonderregelnImpl implements SpielregelnService {
 
     @Override
     public boolean mussSichFarbeWuenschen(AblageStapel ablageStapel) {
-        int anzahl = ablageStapel.getAblagekarten().size();
+        int anzahl = ablageStapel.getAblagekarten().size()-1;
         Karte karte = ablageStapel.getAblagekarten().get(anzahl);
         if (karte.getKartenWert().equals("Bube")) {
             return true;

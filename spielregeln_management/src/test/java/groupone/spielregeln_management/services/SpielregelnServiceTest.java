@@ -85,7 +85,7 @@ public class SpielregelnServiceTest {
         int anzahlKartenErwartet = 5;
 
         //actual
-        spielregelnService.siebenGelegt(spieler.getSpielerHand(), ziehStapel);
+     //   spielregelnService.siebenGelegt(spieler.getSpielerHand(), ziehStapel);
 
         //assert
         Assertions.assertEquals(anzahlKartenErwartet, spieler.getSpielerHand().getAnzahlKarten());
@@ -166,6 +166,7 @@ public class SpielregelnServiceTest {
 
         //actual
         Spiel spiel = spielService.erstelleSpiel(spielerListe, runde, ablageStapel, ziehStapel);
+        spiel.setAktiverSpieler(spieler1);
         spielregelnService.nächsterSpielerIstDran(spiel);
 
         //assert

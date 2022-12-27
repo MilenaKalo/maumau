@@ -18,7 +18,7 @@ public class SpielerImpl implements SpielerService {
 
     @Override
     public void sageMau(Spieler spieler) {
-        boolean b = spieler.getSpielerHand().getAnzahlKarten() <= 1;
+        boolean b = spieler.getSpielerHand().getAnzahlKarten() == 1;
 
         if (b == true) {
             spieler.setMauGesagt(true);

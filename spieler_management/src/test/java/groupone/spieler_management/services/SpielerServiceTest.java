@@ -5,7 +5,7 @@ import groupone.kartenstapel_management.classes.AblageStapel;
 import groupone.kartenstapel_management.classes.Karte;
 import groupone.kartenstapel_management.classes.SpielerHand;
 
-import groupone.spiel_management.services.KartenSpielerService;
+
 import groupone.spieler_management.classes.Spieler;
 
 import groupone.spieler_management.implementation.SpielerImpl;
@@ -25,7 +25,7 @@ public class SpielerServiceTest {
     private SpielerService spielerService = new SpielerImpl();
 
 
-    private KartenSpielerService kartenSpielerImpl;
+
 
     @Test
     public void erhöhePunktTest() {
@@ -44,35 +44,22 @@ public class SpielerServiceTest {
 
     @Test
     public void maumauTest() {
-       //Setup
-        Spieler spieler = new Spieler(1L, "Max Mustermann", 0);
+        //setup
+        Spieler spieler = new Spieler(1L, "Max Muster", 1);
         List<Karte> kartenListe = new ArrayList<>();
-        Karte herzBube = new Karte("Herz", "Bube");
-        Karte pikAss = new Karte("Pik", "Ass");
-        kartenListe.add(herzBube);
-        kartenListe.add(pikAss);
-        SpielerHand spielerHand = new SpielerHand(2, kartenListe);
+        int anzahl = 0;
+        SpielerHand spielerHand = new SpielerHand(anzahl , kartenListe);
         spieler.setSpielerHand(spielerHand);
+        spieler.setMauGesagt(false);
+        //erwartet
 
-        Karte kreuzVier = new Karte("Kreuz", "Vier");
-
-        List<Karte> ablageListe = new ArrayList<>();
-        ablageListe.add(kreuzVier);
-
-        int anzahlAblageKarten = 1;
-
-        AblageStapel ablageStapel = new AblageStapel(anzahlAblageKarten, ablageListe);
-
-        //Erwartet
-        boolean t = true;
-
+        boolean erwartet = true;
         //actual
-        Mockito.doNothing().when(kartenSpielerImpl).legeKarteAb(spieler.getSpielerHand(),
-                spieler.getSpielerHand().getKarten().get(1), ablageStapel);
-        spielerService.sageMau(spieler);
 
-        //assert
-        Assertions.assertEquals(t, spieler.isMauGesagt());
+        spielerService.maumau(spieler);
+
+        // assert
+        Assertions.assertEquals(erwartet, spieler.isMaumauGesagt());
     }
 
 
@@ -80,6 +67,12 @@ public class SpielerServiceTest {
     public void sageMauTest() {
         //setup
         Spieler spieler = new Spieler(1L, "Max Muster", 1);
+        Karte karte = new Karte("Herz", "9");
+        List<Karte> kartenListe = new ArrayList<>();
+        kartenListe.add(karte);
+        int anzahl = 1;
+        SpielerHand spielerHand = new SpielerHand(anzahl , kartenListe);
+        spieler.setSpielerHand(spielerHand);
         spieler.setMauGesagt(false);
         //erwartet
 

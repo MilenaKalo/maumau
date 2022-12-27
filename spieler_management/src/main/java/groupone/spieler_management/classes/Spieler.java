@@ -10,6 +10,7 @@ public class Spieler {
     private int punkte;
     private SpielerHand spielerHand;
     private boolean mauGesagt;
+    private boolean maumauGesagt;
     private int strafziehen;
     private String wunschfarbe;
     private boolean aussetzen;
@@ -86,5 +87,13 @@ public class Spieler {
 
     public void setAussetzen(boolean aussetzen) {
         this.aussetzen = aussetzen;
+    }
+
+    public boolean isMaumauGesagt() {
+        return maumauGesagt;
+    }
+
+    public void setMaumauGesagt(boolean maumauGesagt) {
+        this.maumauGesagt = maumauGesagt;
     }
 }
