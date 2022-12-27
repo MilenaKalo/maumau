@@ -140,7 +140,8 @@ public class SpielregelnServiceTest {
 
         //actual
 
-        Spiel spiel = spielService.erstelleSpiel(spielerListe, runde, ablageStapel, ziehStapel);
+        Spiel spiel = new Spiel (spielerListe, runde, stapel, ziehStapel);
+        spiel.setAktiverSpieler(spieler1);
         Spieler actual = spielregelnService.aussetzen(spiel);
 
         //assert

@@ -86,21 +86,22 @@ public class SpielImpl implements SpielService {
             ziehKarten.add(kartenDeck.get(i));
             kartenDeck.remove(kartenDeck.get(i));
         }
-        //System.out.println(ziehKarten.size());
+
         spiel.getZiehStapel().setZiehkarten(ziehKarten);
         spiel.getAblageStapel().getAblagekarten().add(kartenDeck.get(kartenDeck.size() - 1));
         kartenDeck.remove(kartenDeck.get(kartenDeck.size() - 1));
         int uebrigekarten = kartenDeck.size();
-        System.out.println(uebrigekarten);
-        /*
+        int uebrigekartenIndex = uebrigekarten - 1;
+
         for (int l = anzahlSpieler - 1; l >= 0; l--) {
-            int j = uebrigekarten - 1;
                 for (int k = 5; k > 0; k--) {
-                    spiel.getSpielerListe().get(l).getSpielerHand().getKarten().add(kartenDeck.get(j));
-                    kartenDeck.remove(kartenDeck.get(j));
-                    j--;
+                    spiel.getSpielerListe().get(l).getSpielerHand().getKarten().add(kartenDeck.get(uebrigekartenIndex));
+                    spiel.getSpielerListe().get(l).getSpielerHand().setAnzahlKarten(spiel.getSpielerListe().get(l).getSpielerHand().getAnzahlKarten() + 1);
+                    kartenDeck.remove(kartenDeck.get(uebrigekartenIndex));
+                    uebrigekartenIndex = uebrigekartenIndex - 1;
                 }
-        }*/
+        }
+
         return spiel;
     }
 

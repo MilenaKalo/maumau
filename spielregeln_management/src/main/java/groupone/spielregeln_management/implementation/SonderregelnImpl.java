@@ -114,9 +114,9 @@ public class SonderregelnImpl implements SpielregelnService {
 
     @Override
     public boolean pruefeKarte(Karte karte, AblageStapel ablageStapel) {
-        int anzahl = ablageStapel.getAblagekarten().size();
-        Karte karte2 = ablageStapel.getAblagekarten().get(anzahl);
-        if(karte2.getKartenWert().equals(karte.getKartenWert()) || karte2.getKartenFarbe().equals(karte.getKartenFarbe())) {
+        int letzteKarteIndex = ablageStapel.getAblagekarten().size() - 1;
+        Karte letzteKarte = ablageStapel.getAblagekarten().get(letzteKarteIndex);
+        if(letzteKarte.getKartenFarbe().equals(ablageStapel.getWunschFarbe()) || letzteKarte.getKartenWert().equals(karte.getKartenWert()) || letzteKarte.getKartenFarbe().equals(karte.getKartenFarbe())) {
             return true;
         } else {
             return false;
@@ -136,12 +136,12 @@ public class SonderregelnImpl implements SpielregelnService {
 
     @Override
     public boolean richtungWechsel(AblageStapel ablageStapel) {
-        int anzahl = ablageStapel.getAblagekarten().size();
-        Karte karte = ablageStapel.getAblagekarten().get(anzahl);
-        if (karte.getKartenWert().equals("9")) {
+        int letzteKarteIndex = ablageStapel.getAblagekarten().size() - 1;
+        if(ablageStapel.getAblagekarten().get(letzteKarteIndex).getKartenWert().equals("Neun")){
             return true;
         } else {
             return false;
         }
     }
+
 }
