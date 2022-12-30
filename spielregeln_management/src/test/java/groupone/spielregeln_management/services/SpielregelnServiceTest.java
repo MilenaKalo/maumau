@@ -29,6 +29,8 @@ public class SpielregelnServiceTest {
     Karte herzAcht = new Karte("Herz", "Acht");
     Karte herzNeun = new Karte("Herz", "Neun");
     Karte herzZehn = new Karte("Herz", "Zehn");
+    Karte herzBube = new Karte("Herz", "Bube");
+    Karte karoSieben = new Karte("Karo", "Sieben");
     Karte karoAcht = new Karte("Karo", "Acht");
     Karte karoNeun = new Karte("Karo", "Neun");
     Karte karoZehn = new Karte("Karo", "Zehn");
@@ -57,9 +59,9 @@ public class SpielregelnServiceTest {
     Spieler spieler4 = new Spieler(4, "Erika Musterfrau", 0);
 
     List<Spieler> spielerListe = new ArrayList<>();
+
     @Test
     public void siebenGelegtTest() {
-
         //Setup
         //Ablagestapel
         ablageStapelListe.add(herzSieben);
@@ -95,6 +97,53 @@ public class SpielregelnServiceTest {
 
         //assert
         Assertions.assertEquals(anzahlKartenErwartet, spieler1.getSpielerHand().getAnzahlKarten());
+
+    }
+
+    @Test
+    public void siebenGelegtTest2() {
+        //Setup
+        //Ablagestapel
+        ablageStapelListe.add(herzSieben);
+        AblageStapel ablageStapel = new AblageStapel(1, ablageStapelListe);
+
+        //Ziehstapel
+        ziehStapelListe.add(herzAcht);
+        ziehStapelListe.add(herzNeun);
+        ziehStapelListe.add(herzZehn);
+        ziehStapelListe.add(herzBube);
+        ZiehStapel ziehStapel = new ZiehStapel(4, ziehStapelListe);
+
+        //Spieler
+        spielerListe.add(spieler1);
+        spielerListe.add(spieler2);
+        spielerListe.add(spieler3);
+        spielerListe.add(spieler4);
+
+        //Spielerhand Spieler 1
+        spielerHandListe.add(karoSieben);
+        spielerHandListe.add(karoAcht);
+        spielerHandListe.add(karoNeun);
+        spielerHandListe.add(karoZehn);
+        SpielerHand spielerHand = new SpielerHand(4, spielerHandListe);
+        spieler1.setSpielerHand(spielerHand);
+
+        //Spielerhand Spieler 1
+        List<Karte> spielerHandListe2 = new ArrayList<>();
+        SpielerHand spielerHand2 = new SpielerHand(0, spielerHandListe2);
+        spieler2.setSpielerHand(spielerHand2);
+
+        //expected
+        int anzahlKartenErwartet = 4;
+
+        //actual
+        //Spiel spiel = spielService.erstelleSpiel(spielerListe, runde, ablageStapel, ziehStapel);
+        Spiel spiel = new Spiel(spielerListe, runde, ablageStapel, ziehStapel);
+        spiel.setAktiverSpieler(spieler1);
+        spielregelnService.siebenGelegt(spiel);
+
+        //assert
+        Assertions.assertEquals(anzahlKartenErwartet, spieler2.getSpielerHand().getAnzahlKarten());
 
     }
 

@@ -7,11 +7,14 @@ import groupone.kartenstapel_management.classes.ZiehStapel;
 import groupone.spiel_management.classes.Spiel;
 import groupone.spieler_management.classes.Spieler;
 import groupone.spielregeln_management.services.SpielregelnService;
+import groupone.spiel_management.implementation.KartenSpielerImpl;
 
 import java.util.Collections;
 import java.util.List;
 
 public class SonderregelnImpl implements SpielregelnService {
+
+    KartenSpielerImpl kartenSpielerImpl = new KartenSpielerImpl();
 
     @Override
     public void siebenGelegt(Spiel spiel) {
@@ -74,6 +77,7 @@ public class SonderregelnImpl implements SpielregelnService {
        } else {
            System.out.println("Sieben wurde nicht gelegt");
        }
+
     }
 
     @Override
@@ -100,7 +104,19 @@ public class SonderregelnImpl implements SpielregelnService {
         int aktiverSpielerIndex = spiel.getSpielerListe().indexOf(aktiverSpieler);
         System.out.println(aktiverSpielerIndex);
         int naechsterSpielerIndex;
-        if (aktiverSpielerIndex+1 > spiel.getSpielerListe().size()) {
+        boolean richtungsWechsel = richtungWechsel(spiel.getAblageStapel());
+
+        // aussetzen
+        if(spiel.getAblageStapel().getAblagekarten().get(spiel.getAblageStapel().getAblagekarten().size() - 1)
+                .getKartenWert().equals("Acht")){
+            Spieler naechsterSpieler = aussetzen(spiel);
+            naechsterSpielerIndex = spiel.getSpielerListe().indexOf(naechsterSpieler);
+        // Richtungswechsel
+        } else if (richtungsWechsel) {
+            Collections.reverse(spiel.getSpielerListe());
+            naechsterSpielerIndex = spiel.getSpielerListe().indexOf(aktiverSpieler)+1;
+        // nächster Spieler ist dran (Fall: aktiver Spieler ist Letzter in der Spielerliste)
+        } else if (aktiverSpielerIndex + 1 > spiel.getSpielerListe().size()) {
             naechsterSpielerIndex = aktiverSpielerIndex+1-spiel.getSpielerListe().size();
         } else {
             naechsterSpielerIndex = aktiverSpielerIndex+1;
