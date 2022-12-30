@@ -23,7 +23,8 @@ public interface SpielregelnService {
      void mauStrafe(Spieler spieler, ZiehStapel ziehStapel);
 
     /**
-     * Nächster Spieler dran
+     * Nächster Spieler dran. Es werden auch die Sonderfälle Aussetzen, Richtungswechsel und letzter Spieler in
+     * Spielerliste berücksichtigt
      * @param spiel Spiel wo der nächste Spieler in der Liste genommen wird
      * @return der Spieler der nun an der Reihe ist
      */

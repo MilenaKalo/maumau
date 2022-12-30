@@ -18,6 +18,11 @@ public interface ControllerService {
     public void spielerHatMauGesagt();
 
     /**
+     * Methode zeigt an welcher Spieler MauMau gesagt hat. Spieler hat daraufhin gewonnen, da alle Karten abgelegt
+     */
+    public void spielerHatMauMauGesagt();
+
+    /**
      * Methode die die Regeln anzeigt die im Spiel gelten können
      */
     public void regelnAnzeigen();

@@ -118,6 +118,7 @@ public class SonderregelnImpl implements SpielregelnService {
         // nächster Spieler ist dran (Fall: aktiver Spieler ist Letzter in der Spielerliste)
         } else if (aktiverSpielerIndex + 1 > spiel.getSpielerListe().size()) {
             naechsterSpielerIndex = aktiverSpielerIndex+1-spiel.getSpielerListe().size();
+        // nächster Spieler ist dran (Fall: nicht am Ende der Spielerliste)
         } else {
             naechsterSpielerIndex = aktiverSpielerIndex+1;
         }

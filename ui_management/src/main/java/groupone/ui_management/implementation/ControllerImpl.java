@@ -23,11 +23,17 @@ public class ControllerImpl implements ControllerService {
     }
 
     @Override
+    public void spielerHatMauMauGesagt() {
+
+        System.out.println("Spieler hat MauMau gesagt und hat gewonnen.");
+    }
+
+    @Override
     public void regelnAnzeigen() {
         System.out.println("Einfache Regeln :-----------------");
         System.out.println("1. Jeder Spieler erhält 5 Karten");
-        System.out.println("2. Der Spieler muss eine Karte ablegen, die entweder die gleiche Farbe oder den gleichen Wert hat");
-        System.out.println("3. Wenn der Spieler keine Karte ablegen kann, muss er eine Karte ziehen");
+        System.out.println("2. Der Spieler muss eine Karte ablegen, die entweder die gleiche Farbe oder den gleichen Wert hat.");
+        System.out.println("3. Wenn der Spieler keine Karte ablegen kann, muss er eine Karte ziehen.");
         System.out.println("Sonderregeln :-----------------");
         System.out.println("1. ....");
         System.out.println("2. ...");

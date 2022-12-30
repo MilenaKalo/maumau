@@ -54,14 +54,17 @@ public class SpielregelnImpl implements SpielregelnService {
 
     @Override
     public Spieler nächsterSpielerIstDran(Spiel spiel) {
-    Spieler aktiverSpieler = spiel.getAktiverSpieler();
-    int aktiverSpielerIndex = spiel.getSpielerListe().indexOf(aktiverSpieler);
-    int naechsterSpielerIndex;
-    if (aktiverSpielerIndex+1 > spiel.getSpielerListe().size()) {
-        naechsterSpielerIndex = aktiverSpielerIndex+1-spiel.getSpielerListe().size();
-    } else {
-        naechsterSpielerIndex = aktiverSpielerIndex+1;
-    }
-    return spiel.getSpielerListe().get(naechsterSpielerIndex);
+        Spieler aktiverSpieler = spiel.getAktiverSpieler();
+        int aktiverSpielerIndex = spiel.getSpielerListe().indexOf(aktiverSpieler);
+        System.out.println(aktiverSpielerIndex);
+        int naechsterSpielerIndex;
+        if (aktiverSpielerIndex+1 > spiel.getSpielerListe().size()) {
+            naechsterSpielerIndex = aktiverSpielerIndex+1-spiel.getSpielerListe().size();
+        } else {
+            naechsterSpielerIndex = aktiverSpielerIndex+1;
+        }
+        System.out.println(naechsterSpielerIndex);
+        spiel.setAktiverSpieler(spiel.getSpielerListe().get(naechsterSpielerIndex));
+        return spiel.getAktiverSpieler();
     }
 }
