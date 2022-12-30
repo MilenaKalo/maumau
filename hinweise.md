@@ -1,3 +1,9 @@
-Diagramme anpassen :)
+Fragen zur nächsten Veranstaltung: 
 
-Richtungswechsel bei nächster Spieler ist dran implementieren mit hilfe von einem Attribut 
+- Datenmodell aktualisieren ? 
+- Testabdeckung ? 
+- Mockito wo benutzen ?
+- EasyMock notwendig ?
+- UI ausreichend ? 
+
+

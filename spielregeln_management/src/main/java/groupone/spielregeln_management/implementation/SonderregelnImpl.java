@@ -8,6 +8,7 @@ import groupone.spiel_management.classes.Spiel;
 import groupone.spieler_management.classes.Spieler;
 import groupone.spielregeln_management.services.SpielregelnService;
 
+import java.util.Collections;
 import java.util.List;
 
 public class SonderregelnImpl implements SpielregelnService {
@@ -15,42 +16,62 @@ public class SonderregelnImpl implements SpielregelnService {
     @Override
     public void siebenGelegt(Spiel spiel) {
 
-    //prüfen ob der Ablagestapel eine 7 enthält
+    //Prüfen, ob der Ablagestapel eine 7 enthält
        AblageStapel ablageStapel = spiel.getAblageStapel();
-       int anzahl = ablageStapel.getAblagekarten().size()-1;
-       Karte karte = ablageStapel.getAblagekarten().get(anzahl);
-    //wenn er eine 7 hat
-       if(karte.getKartenWert().equals("Sieben")){
-           System.out.println("Sieben gelegt");
-              //wenn der Spieler eine 7 hat
-              Spieler aktiverSpieler = spiel.getAktiverSpieler();
-              List<Karte> kartenListe= aktiverSpieler.getSpielerHand().getKarten();
-              for(int i = 0; i<kartenListe.size(); i++) {
-                  //wenn der Spieler eine 7 hat, muss er diese legen
-                  if (kartenListe.get(i).getKartenWert().equals("Sieben")) {
-                      System.out.println("Spieler hat eine Sieben");
-                      Karte k = kartenListe.get(i);
-                      spiel.getAblageStapel().getAblagekarten().add(k);
-                      aktiverSpieler.getSpielerHand().getKarten().remove(k);
-                      nächsterSpielerIstDran(spiel);
+       int letzteKarteIndex = ablageStapel.getAblagekarten().size() - 1;
+       Karte letzteKarte = ablageStapel.getAblagekarten().get(letzteKarteIndex);
+       System.out.println(letzteKarte.getKartenWert());
 
-                  }
-                  //wenn er keine 7 hat, muss er eine Karte ziehen
-                  else{
-                      System.out.println("Spieler hat keine Sieben");
-                      ZiehStapel ziehStapel = spiel.getZiehStapel();
-                      SpielerHand spielerHand = aktiverSpieler.getSpielerHand();
-                      //erste Karte vom Ziehstapel wird gezogen
-                      spielerHand.getKarten().add(ziehStapel.getZiehkarten().get(ziehStapel.getZiehkarten().size()-1));
-                      ziehStapel.getZiehkarten().remove(ziehStapel.getZiehkarten().get(ziehStapel.getZiehkarten().size()-1));
-                      // zweite Karte vom Ziehstapel wird gezogen
-                      spielerHand.getKarten().add(ziehStapel.getZiehkarten().get(ziehStapel.getZiehkarten().size()-1));
-                      ziehStapel.getZiehkarten().remove(ziehStapel.getZiehkarten().get(ziehStapel.getZiehkarten().size()-1));
-                      nächsterSpielerIstDran(spiel);
-                  }
-              }
-       }
-       else{
+    //Die Anzahl der Karten, die gezogen werden müssen
+        int anzahlZiehen = 0;
+
+    //Wenn letzteKarte = "Sieben"
+       if(letzteKarte.getKartenWert().equals("Sieben")) {
+           System.out.println("Eine Sieben wurde gelegt.");
+           anzahlZiehen = 2;
+           boolean weitermachen = true;
+
+           while(weitermachen) {
+               Spieler aktiverSpieler = spiel.getAktiverSpieler();
+               List<Karte> aktiverSpielerKarten = aktiverSpieler.getSpielerHand().getKarten();
+
+               //Prüfen, ob der Spieler eine Sieben hat
+               boolean hatSieben = false;
+               for (int i = 0; i < aktiverSpielerKarten.size(); i++) {
+
+                   if (aktiverSpielerKarten.get(i).getKartenWert().equals("Sieben")) {
+                       hatSieben = true;
+                   }
+
+               }
+
+               //Wenn der Spieler keine 7 hat
+               if (hatSieben == false) {
+
+                   for (int i = 0; i < anzahlZiehen; i++) {
+                       kartenSpielerImpl.zieheKarte(aktiverSpieler.getSpielerHand(), spiel.getZiehStapel());
+                   }
+                   weitermachen = false;
+
+               }
+
+               //Wenn der Spieler eine 7 hat
+               if (hatSieben == true) {
+                   for (int i = 0; i < aktiverSpielerKarten.size(); i++) {
+                       //Wenn der Spieler eine 7 hat, muss er diese legen
+                       if (aktiverSpielerKarten.get(i).getKartenWert().equals("Sieben")) {
+                           System.out.println("Spieler hat eine Sieben!");
+                           Karte spielerSieben = aktiverSpielerKarten.get(i);
+                           spiel.getAblageStapel().getAblagekarten().add(spielerSieben);
+                           aktiverSpieler.getSpielerHand().getKarten().remove(spielerSieben);
+                           anzahlZiehen += 2;
+                           i = aktiverSpielerKarten.size();
+                           nächsterSpielerIstDran(spiel);
+                       }
+                   }
+               }
+           }
+       } else {
            System.out.println("Sieben wurde nicht gelegt");
        }
     }

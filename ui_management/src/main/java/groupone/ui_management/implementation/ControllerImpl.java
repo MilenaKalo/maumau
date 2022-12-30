@@ -3,6 +3,7 @@ package groupone.ui_management.implementation;
 import groupone.ui_management.service.ControllerService;
 
 public class ControllerImpl implements ControllerService {
+
     @Override
     public void startGame() {
         System.out.println("Möchtest du ein neues Spiel starten oder ein vorhandenes Spiel laden?");
@@ -17,7 +18,8 @@ public class ControllerImpl implements ControllerService {
 
     @Override
     public void spielerHatMauGesagt() {
-        System.out.println("Spieler hat Mau gesagt");
+
+        System.out.println("Spieler hat Mau gesagt.");
     }
 
     @Override
@@ -35,36 +37,43 @@ public class ControllerImpl implements ControllerService {
 
     @Override
     public void regelnAuswählen() {
+
         System.out.println("Welches Regelwerk soll gespielt werden?");
     }
 
     @Override
     public void kartenAnzeigenSpielerHand() {
-        System.out.println("Karten des Spielers anzeigen");
+
+        System.out.println("Karten des Spielers anzeigen.");
     }
 
     @Override
     public void karteAnzeigenAblagestapel() {
-        System.out.println("Karte des Ablagestapels anzeigen");
+
+        System.out.println("Karte des Ablagestapels anzeigen.");
     }
 
     @Override
     public void karteAblegen() {
+
         System.out.println("Welche Karte soll abgelegt werden?");
     }
 
     @Override
     public void falscheKarte() {
-        System.out.println("Falsche Karte abgelegt");
+
+        System.out.println("Falsche Karte abgelegt.");
     }
 
     @Override
     public void farbeWählen() {
-        System.out.println("Wähle bitte eine Farbe");
+
+        System.out.println("Wähle bitte eine Farbe.");
     }
 
     @Override
     public void karteZiehen() {
-        System.out.println("Karte ziehen");
+
+        System.out.println("Karte ziehen.");
     }
 }

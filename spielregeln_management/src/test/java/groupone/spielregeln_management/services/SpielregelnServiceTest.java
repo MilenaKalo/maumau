@@ -72,23 +72,29 @@ public class SpielregelnServiceTest {
         ZiehStapel ziehStapel = new ZiehStapel(3, ziehStapelListe);
 
         //Spieler
-        Spieler spieler = new Spieler(1, "Max Mustermann", 0);
+        spielerListe.add(spieler1);
+        spielerListe.add(spieler2);
+        spielerListe.add(spieler3);
+        spielerListe.add(spieler4);
 
         //Spielerhand
         spielerHandListe.add(karoAcht);
         spielerHandListe.add(karoNeun);
         spielerHandListe.add(karoZehn);
         SpielerHand spielerHand = new SpielerHand(3, spielerHandListe);
-        spieler.setSpielerHand(spielerHand);
+        spieler1.setSpielerHand(spielerHand);
 
         //expected
         int anzahlKartenErwartet = 5;
 
         //actual
-     //   spielregelnService.siebenGelegt(spieler.getSpielerHand(), ziehStapel);
+        //Spiel spiel = spielService.erstelleSpiel(spielerListe, runde, ablageStapel, ziehStapel);
+        Spiel spiel = new Spiel(spielerListe, runde, ablageStapel, ziehStapel);
+        spiel.setAktiverSpieler(spieler1);
+        spielregelnService.siebenGelegt(spiel);
 
         //assert
-        Assertions.assertEquals(anzahlKartenErwartet, spieler.getSpielerHand().getAnzahlKarten());
+        Assertions.assertEquals(anzahlKartenErwartet, spieler1.getSpielerHand().getAnzahlKarten());
 
     }
 
