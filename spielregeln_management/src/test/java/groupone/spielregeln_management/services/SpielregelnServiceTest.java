@@ -14,16 +14,24 @@ import groupone.spielregeln_management.implementation.SpielregelnImpl;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.picocontainer.ComponentAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
+@ExtendWith(MockitoExtension.class)
 public class SpielregelnServiceTest {
 
-    private SpielService spielService = new SpielImpl();
-    private SpielregelnService spielregelnService = new SonderregelnImpl();
+    @InjectMocks
+    SpielregelnService spielregelnService = new SonderregelnImpl();
+
+    @Mock
+    KartenSpielerService kartenSpielerService;
 
     Karte herzSieben = new Karte("Herz", "Sieben");
     Karte herzAcht = new Karte("Herz", "Acht");
@@ -88,6 +96,14 @@ public class SpielregelnServiceTest {
 
         //expected
         int anzahlKartenErwartet = 5;
+       // Mockito.doThrow(new Exception()).doNothing().when(instance).methodName();
+
+        Mockito.doAnswer(i ->{
+            spielerHand.setAnzahlKarten(spielerHand.getAnzahlKarten() + 1);
+            ziehStapel.setAnzahlKarten(ziehStapel.getAnzahlKarten() - 1);
+            return spielerHand;
+        }).when(kartenSpielerService).zieheKarte(spielerHand, ziehStapel);
+
 
         //actual
         //Spiel spiel = spielService.erstelleSpiel(spielerListe, runde, ablageStapel, ziehStapel);
@@ -128,13 +144,19 @@ public class SpielregelnServiceTest {
         SpielerHand spielerHand = new SpielerHand(4, spielerHandListe);
         spieler1.setSpielerHand(spielerHand);
 
-        //Spielerhand Spieler 1
+        //Spielerhand Spieler 2
         List<Karte> spielerHandListe2 = new ArrayList<>();
         SpielerHand spielerHand2 = new SpielerHand(0, spielerHandListe2);
         spieler2.setSpielerHand(spielerHand2);
 
         //expected
         int anzahlKartenErwartet = 4;
+
+        Mockito.doAnswer(i ->{
+            spielerHand2.setAnzahlKarten(spielerHand2.getAnzahlKarten() + 1);
+            ziehStapel.setAnzahlKarten(ziehStapel.getAnzahlKarten() - 1);
+            return spielerHand2;
+        }).when(kartenSpielerService).zieheKarte(spielerHand2, ziehStapel);
 
         //actual
         //Spiel spiel = spielService.erstelleSpiel(spielerListe, runde, ablageStapel, ziehStapel);
@@ -223,13 +245,17 @@ public class SpielregelnServiceTest {
             ziehKarten.add(dummyKarte);
         }
 
+        // Ablagestapel
+        ablageStapel.getAblagekarten().add(karoNeun);
+
         //erwartet
-        Spieler erwartet = spieler2;
+        Spieler erwartet = spieler4;
 
         //actual
-        Spiel spiel = spielService.erstelleSpiel(spielerListe, runde, ablageStapel, ziehStapel);
+        Spiel spiel = new Spiel (spielerListe, runde, ablageStapel, ziehStapel);
         spiel.setAktiverSpieler(spieler1);
         spielregelnService.nächsterSpielerIstDran(spiel);
+
 
         //assert
         Assertions.assertEquals(erwartet, spiel.getAktiverSpieler());

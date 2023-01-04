@@ -10,6 +10,10 @@ import groupone.spielregeln_management.services.SpielregelnService;
 
 public class SpielregelnImpl implements SpielregelnService {
 
+    public SpielregelnImpl() {
+
+    }
+
     @Override
     public void siebenGelegt(Spiel spiel) {
     //Sonderregel

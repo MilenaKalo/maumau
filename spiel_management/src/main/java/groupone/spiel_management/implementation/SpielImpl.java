@@ -4,6 +4,7 @@ import groupone.kartenstapel_management.classes.AblageStapel;
 import groupone.kartenstapel_management.classes.Karte;
 import groupone.kartenstapel_management.classes.SpielerHand;
 import groupone.kartenstapel_management.implementation.KartenSpielImpl;
+import groupone.kartenstapel_management.services.KartenSpielService;
 import groupone.spiel_management.classes.Spiel;
 import groupone.spieler_management.classes.Spieler;
 import groupone.kartenstapel_management.classes.ZiehStapel;
@@ -13,7 +14,21 @@ import java.util.*;
 
 public class SpielImpl implements SpielService {
 
-    KartenSpielImpl kartenSpiel = new KartenSpielImpl();
+    // das hier mocken ohne new KartenspielImpl
+    //hier den Service nehmen
+    // Injecten mit @Inject hier nicht da es i Constructor übergeben wird
+
+    KartenSpielService kartenSpiel;
+    // ConstructorInjection hier constructor übergeben
+    //Tests
+    // importierte komponente @ mock hier kartenspiel
+    // service wird injectmocks verwenden
+    public SpielImpl(KartenSpielService kartenSpiel) {
+        this.kartenSpiel = kartenSpiel;
+    }
+
+    public SpielImpl() {
+    }
 
     @Override
     public List<Spieler> erstelleSpielerReihenfolge(List<Spieler> spielerliste) {
@@ -79,7 +94,7 @@ public class SpielImpl implements SpielService {
             break;
         }
 
-        List<Karte> kartenDeck = kartenSpiel.erstelleKarten();
+        List<Karte> kartenDeck = kartenSpiel.erstelleKarten(); // do return when hier mocken
         kartenSpiel.mischeKarten(kartenDeck);
         List<Karte> ziehKarten = new ArrayList<>();
         for (int i = 31; i >= anzahlSpieler * 5 + 1; i--) {

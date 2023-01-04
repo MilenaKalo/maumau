@@ -13,6 +13,7 @@ import groupone.spieler_management.implementation.SpielerImpl;
 import org.junit.jupiter.api.Assertions;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 
 
@@ -21,11 +22,8 @@ import java.util.List;
 
 
 public class SpielerServiceTest {
-
+    // InjectMocks nur wennn ein anderes Attribut in der Klasse verwendet wird von einer anderen Komponente
     private SpielerService spielerService = new SpielerImpl();
-
-
-
 
     @Test
     public void erhöhePunktTest() {

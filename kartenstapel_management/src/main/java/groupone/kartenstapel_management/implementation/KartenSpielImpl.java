@@ -10,6 +10,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 public class KartenSpielImpl implements KartenSpielService {
+
+    public KartenSpielImpl() {
+
+    }
+
     @Override
     public void legeErsteKarteAufAblagestapel(ZiehStapel ziehStapel, AblageStapel ablageStapel) {
         Karte karte = ziehStapel.getZiehkarten().get(ziehStapel.getZiehkarten().size()-1);

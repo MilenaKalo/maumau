@@ -6,6 +6,10 @@ import groupone.spieler_management.services.SpielerService;
 
 public class SpielerImpl implements SpielerService {
 
+    public SpielerImpl(){
+
+    }
+
     @Override
     public void erhöhePunkt(Spieler spieler) {
 

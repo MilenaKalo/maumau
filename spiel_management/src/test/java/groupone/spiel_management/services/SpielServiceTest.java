@@ -10,13 +10,14 @@ import groupone.spieler_management.classes.Spieler;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -26,7 +27,7 @@ public class SpielServiceTest {
     private SpielService spielService = new SpielImpl();
 
     @Mock
-    private KartenSpielerImpl kartenSpielerImpl;
+    private KartenSpielService kartenSpielService;
 
     //Erzeugung eines Spiels
     //Runde
@@ -67,11 +68,18 @@ public class SpielServiceTest {
         List<Karte> ablageKarten = new ArrayList<>();
         AblageStapel ablageStapel = new AblageStapel(anzahlKartenAblage, ablageKarten);
 
-        //Ziehstapel
+       // Hier mocken
+        //Mockito.doReturn(ziehKarten).when(kartenSpielService).findById(itemId);
         List<Karte> ziehKarten = new ArrayList<>();
         for (int i = 0; i < 32; i++) {
             ziehKarten.add(dummyKarte);
         }
+        Mockito.when(kartenSpielService.erstelleKarten()).thenReturn(ziehKarten);
+        Mockito.when(kartenSpielService.mischeKarten(ziehKarten)).thenAnswer(i -> {
+            Collections.shuffle(ziehKarten);
+            return ziehKarten;
+        });
+
         ZiehStapel ziehStapel = new ZiehStapel(32, ziehKarten);
 
         //erwartet
@@ -131,11 +139,19 @@ public class SpielServiceTest {
         spielerListe.add(spieler3);
         spielerListe.add(spieler4);
 
-        //Ziehkarten
+        // Hier mocken
+        //Mockito.doReturn(ziehKarten).when(kartenSpielService).findById(itemId);
+        List<Karte> ziehKarten = new ArrayList<>();
         for (int i = 0; i < 32; i++) {
             ziehKarten.add(dummyKarte);
         }
+        Mockito.when(kartenSpielService.erstelleKarten()).thenReturn(ziehKarten);
+        Mockito.when(kartenSpielService.mischeKarten(ziehKarten)).thenAnswer(i -> {
+            Collections.shuffle(ziehKarten);
+            return ziehKarten;
+        });
 
+        ZiehStapel ziehStapel = new ZiehStapel(32, ziehKarten);
         //erwartet
         String erwartet = "Das Spiel wurde beendet!";
 
@@ -157,11 +173,20 @@ public class SpielServiceTest {
         spielerListe.add(spieler4);
         spieler1.setPunkte(1);
 
-        //Ziehkarten
+
+        // Hier mocken
+        //Mockito.doReturn(ziehKarten).when(kartenSpielService).findById(itemId);
+        List<Karte> ziehKarten = new ArrayList<>();
         for (int i = 0; i < 32; i++) {
             ziehKarten.add(dummyKarte);
         }
+        Mockito.when(kartenSpielService.erstelleKarten()).thenReturn(ziehKarten);
+        Mockito.when(kartenSpielService.mischeKarten(ziehKarten)).thenAnswer(i -> {
+            Collections.shuffle(ziehKarten);
+            return ziehKarten;
+        });
 
+        ZiehStapel ziehStapel = new ZiehStapel(32, ziehKarten);
         //erwartet
         Spieler erwartet = spieler1;
 
@@ -173,6 +198,5 @@ public class SpielServiceTest {
         Assertions.assertEquals(erwartet, actual);
 
     }
-
 
 }

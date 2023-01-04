@@ -5,6 +5,7 @@ import groupone.kartenstapel_management.classes.Karte;
 import groupone.kartenstapel_management.classes.SpielerHand;
 import groupone.kartenstapel_management.classes.ZiehStapel;
 import groupone.spiel_management.classes.Spiel;
+import groupone.spiel_management.services.KartenSpielerService;
 import groupone.spieler_management.classes.Spieler;
 import groupone.spielregeln_management.services.SpielregelnService;
 import groupone.spiel_management.implementation.KartenSpielerImpl;
@@ -14,7 +15,15 @@ import java.util.List;
 
 public class SonderregelnImpl implements SpielregelnService {
 
-    KartenSpielerImpl kartenSpielerImpl = new KartenSpielerImpl();
+    KartenSpielerService kartenSpielerImpl;
+
+    public SonderregelnImpl(){
+
+    }
+
+    public SonderregelnImpl(KartenSpielerService kartenSpielerImpl){
+        this.kartenSpielerImpl = kartenSpielerImpl;
+    }
 
     @Override
     public void siebenGelegt(Spiel spiel) {
@@ -104,23 +113,36 @@ public class SonderregelnImpl implements SpielregelnService {
         int aktiverSpielerIndex = spiel.getSpielerListe().indexOf(aktiverSpieler);
         System.out.println(aktiverSpielerIndex);
         int naechsterSpielerIndex;
+
         boolean richtungsWechsel = richtungWechsel(spiel.getAblageStapel());
+        //System.out.println("Richtungswechsel " +richtungsWechsel);
 
         // aussetzen
         if(spiel.getAblageStapel().getAblagekarten().get(spiel.getAblageStapel().getAblagekarten().size() - 1)
                 .getKartenWert().equals("Acht")){
             Spieler naechsterSpieler = aussetzen(spiel);
             naechsterSpielerIndex = spiel.getSpielerListe().indexOf(naechsterSpieler);
-        // Richtungswechsel
+            // Richtungswechsel
         } else if (richtungsWechsel) {
+            //System.out.println("erste if");
             Collections.reverse(spiel.getSpielerListe());
-            naechsterSpielerIndex = spiel.getSpielerListe().indexOf(aktiverSpieler)+1;
+            aktiverSpielerIndex = spiel.getSpielerListe().indexOf(aktiverSpieler);
+            //System.out.println(aktiverSpielerIndex);
+            if(aktiverSpielerIndex + 1 > spiel.getSpielerListe().size() - 1) {
+                //System.out.println("erste if if");
+                naechsterSpielerIndex = aktiverSpielerIndex - spiel.getSpielerListe().size() + 1;
+            }else {
+                //System.out.println("erste if else");
+                naechsterSpielerIndex = spiel.getSpielerListe().indexOf(aktiverSpieler) + 1;
+            }
         // nächster Spieler ist dran (Fall: aktiver Spieler ist Letzter in der Spielerliste)
-        } else if (aktiverSpielerIndex + 1 > spiel.getSpielerListe().size()) {
+        } else if (aktiverSpielerIndex + 1 > spiel.getSpielerListe().size() -1) {
             naechsterSpielerIndex = aktiverSpielerIndex+1-spiel.getSpielerListe().size();
+            //System.out.println("zweite if");
         // nächster Spieler ist dran (Fall: nicht am Ende der Spielerliste)
         } else {
             naechsterSpielerIndex = aktiverSpielerIndex+1;
+            // System.out.println("else ");
         }
         System.out.println(naechsterSpielerIndex);
         spiel.setAktiverSpieler(spiel.getSpielerListe().get(naechsterSpielerIndex));

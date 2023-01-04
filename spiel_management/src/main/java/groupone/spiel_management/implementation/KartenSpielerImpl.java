@@ -8,6 +8,11 @@ import groupone.kartenstapel_management.classes.ZiehStapel;
 import groupone.spiel_management.services.KartenSpielerService;
 
 public class KartenSpielerImpl implements KartenSpielerService {
+
+    public KartenSpielerImpl(){
+
+    }
+
     @Override
     public void legeKarteAb(SpielerHand spielerhand, Karte karte, AblageStapel ablagestapel) {
         spielerhand.getKarten().remove(karte);

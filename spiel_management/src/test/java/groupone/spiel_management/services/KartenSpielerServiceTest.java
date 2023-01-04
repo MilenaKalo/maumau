@@ -9,8 +9,6 @@ import groupone.kartenstapel_management.classes.ZiehStapel;
 import groupone.spiel_management.implementation.KartenSpielerImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-
 import java.util.ArrayList;
 import java.util.List;
 

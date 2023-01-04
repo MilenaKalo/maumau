@@ -1,9 +1,13 @@
 Fragen zur nächsten Veranstaltung: 
 
-- Datenmodell aktualisieren ? 
-- Testabdeckung ? 
-- Mockito wo benutzen ?
-- EasyMock notwendig ?
-- UI ausreichend ? 
+Testabdeckung -- müssen noch mehr Tests schreiben 
+- shortcut:  opt cmd fn f6 -- run with covergae 
+- Frage -> wasist die Grundlage für Coverage in run - edit config einstellen ? class oder ganzes Pakage -- Implentierungklasse wichtig 
+
+
+
+
+
+
 
 
