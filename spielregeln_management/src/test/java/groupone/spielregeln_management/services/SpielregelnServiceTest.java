@@ -5,8 +5,7 @@ import groupone.kartenstapel_management.classes.Karte;
 import groupone.kartenstapel_management.classes.SpielerHand;
 import groupone.kartenstapel_management.classes.ZiehStapel;
 import groupone.spiel_management.classes.Spiel;
-import groupone.spiel_management.implementation.SpielImpl;
-import groupone.spiel_management.services.SpielService;
+import groupone.spiel_management.services.KartenSpielerService;
 import groupone.spieler_management.classes.Spieler;
 import groupone.spielregeln_management.implementation.SonderregelnImpl;
 import org.junit.jupiter.api.Assertions;
@@ -195,7 +194,7 @@ public class SpielregelnServiceTest {
     }
     @Test
     public void aussetzenTest(){
-        //Setup
+
         //Setup
         //Spielerliste
         List<Spieler> spielerListe = new ArrayList<>();

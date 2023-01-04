@@ -8,6 +8,7 @@ import groupone.kartenstapel_management.services.KartenSpielService;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 public class KartenSpielImpl implements KartenSpielService {
 
     public KartenSpielImpl() {

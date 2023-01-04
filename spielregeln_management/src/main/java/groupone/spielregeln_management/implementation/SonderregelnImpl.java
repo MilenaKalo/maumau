@@ -31,7 +31,7 @@ public class SonderregelnImpl implements SpielregelnService {
        AblageStapel ablageStapel = spiel.getAblageStapel();
        int letzteKarteIndex = ablageStapel.getAblagekarten().size() - 1;
        Karte letzteKarte = ablageStapel.getAblagekarten().get(letzteKarteIndex);
-       System.out.println(letzteKarte.getKartenWert());
+       //System.out.println(letzteKarte.getKartenWert());
 
     //Die Anzahl der Karten, die gezogen werden müssen
         int anzahlZiehen = 0;
@@ -110,7 +110,7 @@ public class SonderregelnImpl implements SpielregelnService {
     public Spieler nächsterSpielerIstDran(Spiel spiel) {
         Spieler aktiverSpieler = spiel.getAktiverSpieler();
         int aktiverSpielerIndex = spiel.getSpielerListe().indexOf(aktiverSpieler);
-        System.out.println(aktiverSpielerIndex);
+        //System.out.println(aktiverSpielerIndex);
         int naechsterSpielerIndex;
 
         boolean richtungsWechsel = richtungWechsel(spiel.getAblageStapel());
@@ -151,24 +151,24 @@ public class SonderregelnImpl implements SpielregelnService {
     @Override
     public Spieler aussetzen(Spiel spiel) {
        AblageStapel ablageStapel =  spiel.getAblageStapel();
-       System.out.println(ablageStapel.getAblagekarten());
+       //System.out.println(ablageStapel.getAblagekarten());
        int anzahl = ablageStapel.getAblagekarten().size();
        Karte karte = ablageStapel.getAblagekarten().get(anzahl - 1);
-       System.out.println(karte.getKartenWert());
-       System.out.println(karte.getKartenFarbe());
-       System.out.println(anzahl);
+       //System.out.println(karte.getKartenWert());
+       //System.out.println(karte.getKartenFarbe());
+       //System.out.println(anzahl);
        if (karte.getKartenWert().equals("Acht")) {
            Spieler aktiverSpieler = spiel.getAktiverSpieler();
 
            int aktiverSpielerIndex =spiel.getSpielerListe().indexOf(aktiverSpieler);
-           System.out.println("aktiver: "+ aktiverSpielerIndex);
+           //System.out.println("aktiver: "+ aktiverSpielerIndex);
            int naechsterSpielerIndex;
            if (aktiverSpielerIndex+2 > spiel.getSpielerListe().size()) {
                naechsterSpielerIndex = aktiverSpielerIndex+2-spiel.getSpielerListe().size();
            } else {
                naechsterSpielerIndex = aktiverSpielerIndex+2;
            }
-           System.out.println("naechster: "+ naechsterSpielerIndex);
+           //System.out.println("naechster: "+ naechsterSpielerIndex);
            return spiel.getSpielerListe().get(naechsterSpielerIndex);
        } else {
            System.out.println("keine Acht");

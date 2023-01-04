@@ -3,7 +3,7 @@ package groupone.spiel_management.services;
 import groupone.kartenstapel_management.classes.AblageStapel;
 import groupone.kartenstapel_management.classes.Karte;
 import groupone.kartenstapel_management.classes.ZiehStapel;
-import groupone.spiel_management.implementation.KartenSpielerImpl;
+import groupone.kartenstapel_management.services.KartenSpielService;
 import groupone.spiel_management.classes.Spiel;
 import groupone.spiel_management.implementation.SpielImpl;
 import groupone.spieler_management.classes.Spieler;
