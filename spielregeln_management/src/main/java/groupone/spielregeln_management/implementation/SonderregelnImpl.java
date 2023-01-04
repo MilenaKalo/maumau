@@ -2,7 +2,6 @@ package groupone.spielregeln_management.implementation;
 
 import groupone.kartenstapel_management.classes.AblageStapel;
 import groupone.kartenstapel_management.classes.Karte;
-import groupone.kartenstapel_management.classes.SpielerHand;
 import groupone.kartenstapel_management.classes.ZiehStapel;
 import groupone.spiel_management.classes.Spiel;
 import groupone.spiel_management.services.KartenSpielerService;
@@ -119,7 +118,7 @@ public class SonderregelnImpl implements SpielregelnService {
 
         // aussetzen
         if(spiel.getAblageStapel().getAblagekarten().get(spiel.getAblageStapel().getAblagekarten().size() - 1)
-                .getKartenWert().equals("Acht")){
+                .getKartenWert().equals("Acht")) {
             Spieler naechsterSpieler = aussetzen(spiel);
             naechsterSpielerIndex = spiel.getSpielerListe().indexOf(naechsterSpieler);
             // Richtungswechsel
@@ -144,7 +143,7 @@ public class SonderregelnImpl implements SpielregelnService {
             naechsterSpielerIndex = aktiverSpielerIndex+1;
             // System.out.println("else ");
         }
-        System.out.println(naechsterSpielerIndex);
+        // System.out.println(naechsterSpielerIndex);
         spiel.setAktiverSpieler(spiel.getSpielerListe().get(naechsterSpielerIndex));
         return spiel.getAktiverSpieler();
     }

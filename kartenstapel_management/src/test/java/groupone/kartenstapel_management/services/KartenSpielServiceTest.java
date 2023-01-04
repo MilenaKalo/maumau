@@ -9,15 +9,15 @@ import groupone.kartenstapel_management.implementation.KartenSpielImpl;
 import org.junit.jupiter.api.Assertions;
 
 import org.junit.jupiter.api.Test;
-
+import org.mockito.InjectMocks;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class KartenSpielServiceTest {
 
-    private KartenSpielService kartenSpielService = new KartenSpielImpl();
+    @InjectMocks
+    KartenSpielService kartenSpielService = new KartenSpielImpl();
 
     Karte herzBube = new Karte("Herz", "Bube");
     Karte pikAss = new Karte("Pik", "Ass");

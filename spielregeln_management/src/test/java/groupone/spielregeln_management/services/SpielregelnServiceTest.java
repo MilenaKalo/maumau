@@ -9,9 +9,6 @@ import groupone.spiel_management.implementation.SpielImpl;
 import groupone.spiel_management.services.SpielService;
 import groupone.spieler_management.classes.Spieler;
 import groupone.spielregeln_management.implementation.SonderregelnImpl;
-import groupone.spielregeln_management.implementation.SpielregelnImpl;
-
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

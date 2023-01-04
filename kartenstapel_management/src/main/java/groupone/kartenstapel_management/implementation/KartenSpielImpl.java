@@ -5,7 +5,6 @@ import groupone.kartenstapel_management.classes.Karte;
 import groupone.kartenstapel_management.classes.SpielerHand;
 import groupone.kartenstapel_management.classes.ZiehStapel;
 import groupone.kartenstapel_management.services.KartenSpielService;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
