@@ -1,5 +1,6 @@
 package groupone.ui_management.implementation;
 
+import groupone.exception_management.AnwendungsException;
 import groupone.kartenstapel_management.classes.AblageStapel;
 import groupone.kartenstapel_management.classes.Karte;
 import groupone.kartenstapel_management.classes.SpielerHand;
@@ -15,7 +16,7 @@ import groupone.ui_management.service.ControllerService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ControllerImpl {
+public class ControllerImpl implements ControllerService {
 
     //Controller - kennt die schnittstellen der anwendungslogik
     private Spiel spiel;
@@ -75,10 +76,7 @@ public class ControllerImpl {
         } else if (x.equals("h")) {
             view.hauptMenue();
         } else {
-            // TODO
-            // Exception
-            System.out.println("Falsche Eingabe.");
-            view.startGame();
+           view.hauptMenue();
         }
     }
 
@@ -101,7 +99,7 @@ public class ControllerImpl {
     /**
      * fragt nach welcher Regel gespielt werden soll
      */
-    private void frageNachSpielregeln() {
+    private void frageNachSpielregeln() throws AnwendungsException {
         String x = view.regelnAnzeigenundAuswählen();
 
         if (x.equals("e")) {
@@ -110,8 +108,8 @@ public class ControllerImpl {
             // TODO
         } else {
             // Exception
-            System.out.println("Falsche Eingabe.");
             view.regelnAnzeigenundAuswählen();
+            throw new AnwendungsException("Falsche Eingabe.");
         }
     }
 
@@ -133,7 +131,7 @@ public class ControllerImpl {
      * Methode die die Karten der Spielerhand des Spielers anzeigt
      * @param spieler - Spieler dessen Hand angezeigt werden soll
      */
-    private void zeigeKartenSpielerHand(Spieler spieler) {
+    private void zeigeKartenSpielerHand(Spieler spieler) throws AnwendungsException {
         String x = view.kartenAnzeigenSpielerHand();
         if (x.equals("y")){
             for (int i = 0; i < spieler.getSpielerHand().getKarten().size(); i++) {
@@ -145,9 +143,11 @@ public class ControllerImpl {
             //TODO
         } else {
             // TODO
-            // Exception
-            System.out.println("Falsche Eingabe.");
             view.kartenAnzeigenSpielerHand();
+            // Exception
+            throw new AnwendungsException("Falsche Eingabe.");
+
+
         }
 
     }

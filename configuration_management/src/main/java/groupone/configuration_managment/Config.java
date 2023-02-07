@@ -1,3 +1,6 @@
+package groupone.configuration_managment;
+
+import groupone.exception_management.TechnischeException;
 import groupone.kartenstapel_management.implementation.KartenSpielImpl;
 import groupone.spiel_management.implementation.KartenSpielerImpl;
 import groupone.spiel_management.implementation.SpielImpl;
@@ -5,6 +8,8 @@ import groupone.spieler_management.implementation.SpielerImpl;
 import groupone.spielregeln_management.implementation.SonderregelnImpl;
 import groupone.spielregeln_management.implementation.SpielregelnImpl;
 import groupone.ui_management.implementation.ControllerImpl;
+import groupone.ui_management.implementation.View;
+import groupone.virtuellerSpieler_management.implementation.virtuellerSpielerImpl;
 import org.picocontainer.DefaultPicoContainer;
 import org.picocontainer.MutablePicoContainer;
 import org.picocontainer.injectors.ConstructorInjection;
@@ -21,11 +26,23 @@ public class Config {
         container.addComponent(SonderregelnImpl.class);
         container.addComponent(SpielregelnImpl.class);
         container.addComponent(ControllerImpl.class);
+        container.addComponent(virtuellerSpielerImpl.class);
+        container.addComponent(View.class);
     }
 
-    public static void main(String[] args) {
-        registriereKomponenten();
-        ControllerImpl ui = container.getComponent(ControllerImpl.class);
-        // Aufruf von ui zum Start des Spiels
+    public static void main(String[] args) throws TechnischeException {
+        try {
+            registriereKomponenten();
+        } catch (Exception e) {
+            throw new TechnischeException("Registrierung der Komponenten fehlgeschlagen");
+        }
+
+        try {
+            container.getComponent(ControllerImpl.class).starteSpiel();
+        } catch (java.lang.NullPointerException e) {
+            throw new TechnischeException("Fehler beim Starten des Spiels");
+        } catch (Exception e){
+            throw new TechnischeException();
+        }
     }
 }

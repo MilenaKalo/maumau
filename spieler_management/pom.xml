@@ -15,12 +15,6 @@
             <groupId>org.groupone</groupId>
             <artifactId>kartenstapel_management</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.groupone</groupId>
-            <artifactId>kartenstapel_management</artifactId>
-            <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

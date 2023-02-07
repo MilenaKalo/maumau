@@ -9,23 +9,11 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>ui_management</artifactId>
+    <artifactId>virtuellerSpieler_management</artifactId>
     <dependencies>
         <dependency>
             <groupId>org.groupone</groupId>
-            <artifactId>spielregeln_management</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.groupone</groupId>
-            <artifactId>exception_managment</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.groupone</groupId>
-            <artifactId>spiel_management</artifactId>
+            <artifactId>kartenstapel_management</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
