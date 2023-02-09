@@ -1,6 +1,6 @@
 package groupone.exception_management;
 
-public class TechnischeException extends Exception {
+public class TechnischeException extends RuntimeException {
 
     /**
      * allgemeine Technische Exception für Fehler die nicht vom Benutzer verursacht werden
