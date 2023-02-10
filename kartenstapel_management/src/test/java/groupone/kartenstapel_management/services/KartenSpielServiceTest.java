@@ -55,6 +55,8 @@ public class KartenSpielServiceTest {
 
     }
 
+
+
     @Test
     public void mischeKarten() {
 

@@ -153,8 +153,7 @@ public class View {
      * wird abgefragt welche Karte auf den Ablagestapel gelegt werden soll
      * @return die Karteneigenschaften in einer Liste
      */
-    public List<String> karteAblegen() {
-
+    public int karteAblegen() {
         System.out.println("Welche Karte soll abgelegt werden?");
         System.out.println("Nummer: ");
         int nummer = scanner.nextInt();

@@ -9,6 +9,7 @@ import groupone.spiel_management.services.KartenSpielerService;
 import groupone.spieler_management.classes.Spieler;
 import groupone.spielregeln_management.implementation.SonderregelnImpl;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -32,15 +33,15 @@ public class SpielregelnServiceTest {
     @Mock
     KartenSpielerService kartenSpielerService;
 
-    Karte herzSieben = new Karte("Herz", "Sieben");
-    Karte herzAcht = new Karte("Herz", "Acht");
-    Karte herzNeun = new Karte("Herz", "Neun");
-    Karte herzZehn = new Karte("Herz", "Zehn");
+    Karte herzSieben = new Karte("Herz", "7");
+    Karte herzAcht = new Karte("Herz", "8");
+    Karte herzNeun = new Karte("Herz", "9");
+    Karte herzZehn = new Karte("Herz", "10");
     Karte herzBube = new Karte("Herz", "Bube");
-    Karte karoSieben = new Karte("Karo", "Sieben");
-    Karte karoAcht = new Karte("Karo", "Acht");
-    Karte karoNeun = new Karte("Karo", "Neun");
-    Karte karoZehn = new Karte("Karo", "Zehn");
+    Karte karoSieben = new Karte("Karo", "7");
+    Karte karoAcht = new Karte("Karo", "8");
+    Karte karoNeun = new Karte("Karo", "9");
+    Karte karoZehn = new Karte("Karo", "10");
 
     List<Karte> ablageStapelListe = new ArrayList<>();
     List<Karte> ziehStapelListe = new ArrayList<>();
@@ -68,104 +69,23 @@ public class SpielregelnServiceTest {
     List<Spieler> spielerListe = new ArrayList<>();
 
     @Test
-    public void siebenGelegtTest() {
-        //Setup
-        //Ablagestapel
-        ablageStapelListe.add(herzSieben);
-        AblageStapel ablageStapel = new AblageStapel(1, ablageStapelListe);
-
-        //Ziehstapel
-        ziehStapelListe.add(herzAcht);
-        ziehStapelListe.add(herzNeun);
-        ziehStapelListe.add(herzZehn);
-        ZiehStapel ziehStapel = new ZiehStapel(3, ziehStapelListe);
-
-        //Spieler
-        spielerListe.add(spieler1);
-        spielerListe.add(spieler2);
-        spielerListe.add(spieler3);
-        spielerListe.add(spieler4);
-
-        //Spielerhand
-        spielerHandListe.add(karoAcht);
-        spielerHandListe.add(karoNeun);
-        spielerHandListe.add(karoZehn);
-        SpielerHand spielerHand = new SpielerHand(3, spielerHandListe);
-        spieler1.setSpielerHand(spielerHand);
-
-        //expected
-        int anzahlKartenErwartet = 5;
-       // Mockito.doThrow(new Exception()).doNothing().when(instance).methodName();
-
-        Mockito.doAnswer(i ->{
-            spielerHand.setAnzahlKarten(spielerHand.getAnzahlKarten() + 1);
-            ziehStapel.setAnzahlKarten(ziehStapel.getAnzahlKarten() - 1);
-            return spielerHand;
-        }).when(kartenSpielerService).zieheKarte(spielerHand, ziehStapel);
-
-
-        //actual
-        //Spiel spiel = spielService.erstelleSpiel(spielerListe, runde, ablageStapel, ziehStapel);
-        Spiel spiel = new Spiel(spielerListe, runde, ablageStapel, ziehStapel);
-        spiel.setAktiverSpieler(spieler1);
-        spielregelnService.siebenGelegt(spiel);
-
-        //assert
-        Assertions.assertEquals(anzahlKartenErwartet, spieler1.getSpielerHand().getAnzahlKarten());
-
+    public void testPrüfeAufSiebenGelegtFalse() {
+        Spiel testSpiel = new Spiel();
+        Karte obersteKarte = new Karte("Karo", "6");
+        ablageStapel.getAblagekarten().add(obersteKarte);
+        testSpiel.setAblageStapel(ablageStapel);
+        boolean result = spielregelnService.prüfeAufSiebenGelegt(testSpiel);
+        assertFalse(result);
     }
 
     @Test
-    public void siebenGelegtTest2() {
-        //Setup
-        //Ablagestapel
-        ablageStapelListe.add(herzSieben);
-        AblageStapel ablageStapel = new AblageStapel(1, ablageStapelListe);
-
-        //Ziehstapel
-        ziehStapelListe.add(herzAcht);
-        ziehStapelListe.add(herzNeun);
-        ziehStapelListe.add(herzZehn);
-        ziehStapelListe.add(herzBube);
-        ZiehStapel ziehStapel = new ZiehStapel(4, ziehStapelListe);
-
-        //Spieler
-        spielerListe.add(spieler1);
-        spielerListe.add(spieler2);
-        spielerListe.add(spieler3);
-        spielerListe.add(spieler4);
-
-        //Spielerhand Spieler 1
-        spielerHandListe.add(karoSieben);
-        spielerHandListe.add(karoAcht);
-        spielerHandListe.add(karoNeun);
-        spielerHandListe.add(karoZehn);
-        SpielerHand spielerHand = new SpielerHand(4, spielerHandListe);
-        spieler1.setSpielerHand(spielerHand);
-
-        //Spielerhand Spieler 2
-        List<Karte> spielerHandListe2 = new ArrayList<>();
-        SpielerHand spielerHand2 = new SpielerHand(0, spielerHandListe2);
-        spieler2.setSpielerHand(spielerHand2);
-
-        //expected
-        int anzahlKartenErwartet = 4;
-
-        Mockito.doAnswer(i ->{
-            spielerHand2.setAnzahlKarten(spielerHand2.getAnzahlKarten() + 1);
-            ziehStapel.setAnzahlKarten(ziehStapel.getAnzahlKarten() - 1);
-            return spielerHand2;
-        }).when(kartenSpielerService).zieheKarte(spielerHand2, ziehStapel);
-
-        //actual
-        //Spiel spiel = spielService.erstelleSpiel(spielerListe, runde, ablageStapel, ziehStapel);
-        Spiel spiel = new Spiel(spielerListe, runde, ablageStapel, ziehStapel);
-        spiel.setAktiverSpieler(spieler1);
-        spielregelnService.siebenGelegt(spiel);
-
-        //assert
-        Assertions.assertEquals(anzahlKartenErwartet, spieler2.getSpielerHand().getAnzahlKarten());
-
+    public void testPrüfeAufSiebenGelegtTrue() {
+        Spiel testSpiel = new Spiel();
+        Karte obersteKarte = new Karte("Karo", "7");
+        ablageStapel.getAblagekarten().add(obersteKarte);
+        testSpiel.setAblageStapel(ablageStapel);
+        boolean result = spielregelnService.prüfeAufSiebenGelegt(testSpiel);
+        assertTrue(result);
     }
 
     @Test

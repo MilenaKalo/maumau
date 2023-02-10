@@ -1,6 +1,7 @@
 package groupone.kartenstapel_management.classes;
 
 import groupone.kartenstapel_management.classes.Karte;
+import groupone.spiel_management.classes.Spiel;
 
 import javax.persistence.*;
 import java.util.List;

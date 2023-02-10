@@ -134,7 +134,8 @@ public class ControllerImpl implements ControllerService {
         } else if (x.equals("h")) {
             hauptMenue();
         } else {
-           view.hauptMenue();
+           hauptMenue();
+
         }
     }
 
@@ -413,6 +414,7 @@ public class ControllerImpl implements ControllerService {
                 returnwert = "nichts";
             }
         }
+        return returnwert;
     }
 
     /**

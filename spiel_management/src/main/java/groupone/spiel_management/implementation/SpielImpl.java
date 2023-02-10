@@ -9,6 +9,7 @@ import groupone.spiel_management.classes.Spiel;
 import groupone.spieler_management.classes.Spieler;
 import groupone.kartenstapel_management.classes.ZiehStapel;
 import groupone.spiel_management.services.SpielService;
+import org.picocontainer.annotations.Inject;
 
 import java.util.*;
 
@@ -104,6 +105,7 @@ public class SpielImpl implements SpielService {
         }
 
         spiel.getZiehStapel().setZiehkarten(ziehKarten);
+        spiel.getAblageStapel().setAblagekarten(new ArrayList<>());
         spiel.getAblageStapel().getAblagekarten().add(kartenDeck.get(kartenDeck.size() - 1));
         kartenDeck.remove(kartenDeck.get(kartenDeck.size() - 1));
         int uebrigekarten = kartenDeck.size();

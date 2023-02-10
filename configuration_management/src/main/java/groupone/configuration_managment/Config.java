@@ -36,11 +36,10 @@ public class Config {
         } catch (Exception e) {
             throw new TechnischeException("Registrierung der Komponenten fehlgeschlagen");
         }
-
         try {
             container.getComponent(ControllerImpl.class).starteSpiel();
         } catch (java.lang.NullPointerException e) {
-            throw new TechnischeException("Fehler beim Starten des Spiels");
+           throw new TechnischeException("Fehler beim Starten des Spiels");
         } catch (Exception e){
             throw new TechnischeException();
         }
