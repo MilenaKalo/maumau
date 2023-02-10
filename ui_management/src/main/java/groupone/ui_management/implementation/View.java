@@ -222,7 +222,6 @@ public class View {
     /**
      * Spieler kann, wenn er nur noch eine Karte in der Hat oder alle Karten abgelegt hat,
      * "Mau" bzw. "MauMau" sagen.
-     * @param spieler Spieler, der was sagen möchte
      * @return die getroffene Aussage
      */
     public String wasSagen() {
@@ -230,4 +229,13 @@ public class View {
         String x = scanner.next().toLowerCase();
         return x;
     }
+
+    public void zuWenigeSpieler(int anzahlGegenwaertigeSpieler) {
+        System.out.println("Bisher gibt es " + anzahlGegenwaertigeSpieler + ". Es werden mindestens 2 Spieler benötigt. Bitte");
+        System.out.println("Bitte erstelle noch mindestens " + (2-anzahlGegenwaertigeSpieler) + " Spieler.");
+    }
+    public void spielerHatGewonnen() {
+        System.out.println("Herzlichen Glückwunsch, du hast gewonnen!");
+    }
+
 }

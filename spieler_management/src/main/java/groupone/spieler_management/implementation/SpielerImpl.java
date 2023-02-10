@@ -18,19 +18,19 @@ public class SpielerImpl implements SpielerService {
 
     @Override
     public void maumau(Spieler spieler) {
-        boolean b = spieler.getSpielerHand().getAnzahlKarten() == 0;
-        if (b) {
+        //boolean b = spieler.getSpielerHand().getAnzahlKarten() == 0;
+        //if (b) {
             spieler.setMaumauGesagt(true);
-        }
+        //}
     }
 
     @Override
     public void sageMau(Spieler spieler) {
-        boolean b = spieler.getSpielerHand().getAnzahlKarten() == 1;
+        //boolean b = spieler.getSpielerHand().getAnzahlKarten() == 1;
 
-        if (b) {
+        //if (b) {
             spieler.setMauGesagt(true);
-        }
+        //}
     }
 
     @Override

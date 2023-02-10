@@ -7,10 +7,15 @@ import groupone.kartenstapel_management.classes.AblageStapel;
 import groupone.kartenstapel_management.classes.Karte;
 import groupone.kartenstapel_management.classes.SpielerHand;
 import groupone.kartenstapel_management.classes.ZiehStapel;
+import groupone.kartenstapel_management.implementation.KartenSpielImpl;
+import groupone.kartenstapel_management.services.KartenSpielService;
 import groupone.spiel_management.classes.Spiel;
+import groupone.spiel_management.implementation.KartenSpielerImpl;
+import groupone.spiel_management.implementation.SpielImpl;
 import groupone.spiel_management.services.KartenSpielerService;
 import groupone.spiel_management.services.SpielService;
 import groupone.spieler_management.classes.Spieler;
+import groupone.spieler_management.implementation.SpielerImpl;
 import groupone.spieler_management.services.SpielerService;
 import groupone.spielregeln_management.implementation.SonderregelnImpl;
 import groupone.spielregeln_management.implementation.SpielregelnImpl;
@@ -421,11 +426,11 @@ public class ControllerImpl implements ControllerService {
      * Methode gibt Spieler Gelegenheit, "Mau" oder "MauMau" zu sagen
      * @param spieler Spieler, der "Mau" oder "MauMau" sagen möchte
      */
-    private void spielerHatWasGesagt(Spieler spieler) {
-        if(view.wasSagen(spieler).equals("mau")){
+    private void spielerHatWasGesagt(String aussage, Spieler spieler) {
+        if(aussage.equals("mau")){
             spielerService.sageMau(spieler);
             view.spielerHatMauGesagt();
-        }else if(view.wasSagen(spieler).equals("maumau")) {
+        }else if(aussage.equals("maumau")) {
             spielerService.maumau(spieler);
             view.spielerHatMauMauGesagt();
         }
@@ -443,7 +448,7 @@ public class ControllerImpl implements ControllerService {
             for (int i = 0; i < spieler.getSpielerHand().getKarten().size(); i++) {
                 String wert = spieler.getSpielerHand().getKarten().get(i).getKartenWert();
                 String farbe = spieler.getSpielerHand().getKarten().get(i).getKartenFarbe();
-                view.infoZurKarte(wert, farbe);
+                view.infoZurKarte(i+1,wert, farbe);
             }
         } else if (x.equals("n")){
         } else {
