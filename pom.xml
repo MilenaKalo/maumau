@@ -16,7 +16,7 @@
     <module>ui_management</module>
     <module>configuration_management</module>
     <module>exception_managment</module>
-      <module>virtuellerSpieler_management</module>
+    <module>virtuellerSpieler_management</module>
   </modules>
 
   <name>maumau</name>

@@ -2,18 +2,45 @@ package groupone.spieler_management.classes;
 
 import groupone.kartenstapel_management.classes.SpielerHand;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "SPIELER")
 public class Spieler {
 
     //Attribute
+    @Id
     private long id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "punkte")
     private int punkte;
+
+    @ManyToOne
+    @JoinColumn(name="SID", nullable = false)
+    private Spiel spiel;
+
+    @OneToOne
+    @MapsId
+    @JoinColumn(name="SID", nullable = false)
+    private Spiel spiel2;
+
+    @OneToOne
     private SpielerHand spielerHand;
+    @Column
     private boolean mauGesagt;
+    @Column
     private boolean maumauGesagt;
+    @Column
     private int strafziehen;
+    @Column
     private String wunschfarbe;
+    @Column
     private boolean aussetzen;
+
+    public Spieler() {
+
+    }
 
     //Getter und Setter
     public long getId() {

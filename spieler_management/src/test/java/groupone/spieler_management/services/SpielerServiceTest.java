@@ -10,107 +10,55 @@ import groupone.spieler_management.classes.Spieler;
 
 import groupone.spieler_management.implementation.SpielerImpl;
 
-import org.junit.jupiter.api.Assertions;
 
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mockito;
 
 
-import java.util.ArrayList;
-import java.util.List;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class SpielerServiceTest {
-    // InjectMocks nur wennn ein anderes Attribut in der Klasse verwendet wird von einer anderen Komponente
-    private SpielerService spielerService = new SpielerImpl();
+    private SpielerImpl spielerImpl;
+    private Spieler spieler;
 
-    @Test
-    public void erhöhePunktTest() {
-        //setup
-        Spieler spieler = new Spieler(1L, "Max Muster", 1);
-
-        //erwartet
-        int punkteErwartet = 2;
-
-         //actual
-        spielerService.erhöhePunkt(spieler);
-
-        // assert
-        Assertions.assertEquals(punkteErwartet, spieler.getPunkte());
+    @BeforeEach
+    public void setUp() {
+        spielerImpl = new SpielerImpl();
+        spieler = spielerImpl.spielerErstellen(1, "Player 1", 0);
     }
 
     @Test
-    public void maumauTest() {
-        //setup
-        Spieler spieler = new Spieler(1L, "Max Muster", 1);
-        List<Karte> kartenListe = new ArrayList<>();
-        int anzahl = 0;
-        SpielerHand spielerHand = new SpielerHand(anzahl , kartenListe);
-        spieler.setSpielerHand(spielerHand);
-        spieler.setMauGesagt(false);
-        //erwartet
-
-        boolean erwartet = true;
-        //actual
-
-        spielerService.maumau(spieler);
-
-        // assert
-        Assertions.assertEquals(erwartet, spieler.isMaumauGesagt());
-    }
-
-
-    @Test
-    public void sageMauTest() {
-        //setup
-        Spieler spieler = new Spieler(1L, "Max Muster", 1);
-        Karte karte = new Karte("Herz", "9");
-        List<Karte> kartenListe = new ArrayList<>();
-        kartenListe.add(karte);
-        int anzahl = 1;
-        SpielerHand spielerHand = new SpielerHand(anzahl , kartenListe);
-        spieler.setSpielerHand(spielerHand);
-        spieler.setMauGesagt(false);
-        //erwartet
-
-        boolean erwartet = true;
-        //actual
-
-        spielerService.sageMau(spieler);
-
-        // assert
-        Assertions.assertEquals(erwartet, spieler.isMauGesagt());
+    public void testErhöhePunkt() {
+        spielerImpl.erhöhePunkt(spieler);
+        assertEquals(1, spieler.getPunkte());
     }
 
     @Test
-    public void mauZurückTest() {
-        //setup
-        Spieler spieler = new Spieler(1L, "Max Muster", 1);
+    public void testMaumau() {
+        spielerImpl.maumau(spieler);
+        assertTrue(spieler.isMaumauGesagt());
+    }
+
+    @Test
+    public void testSageMau() {
+        spielerImpl.sageMau(spieler);
+        assertTrue(spieler.isMauGesagt());
+    }
+
+    @Test
+    public void testMauZuruecksetzen() {
         spieler.setMauGesagt(true);
-        //erwartet
-
-        boolean erwartet = false;
-        //actual
-
-        spielerService.mauZuruecksetzen(spieler);
-
-        // assert
-        Assertions.assertEquals(erwartet, spieler.isMauGesagt());
+        spielerImpl.mauZuruecksetzen(spieler);
+        assertFalse(spieler.isMauGesagt());
     }
 
     @Test
-    public void spielerErstellenTest() {
-        //setup
-        Spieler spieler = new Spieler(1L, "Max Muster", 1);
-        //erwartet
-
-        Spieler erwartet = spieler;
-        //actual
-
-        Spieler actual = spielerService.spielerErstellen(1L, "Max Muster", 1);
-
-        // assert
-        Assertions.assertEquals(erwartet.getName(), actual.getName());
+    public void testSpielerErstellen() {
+        Spieler newSpieler = spielerImpl.spielerErstellen(2, "Player 2", 5);
+        assertEquals(2, newSpieler.getId());
+        assertEquals("Player 2", newSpieler.getName());
+        assertEquals(5, newSpieler.getPunkte());
     }
 }

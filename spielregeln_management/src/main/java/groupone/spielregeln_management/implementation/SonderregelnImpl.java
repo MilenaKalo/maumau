@@ -7,10 +7,8 @@ import groupone.spiel_management.classes.Spiel;
 import groupone.spiel_management.services.KartenSpielerService;
 import groupone.spieler_management.classes.Spieler;
 import groupone.spielregeln_management.services.SpielregelnService;
-import groupone.spiel_management.implementation.KartenSpielerImpl;
 
 import java.util.Collections;
-import java.util.List;
 
 public class SonderregelnImpl implements SpielregelnService {
 
@@ -19,74 +17,22 @@ public class SonderregelnImpl implements SpielregelnService {
     public SonderregelnImpl(){
 
     }
+    int anzahlZiehen = 0;
 
     public SonderregelnImpl(KartenSpielerService kartenSpielerImpl){
         this.kartenSpielerImpl = kartenSpielerImpl;
     }
 
     @Override
-    public void siebenGelegt(Spiel spiel) {
-
-    //Prüfen, ob der Ablagestapel eine 7 enthält
-       AblageStapel ablageStapel = spiel.getAblageStapel();
-       int letzteKarteIndex = ablageStapel.getAblagekarten().size() - 1;
-       Karte letzteKarte = ablageStapel.getAblagekarten().get(letzteKarteIndex);
-       //System.out.println(letzteKarte.getKartenWert());
-
-    //Die Anzahl der Karten, die gezogen werden müssen
-        int anzahlZiehen = 0;
-
-    //Wenn letzteKarte = "Sieben"
-       if(letzteKarte.getKartenWert().equals("Sieben")) {
-           System.out.println("Eine Sieben wurde gelegt.");
-           anzahlZiehen = 2;
-           boolean weitermachen = true;
-
-           while(weitermachen) {
-               Spieler aktiverSpieler = spiel.getAktiverSpieler();
-               List<Karte> aktiverSpielerKarten = aktiverSpieler.getSpielerHand().getKarten();
-
-               //Prüfen, ob der Spieler eine Sieben hat
-               boolean hatSieben = false;
-               for (int i = 0; i < aktiverSpielerKarten.size(); i++) {
-
-                   if (aktiverSpielerKarten.get(i).getKartenWert().equals("Sieben")) {
-                       hatSieben = true;
-                   }
-
-               }
-
-               //Wenn der Spieler keine 7 hat
-               if (hatSieben == false) {
-
-                   for (int i = 0; i < anzahlZiehen; i++) {
-                       kartenSpielerImpl.zieheKarte(aktiverSpieler.getSpielerHand(), spiel.getZiehStapel());
-                   }
-                   weitermachen = false;
-
-               }
-
-               //Wenn der Spieler eine 7 hat
-               if (hatSieben == true) {
-                   for (int i = 0; i < aktiverSpielerKarten.size(); i++) {
-                       //Wenn der Spieler eine 7 hat, muss er diese legen
-                       if (aktiverSpielerKarten.get(i).getKartenWert().equals("Sieben")) {
-                           System.out.println("Spieler hat eine Sieben!");
-                           Karte spielerSieben = aktiverSpielerKarten.get(i);
-                           spiel.getAblageStapel().getAblagekarten().add(spielerSieben);
-                           aktiverSpieler.getSpielerHand().getKarten().remove(spielerSieben);
-                           anzahlZiehen += 2;
-                           i = aktiverSpielerKarten.size();
-                           nächsterSpielerIstDran(spiel);
-                       }
-                   }
-               }
-           }
-       } else {
-           System.out.println("Sieben wurde nicht gelegt");
-       }
-
+    public boolean prüfeAufSiebenGelegt(Spiel spiel){
+        AblageStapel ablageStapel = spiel.getAblageStapel();
+        Karte obersteKarte = ablageStapel.getAblagekarten().get(ablageStapel.getAblagekarten().size()-1);
+        if(obersteKarte.getKartenWert().equalsIgnoreCase("7")){
+            return true;
+        }
+        return false;
     }
+
 
     @Override
     public boolean assGelegt(AblageStapel ablageStapel) {
@@ -98,6 +44,7 @@ public class SonderregelnImpl implements SpielregelnService {
             return false;
         }
     }
+
 
     @Override
     public void mauStrafe(Spieler spieler, ZiehStapel ziehStapel) {
@@ -118,7 +65,7 @@ public class SonderregelnImpl implements SpielregelnService {
 
         // aussetzen
         if(spiel.getAblageStapel().getAblagekarten().get(spiel.getAblageStapel().getAblagekarten().size() - 1)
-                .getKartenWert().equals("Acht")) {
+                .getKartenWert().equals("8")) {
             Spieler naechsterSpieler = aussetzen(spiel);
             naechsterSpielerIndex = spiel.getSpielerListe().indexOf(naechsterSpieler);
             // Richtungswechsel
@@ -157,7 +104,7 @@ public class SonderregelnImpl implements SpielregelnService {
        //System.out.println(karte.getKartenWert());
        //System.out.println(karte.getKartenFarbe());
        //System.out.println(anzahl);
-       if (karte.getKartenWert().equals("Acht")) {
+       if (karte.getKartenWert().equals("8")) {
            Spieler aktiverSpieler = spiel.getAktiverSpieler();
 
            int aktiverSpielerIndex =spiel.getSpielerListe().indexOf(aktiverSpieler);
@@ -169,7 +116,7 @@ public class SonderregelnImpl implements SpielregelnService {
                naechsterSpielerIndex = aktiverSpielerIndex+2;
            }
            //System.out.println("naechster: "+ naechsterSpielerIndex);
-           return spiel.getSpielerListe().get(naechsterSpielerIndex);
+           return (Spieler) spiel.getSpielerListe().get(naechsterSpielerIndex);
        } else {
            System.out.println("keine Acht");
            return nächsterSpielerIstDran(spiel);
@@ -180,7 +127,9 @@ public class SonderregelnImpl implements SpielregelnService {
     public boolean pruefeKarte(Karte karte, AblageStapel ablageStapel) {
         int letzteKarteIndex = ablageStapel.getAblagekarten().size() - 1;
         Karte letzteKarte = ablageStapel.getAblagekarten().get(letzteKarteIndex);
-        if(letzteKarte.getKartenFarbe().equals(ablageStapel.getWunschFarbe()) || letzteKarte.getKartenWert().equals(karte.getKartenWert()) || letzteKarte.getKartenFarbe().equals(karte.getKartenFarbe())) {
+        System.out.println("kartenfarbe equals" +letzteKarte.getKartenFarbe().equalsIgnoreCase(karte.getKartenFarbe()));
+        System.out.println("kartenwert equals"+letzteKarte.getKartenWert().equalsIgnoreCase(karte.getKartenWert()));
+        if( letzteKarte.getKartenWert().equalsIgnoreCase(karte.getKartenWert()) || letzteKarte.getKartenFarbe().equalsIgnoreCase(karte.getKartenFarbe())) {
             return true;
         } else {
             return false;
@@ -201,7 +150,7 @@ public class SonderregelnImpl implements SpielregelnService {
     @Override
     public boolean richtungWechsel(AblageStapel ablageStapel) {
         int letzteKarteIndex = ablageStapel.getAblagekarten().size() - 1;
-        if(ablageStapel.getAblagekarten().get(letzteKarteIndex).getKartenWert().equals("Neun")){
+        if(ablageStapel.getAblagekarten().get(letzteKarteIndex).getKartenWert().equals("9")){
             return true;
         } else {
             return false;

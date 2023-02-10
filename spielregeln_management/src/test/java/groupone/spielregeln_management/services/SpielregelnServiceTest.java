@@ -20,6 +20,9 @@ import org.picocontainer.ComponentAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 @ExtendWith(MockitoExtension.class)
 public class SpielregelnServiceTest {
 

@@ -20,7 +20,7 @@ public class View {
         System.out.println("Spiel starten [S]");
         System.out.println("Spiel löschen [D]");
         System.out.println("Programm beenden [E]");
-        String eingabe = scanner.nextLine().toLowerCase();
+        String eingabe = scanner.next().toLowerCase();
         return eingabe;
     }
 
@@ -35,8 +35,16 @@ public class View {
         System.out.println("Neues Spiel starten [N]");
         System.out.println("Vorhandenes Spiel laden [L]");
         System.out.println("Zurück ins Hauptmenü [H]");
-        String x = scanner.nextLine().toLowerCase();
+        String x = scanner.next().toLowerCase();
         return x;
+    }
+
+    /**
+     * zeigt den Namen des aktiven Spielers an
+     * @param spieler der aktive Spieler
+     */
+    public void zeigeAktivenSpieler(Spieler spieler) {
+        System.out.println("Spieler " + spieler.getName() + " ist am Zug!");
     }
 
     /**
@@ -47,7 +55,7 @@ public class View {
     public String loescheSpiel() {
         System.out.println("Welchen Spielstand möchtest du löschen?");
         // Spielstände aus der Datenbank auslesen
-        String x = scanner.nextLine().toLowerCase();
+        String x = scanner.next().toLowerCase();
         return x;
     }
 
@@ -57,7 +65,7 @@ public class View {
      */
     public String spielerName() {
         System.out.println("Wie soll der Spieler heißen?");
-        String name = scanner.nextLine();
+        String name = scanner.next();
         return name;
     }
 
@@ -76,8 +84,9 @@ public class View {
      * @return ja wenn ein spieler hinzugefügt werden soll
      */
     public String spielerhinzufügen() {
-        System.out.println("Soll ein weiterer Spieler hinzugefügt werden?");
-        String x = scanner.nextLine().toLowerCase();
+        // System.out.println("Soll ein weiterer Spieler hinzugefügt werden? (ja/nein)");
+        System.out.println("Soll ein menschlicher Spieler [m], ein virtueller Spieler [v] oder kein weiter Spieler [nein] hinzugefügt werden?");
+        String x = scanner.next().toLowerCase();
         return x;
     }
 
@@ -85,7 +94,6 @@ public class View {
      * Methode zeigt an welcher Spieler Mau gesagt hat
      */
     public void spielerHatMauGesagt() {
-
         System.out.println("Spieler hat Mau gesagt.");
 
     }
@@ -95,7 +103,7 @@ public class View {
      */
     public void spielerHatMauMauGesagt() {
 
-        System.out.println("Spieler hat MauMau gesagt und hat gewonnen.");
+        System.out.println("Spieler hat MauMau gesagt.");
 
     }
 
@@ -116,7 +124,7 @@ public class View {
                 "Legt hingegen einer eine \"9\" so wird die Spielrichtung umgedreht.\n" +
                 "Tippe e für einfache Regeln oder s für Sonderregeln");
         ;
-        String x = scanner.nextLine().toLowerCase();
+        String x = scanner.next().toLowerCase();
         return x;
     }
 
@@ -127,7 +135,7 @@ public class View {
      */
     public String kartenAnzeigenSpielerHand() {
         System.out.println("Karten des Spielers anzeigen. y/n ?");
-        String x = scanner.nextLine().toLowerCase();
+        String x = scanner.next().toLowerCase();
         return x;
     }
 
@@ -148,12 +156,9 @@ public class View {
     public List<String> karteAblegen() {
 
         System.out.println("Welche Karte soll abgelegt werden?");
-        System.out.println("Kartenwert: ");
-        String wert = scanner.nextLine();
-        System.out.println("Kartenfarbe: ");
-        String farbe = scanner.nextLine();
-        List<String> karte = List.of(wert, farbe);
-        return karte; //Liste mit wert und farbe
+        System.out.println("Nummer: ");
+        int nummer = scanner.nextInt();
+        return nummer;
     }
 
     /**
@@ -164,13 +169,39 @@ public class View {
     }
 
     /**
+     * wenn eine Karte abgelegt werden soll die nicht im Handkartenstapel ist
+     */
+    public void falscheAntwort() {
+        System.out.println("Bitte wählen Sie nur zwischen ablegen[A] und ziehen[Z]!");
+    }
+
+    /**
+     * wenn eine falsche Antwort geben wird
+     */
+    public void falscheAntwort2() {
+        System.out.println("Bitte gebe was sinnvolles ein !");
+    }
+
+    /**
+     * Fragt den Spieler, ob er eine Karte ablegen möchte oder ziehen möchte
+     * @return Die Antwort auf die Frage
+     */
+    public String frageKarteZiehen(){
+        System.out.println("Möchtest du eine Karte ablegen[A] oder ziehen[Z]?");
+        String antwort = scanner.next();
+        antwort = antwort.toLowerCase();
+        return antwort;
+    }
+
+    /**
      * fordert dem Spieler auf, seine Wunschfarbe anzugeben
      * @return die Farbe die der Spieler gewählt hat
      */
     public String farbeWählen() {
 
-        System.out.println("Wähle bitte eine Farbe.");
-        String x = scanner.nextLine();
+        System.out.println("Wähle bitte eine Farbe. - KARO, PIK, HERZ, KREUZ");
+        String x = scanner.next();
+        x =  x.toLowerCase();
         return x;
     }
 
@@ -185,8 +216,8 @@ public class View {
     /**
      * gibt den Kartenwert und die Farbe der Karte an
      */
-    public void infoZurKarte(String kartenwert, String farbe) {
-        System.out.println("Kartenwert:" + kartenwert + "Kartenfarbe:" + farbe);
+    public void infoZurKarte(int i, String kartenwert, String farbe) {
+        System.out.println(i + ": " + kartenwert + " " + farbe);
     }
 
     /**
@@ -195,9 +226,9 @@ public class View {
      * @param spieler Spieler, der was sagen möchte
      * @return die getroffene Aussage
      */
-    public String wasSagen(Spieler spieler) {
-        System.out.println("Möchtest du was sagen? [Mau] oder [MauMau]");
-        String x = scanner.nextLine().toLowerCase();
+    public String wasSagen() {
+        System.out.println("Möchtest du was sagen? [Mau] oder [MauMau] oder [Nein]");
+        String x = scanner.next().toLowerCase();
         return x;
     }
 }

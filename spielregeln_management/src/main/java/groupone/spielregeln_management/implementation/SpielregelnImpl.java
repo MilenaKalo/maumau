@@ -4,7 +4,6 @@ import groupone.kartenstapel_management.classes.AblageStapel;
 import groupone.kartenstapel_management.classes.Karte;
 import groupone.spiel_management.classes.Spiel;
 import groupone.spieler_management.classes.Spieler;
-import groupone.kartenstapel_management.classes.SpielerHand;
 import groupone.kartenstapel_management.classes.ZiehStapel;
 import groupone.spielregeln_management.services.SpielregelnService;
 
@@ -12,11 +11,6 @@ public class SpielregelnImpl implements SpielregelnService {
 
     public SpielregelnImpl() {
 
-    }
-
-    @Override
-    public void siebenGelegt(Spiel spiel) {
-    //Sonderregel
     }
 
     @Override
@@ -33,7 +27,7 @@ public class SpielregelnImpl implements SpielregelnService {
     public boolean pruefeKarte(Karte karte, AblageStapel ablageStapel) {
         int letzteKarteIndex = ablageStapel.getAblagekarten().size() - 1;
         Karte letzteKarte = ablageStapel.getAblagekarten().get(letzteKarteIndex);
-        if(letzteKarte.getKartenFarbe().equals(ablageStapel.getWunschFarbe()) || letzteKarte.getKartenWert().equals(karte.getKartenWert()) || letzteKarte.getKartenFarbe().equals(karte.getKartenFarbe())) {
+        if(letzteKarte.getKartenWert().equalsIgnoreCase(karte.getKartenWert()) || letzteKarte.getKartenFarbe().equalsIgnoreCase(karte.getKartenFarbe())) {
             return true;
         } else {
             return false;
@@ -57,18 +51,29 @@ public class SpielregelnImpl implements SpielregelnService {
     }
 
     @Override
+    public boolean prüfeAufSiebenGelegt(Spiel spiel) {
+        return false; //Sonderregel
+    }
+
+    @Override
     public Spieler nächsterSpielerIstDran(Spiel spiel) {
         Spieler aktiverSpieler = spiel.getAktiverSpieler();
         int aktiverSpielerIndex = spiel.getSpielerListe().indexOf(aktiverSpieler);
-        System.out.println(aktiverSpielerIndex);
+      //  System.out.println(aktiverSpielerIndex);
         int naechsterSpielerIndex;
-        if (aktiverSpielerIndex+1 > spiel.getSpielerListe().size()) {
-            naechsterSpielerIndex = aktiverSpielerIndex+1-spiel.getSpielerListe().size();
-        } else {
-            naechsterSpielerIndex = aktiverSpielerIndex+1;
-        }
-        System.out.println(naechsterSpielerIndex);
+        System.out.println("Ich bin in der Methode und bin vor der if");
+    if (aktiverSpielerIndex + 1 > spiel.getSpielerListe().size() -1) {
+        naechsterSpielerIndex = aktiverSpielerIndex+1-spiel.getSpielerListe().size();
+        //System.out.println("zweite if");
+        // nächster Spieler ist dran (Fall: nicht am Ende der Spielerliste)
+    } else {
+        naechsterSpielerIndex = aktiverSpielerIndex+1;
+        // System.out.println("else ");
+    }
+        System.out.println("Ich bin in der Methode und nach der if");
+   //     System.out.println(naechsterSpielerIndex);
         spiel.setAktiverSpieler(spiel.getSpielerListe().get(naechsterSpielerIndex));
+        System.out.println("Ich bin am ende");
         return spiel.getAktiverSpieler();
     }
 }

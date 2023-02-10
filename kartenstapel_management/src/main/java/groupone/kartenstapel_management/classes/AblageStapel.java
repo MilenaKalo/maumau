@@ -1,12 +1,39 @@
 package groupone.kartenstapel_management.classes;
 
+import groupone.spiel_management.classes.Spiel;
+
+import javax.persistence.*;
 import java.util.List;
+
+@Entity
+@Table(name = "ABLAGESTAPEL")
 public class AblageStapel {
+    @Id
+    @Column(name = "AID", nullable = false)
+    private Long id;
 
     //Attribute
+    @Column
     private int anzahlKarten;
-    private List<Karte> ablagekarten;
+
+    @Column
     private String wunschFarbe;
+
+    @OneToMany(mappedBy="ablageStapel")
+    private List<Karte> ablagekarten;
+
+    @OneToOne
+    @MapsId
+    @JoinColumn(name="SID")
+    private Spiel spiel;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     //Getter und Setter
     public int getAnzahlKarten() {
@@ -37,6 +64,10 @@ public class AblageStapel {
     public AblageStapel(int anzahlKarten, List<Karte> ablagekarten) {
         this.anzahlKarten = anzahlKarten;
         this.ablagekarten = ablagekarten;
+    }
+
+    public AblageStapel(){
+
     }
 
 }

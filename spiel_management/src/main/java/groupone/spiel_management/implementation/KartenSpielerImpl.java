@@ -18,9 +18,7 @@ public class KartenSpielerImpl implements KartenSpielerService {
         ablagestapel.getAblagekarten().add(karte);
         spielerhand.setAnzahlKarten(spielerhand.getAnzahlKarten() - 1);
         ablagestapel.setAnzahlKarten(ablagestapel.getAnzahlKarten() + 1);
-        if(karte.getKartenWert().equals("Bube")) {
-            ablagestapel.setWunschFarbe(karte.getKartenFarbe());
-        }
+
     }
 
     @Override
