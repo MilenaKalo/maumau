@@ -52,7 +52,6 @@ public class ControllerImpl implements ControllerService {
     //TODO heute
     // Exceptions abfangen und weitereinbauen
 
-
     //TODO morgen
     // Testabdeckung erfüllen
     // JavaDoc überprüfen und erstellen
