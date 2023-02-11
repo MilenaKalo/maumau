@@ -21,5 +21,5 @@ public interface ISpielDAO {
      * Methode dient zum Löschen eines Spiels
      * @param id des zu löschenden Spiels
      */
-    void loescheSpiel(Long id);
+    String loescheSpiel(Long id);
 }

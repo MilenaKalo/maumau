@@ -75,6 +75,18 @@ public class View {
         return id;
     }
 
+    public int zurueckGehen(){
+        System.out.println("Möchtest du wieder zurück zur Auswahl? [1] Für ja \n[2] Für nein");
+        String input = scanner.next();
+        try {
+            int antwort = Integer.parseInt(input);
+            return antwort;
+        } catch (NumberFormatException e) {
+            System.out.println("Ungültige Eingabe. Bitte wähle zwischen:\n[1] Für ja \n[2] Für nein");
+            return zurueckGehen();
+        }
+    }
+
     /**
      * Methode die die Spielernamen aus der UI entgegennimmt und in die Klasse Spieler speichert
      * @return ja wenn ein spieler hinzugefügt werden soll
@@ -152,8 +164,14 @@ public class View {
     public int karteAblegen() {
         System.out.println("Welche Karte soll abgelegt werden?");
         System.out.println("Nummer: ");
-        int nummer = scanner.nextInt();
-        return nummer;
+        String input = scanner.next();
+        try {
+            int id = Integer.parseInt(input);
+            return id;
+        } catch (NumberFormatException e) {
+            System.out.println("Ungültige Eingabe. Bitte geben Sie eine gültige Nummer ein.");
+            return karteAblegen();
+        }
     }
 
     /**
@@ -247,9 +265,21 @@ public class View {
      * @return die Spiel ID für ein Spiel
      */
     public Long idFürSpiel() {
-        System.out.println("Bitte gib eine ID für das Spiel ein.");
-        Long x = scanner.nextLong();
-        return x;
+        System.out.println("Welche ID soll das Spiel haben?");
+        String input = scanner.next();
+        try {
+            Long id = Long.parseLong(input);
+            return id;
+        } catch (NumberFormatException e) {
+            System.out.println("Ungültige Eingabe. Bitte geben Sie eine gültige ID ein.");
+            return idFürSpiel();
+        }
+
+
 
     }
+
+
 }
+
+

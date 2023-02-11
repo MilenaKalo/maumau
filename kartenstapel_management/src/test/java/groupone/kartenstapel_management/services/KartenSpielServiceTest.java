@@ -141,6 +141,24 @@ public class KartenSpielServiceTest {
         Assertions.assertEquals(anzahlZiehStapelErwartet, ziehStapel.getAnzahlKarten());
     }
 
+    void erstelleZiehstapelTest2() {
+
+        //Setup
+        ziehStapelKarten.add(herzBube);
+        ziehStapelKarten.add(pikAss);
+        ziehStapelKarten.add(karoNeun);
+        ziehStapelKarten.add(karoZehn);
+        ziehStapelKarten.add(karoNeun);
+
+        //erwartet
+        int anzahlZiehStapelErwartet = 5;
+
+        //actual
+        ZiehStapel ziehStapel = kartenSpielService.erstelleZiehStapel(5, ziehStapelKarten);
+
+        Assertions.assertEquals(anzahlZiehStapelErwartet, ziehStapel.getAnzahlKarten());
+    }
+
 
     @Test
     void erstelleAblagestapelTest(){

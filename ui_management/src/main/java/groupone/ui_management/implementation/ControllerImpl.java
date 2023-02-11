@@ -42,7 +42,7 @@ public class ControllerImpl implements ControllerService {
     private KartenSpielerService kartenSpielerService;
     private SpielregelnService spielregelnService;
     private int anzahlZiehen;
-    private ISpielDAO spielDAO;
+    private ISpielDAO spielDAO = new SpielDAO();
     private SpielerService spielerService = new SpielerImpl();
     private VirtuellerSpielerService virtuellerSpielerService = new VirtuellerSpielerImpl();
 
@@ -70,8 +70,13 @@ public class ControllerImpl implements ControllerService {
             starteSpiel();
         } else if (x.equals("d")) {
             Long z = view.idFürSpiel();
-            spielDAO.loescheSpiel(z);
-            view.loescheSpiel();
+            String rueckgabe = spielDAO.loescheSpiel(z);
+            if(rueckgabe.equals("gelöscht")){
+                view.loescheSpiel();
+                hauptMenue();
+            } else{
+                hauptMenue();
+            }
         } else if (x.equals("e")) {
             System.exit(0);
         }
@@ -94,7 +99,7 @@ public class ControllerImpl implements ControllerService {
             // erster Spieler wird hinzugefügt
             Long id2 = view.idFürSpiel();
             String spielername = view.spielerName();
-            long id =view.spielerId();
+            long id = view.spielerId();
             Spieler spieler = spielerService.spielerErstellen(id, spielername);
             spielerList.add(spieler);
 
@@ -199,7 +204,11 @@ public class ControllerImpl implements ControllerService {
                                         }
                                     } else {
                                         view.falscheKarte();
-                                        // nurFuerAss = false;
+                                        int zurueck = view.zurueckGehen();
+                                        if(zurueck == 1){
+                                            break;
+                                        } else {
+                                        }
                                     }
                                 } else if (antwortFrage.equals("z")) {
                                     zieheKarte(spiel.getAktiverSpieler());
@@ -227,13 +236,16 @@ public class ControllerImpl implements ControllerService {
                 System.out.println("Virtueller Spieler verlässt einsatz");
             } else{
             prüfeMauUndMauMau(spiel);
+                if(spiel.getAktiverSpieler().getSpielerHand().getAnzahlKarten() == 0){
+                    spielService.gibGewinneraus(spiel);
+                } else{
             spielregelnEinfach.nächsterSpielerIstDran(spiel);
             System.out.println("Als nächstes gehe ich in die view");
             view.zeigeAktivenSpieler(spiel.getAktiverSpieler());
             System.out.println("Ich war in der View");
            // spielDAO.speichereSpiel(spiel);
             System.out.println("hier hier");
-        }}
+        }}}
     }
 
 
@@ -285,7 +297,11 @@ public class ControllerImpl implements ControllerService {
                                 }
                                 else {
                                     view.falscheKarte();
-                                   // nurFuerAss = false;
+                                    int zurueck = view.zurueckGehen();
+                                    if(zurueck == 1){
+                                        break;
+                                    } else {
+                                    }
                                 }
                         } else if (antwortFrage.equals("z")) {
                             zieheKarte(spiel.getAktiverSpieler());
@@ -313,9 +329,16 @@ public class ControllerImpl implements ControllerService {
                 System.out.println("Virtueller Spieler verlässt einsatz");
             } else{
             prüfeMauUndMauMau(spiel);
+            if(spiel.getZiehStapel().getZiehkarten().size() == 1) {
+                System.out.println("Jezt wird abgegeben");
+                kartenSpiel.kartenDesAblagestapelsDemZiehstapelUebergeben(spiel.getAblageStapel(), spiel.getZiehStapel());
+                kartenSpiel.mischeKarten(spiel.getZiehStapel().getZiehkarten());
+            }if(spiel.getAktiverSpieler().getSpielerHand().getAnzahlKarten() == 0){
+                spielService.gibGewinneraus(spiel);
+                } else{
             spielregelnSonder.nächsterSpielerIstDran(spiel);
             view.zeigeAktivenSpieler(spiel.getAktiverSpieler());
-        }}
+        }}}
     }
 
     /**
@@ -479,9 +502,13 @@ public class ControllerImpl implements ControllerService {
         boolean i = true;
         boolean rückgabe = false;
         while (i) {
+            System.out.println("Hallo Hierher");
             int wert = view.karteAblegen();
             SpielerInterface spieler = spiel.getAktiverSpieler();
             SpielerHand spielerHand = spieler.getSpielerHand();
+            if(wert > spielerHand.getAnzahlKarten()){
+                rückgabe = false;
+            } else {
             Karte karte = spielerHand.getKarten().get(wert - 1);
             AblageStapel ablage = spiel.getAblageStapel();
             System.out.println(spielerHand.getKarten().contains(karte));
@@ -509,6 +536,8 @@ public class ControllerImpl implements ControllerService {
 
         }
         return rückgabe;
+    }
+    return rückgabe;
     }
 
     public void virtuellerSpielerIstDran(VirtuellerSpieler spieler, Spiel spiel) {

@@ -5,8 +5,8 @@ import groupone.spiel_management.classes.Spiel;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.util.Objects;
 
 public class SpielDAO implements ISpielDAO{
@@ -36,6 +36,7 @@ public class SpielDAO implements ISpielDAO{
 
     }
 
+    @Transactional(Transactional.TxType.MANDATORY)
     @Override
     public void loescheSpiel(Long id) {
         Spiel spiel = this.entityManager.find(Spiel.class, id);
