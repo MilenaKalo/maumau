@@ -2,6 +2,7 @@ package groupone.ui_management.implementation;
 
 
 
+import groupone.exception_management.TechnischeException;
 import groupone.spieler_management.classes.Spieler;
 import groupone.spieler_management.classes.SpielerInterface;
 
@@ -69,10 +70,16 @@ public class View {
      * fragt nach Spielereigenschaften ID
      * @return spielerid
      */
-    public long spielerId() {
-        System.out.println("Wie ist die Spieler ID?");
-        long id = scanner.nextLong();
-        return id;
+    public Long spielerId() {
+        System.out.println("Welche ID soll der Spieler haben?");
+        String input = scanner.next();
+        try {
+            Long id = Long.parseLong(input);
+            return id;
+        } catch (NumberFormatException e) {
+            System.out.println("Ungültige Eingabe. Bitte geben Sie eine gültige ID ein.");
+             return spielerId();
+        }
     }
 
     public int zurueckGehen(){

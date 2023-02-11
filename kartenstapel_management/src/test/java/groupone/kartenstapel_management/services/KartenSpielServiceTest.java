@@ -76,6 +76,7 @@ public class KartenSpielServiceTest {
     }
 
 
+
     @Test
     public void mischeKarten() {
 
@@ -195,6 +196,12 @@ public class KartenSpielServiceTest {
      	SpielerHand spielerHand = kartenSpielService.erstelleSpielerHand(4, spielerHandKarten);
 
      	Assertions.assertEquals(anzahlSpielerHandErwartet, spielerHand.getAnzahlKarten());
+
+    }
+    @Test
+    void testErstelleKarten() {
+        List<Karte> kartenDeck = kartenSpielService.erstelleKarten();
+        assertEquals(32, kartenDeck.size());
 
     }
 

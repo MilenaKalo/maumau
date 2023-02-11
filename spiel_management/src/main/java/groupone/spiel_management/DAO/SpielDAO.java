@@ -14,6 +14,13 @@ public class SpielDAO implements ISpielDAO{
     @PersistenceContext
     EntityManager entityManager;
 
+
+    public SpielDAO(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+
+    public SpielDAO() {
+    }
     private static Logger logger = LogManager.getLogger(SpielDAO.class);
 
     @Override
@@ -38,9 +45,20 @@ public class SpielDAO implements ISpielDAO{
 
     @Transactional(Transactional.TxType.MANDATORY)
     @Override
-    public void loescheSpiel(Long id) {
-        Spiel spiel = this.entityManager.find(Spiel.class, id);
-        this.entityManager.remove(spiel);
-        logger.info("Spiel wurde gelöscht.");
+    public String loescheSpiel(Long id) {
+        String antwort = " ";
+        System.out.println("entitymanager mit this" + this.entityManager);
+        System.out.println("entitymanager " + entityManager);
+        System.out.println("Bis hierhin komme ich");
+        if (Objects.isNull(this.entityManager.find(Spiel.class, id))) {
+            System.out.println("Bis hierhin komme ich. I still live");
+             antwort = "nichts gefunden";
+        } else {
+            Spiel spiel = this.entityManager.find(Spiel.class, id);
+            this.entityManager.remove(spiel);
+            logger.info("Spiel wurde gelöscht.");
+             antwort = "gelöscht";
+        }
+        return antwort;
     }
 }

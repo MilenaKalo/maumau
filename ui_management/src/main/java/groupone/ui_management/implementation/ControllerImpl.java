@@ -49,11 +49,8 @@ public class ControllerImpl implements ControllerService {
     public ControllerImpl() {
     }
 
-    //TODO heute
-    // Exceptions abfangen und weitereinbauen
 
     //TODO morgen
-    // Testabdeckung erfüllen
     // JavaDoc überprüfen und erstellen
     // Diagramme aktualisieren - prüfen
     // Dokumentation abschließen - Max
