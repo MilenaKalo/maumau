@@ -3,9 +3,11 @@ package groupone.spiel_management.classes;
 import groupone.spieler_management.classes.Spieler;
 import groupone.kartenstapel_management.classes.AblageStapel;
 import groupone.kartenstapel_management.classes.ZiehStapel;
+import groupone.spieler_management.classes.SpielerInterface;
 
 import javax.persistence.*;
 import java.util.List;
+
 @Entity
 @Table(name = "SPIEL")
 public class Spiel {
@@ -13,28 +15,27 @@ public class Spiel {
     @Column(name = "SID", nullable = false)
     private Long id;
 
-    //Attribute
-    @OneToMany(mappedBy="spiel")
-    private List<Spieler> spielerListe;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<SpielerInterface> spielerListe;
 
-    @Column
+    @Column(name ="runde")
     private int runde;
 
-    @PrimaryKeyJoinColumn
-    @OneToOne(mappedBy = "spiel", cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     private AblageStapel ablageStapel;
 
-    @PrimaryKeyJoinColumn
-    @OneToOne(mappedBy = "spiel", cascade = CascadeType.ALL)
+
+    @OneToOne(cascade = CascadeType.ALL)
     private ZiehStapel ziehStapel;
 
-    @PrimaryKeyJoinColumn
-    @OneToOne(mappedBy = "spiel2", cascade = CascadeType.ALL)
-    private Spieler aktiverSpieler;
+
+    @OneToOne( cascade = CascadeType.ALL)
+    private SpielerInterface aktiverSpieler;
 
     public Spiel() {
 
     }
+
 
     public Long getId() {
         return id;
@@ -81,12 +82,12 @@ public class Spiel {
         return aktiverSpieler;
     }
 
-    public void setAktiverSpieler(Spieler aktiverSpieler) {
+    public void setAktiverSpieler(SpielerInterface aktiverSpieler) {
         this.aktiverSpieler = aktiverSpieler;
     }
 
     //Konstruktor
-    public Spiel(List<Spieler> spielerListe, int runde, AblageStapel ablageStapel, ZiehStapel ziehStapel) {
+    public Spiel(List<SpielerInterface> spielerListe, int runde, AblageStapel ablageStapel, ZiehStapel ziehStapel) {
         this.spielerListe = spielerListe;
         this.runde = runde;
         this.ablageStapel = ablageStapel;

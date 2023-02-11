@@ -7,6 +7,8 @@ import groupone.kartenstapel_management.classes.ZiehStapel;
 import groupone.spiel_management.classes.Spiel;
 import groupone.spiel_management.services.KartenSpielerService;
 import groupone.spieler_management.classes.Spieler;
+import groupone.spieler_management.classes.SpielerInterface;
+import groupone.spieler_management.classes.VirtuellerSpieler;
 import groupone.spielregeln_management.implementation.SonderregelnImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,8 +23,7 @@ import org.picocontainer.ComponentAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 public class SpielregelnServiceTest {
@@ -61,12 +62,12 @@ public class SpielregelnServiceTest {
 
     Karte dummyKarte = new Karte("Karo", "Ass");
 
-    Spieler spieler1 = new Spieler(1, "Max Mustermann", 0);
-    Spieler spieler2 = new Spieler(2, "Maxine Musterfrau", 0);
-    Spieler spieler3 = new Spieler(3, "Erik Mustermann", 0);
-    Spieler spieler4 = new Spieler(4, "Erika Musterfrau", 0);
+    SpielerInterface spieler1 = new Spieler(1, "Max Mustermann");
+    SpielerInterface spieler2 = new Spieler(2, "Maxine Musterfrau");
+    SpielerInterface spieler3 = new Spieler(3, "Erik Mustermann");
+    SpielerInterface spieler4 = new Spieler(4, "Erika Musterfrau");
 
-    List<Spieler> spielerListe = new ArrayList<>();
+    List<SpielerInterface> spielerListe = new ArrayList<>();
 
     @Test
     public void testPrüfeAufSiebenGelegtFalse() {
@@ -99,7 +100,7 @@ public class SpielregelnServiceTest {
         ZiehStapel ziehStapel = new ZiehStapel(3, ziehStapelListe);
 
         // Spieler
-        Spieler spieler = new Spieler(1, "Max Mustermann", 0);
+        Spieler spieler = new Spieler(1, "Max Mustermann");
 
         // Spielerhand
         spielerHandListe.add(karoAcht);
@@ -112,7 +113,8 @@ public class SpielregelnServiceTest {
         spielregelnService.mauStrafe(spieler, ziehStapel);
 
         //assert
-        Assertions.assertEquals(erwartet, spieler.getSpielerHand().getAnzahlKarten());
+        assertEquals(erwartet, spieler.getSpielerHand().getAnzahlKarten());
+        assertEquals(2, ziehStapel.getZiehkarten().size());
 
     }
     @Test
@@ -120,7 +122,7 @@ public class SpielregelnServiceTest {
 
         //Setup
         //Spielerliste
-        List<Spieler> spielerListe = new ArrayList<>();
+        List<SpielerInterface> spielerListe = new ArrayList<>();
         spielerListe.add(spieler1);
         spielerListe.add(spieler2);
         spielerListe.add(spieler3);
@@ -138,7 +140,7 @@ public class SpielregelnServiceTest {
         AblageStapel stapel = new AblageStapel(1, ablageKarten2);
 
         //erwartet
-        Spieler erwartet = spieler3;
+        SpielerInterface erwartet = spieler3;
 
         //actual
 
@@ -147,7 +149,7 @@ public class SpielregelnServiceTest {
         Spieler actual = spielregelnService.aussetzen(spiel);
 
         //assert
-        Assertions.assertEquals(erwartet, actual);
+        assertEquals(erwartet, actual);
     }
 
     @Test
@@ -177,7 +179,7 @@ public class SpielregelnServiceTest {
 
 
         //assert
-        Assertions.assertEquals(erwartet, spiel.getAktiverSpieler());
+        assertEquals(erwartet, spiel.getAktiverSpieler());
     }
 
     @Test
@@ -195,13 +197,60 @@ public class SpielregelnServiceTest {
         boolean erwartet = false;
 
         //actual
-        Assertions.assertEquals(spielregelnService.pruefeKarte(spieler.getSpielerHand().getKarten().get(0)
+        assertEquals(spielregelnService.pruefeKarte(spieler.getSpielerHand().getKarten().get(0)
                 , ablageStapel), erwartet);
 
     }
 
     @Test
-    public void assGelegtTest(){
+    public void testPruefeKarte_gleicheFarbe() {
+        // Vorbereitung
+        Karte karte1 = new Karte("Herz", "Acht");
+        Karte karte2 = new Karte("Herz", "Sieben");
+        ablageStapel.getAblagekarten().add(karte1);
+
+        // Ausführung
+        SpielerInterface  spieler = new VirtuellerSpieler();
+        boolean result = spielregelnService.pruefeKarte(karte2, ablageStapel);
+
+        // Überprüfung
+        assertTrue(result);
+    }
+
+    @Test
+    public void testPruefeKarte_gleicherWert() {
+        // Vorbereitung
+        Karte karte1 = new Karte("Herz", "Acht");
+        Karte karte2 = new Karte("Karo", "Acht");
+        ablageStapel.getAblagekarten().add(karte1);
+
+        // Ausführung
+        SpielerInterface  spieler = new VirtuellerSpieler();
+        boolean result = spielregelnService.pruefeKarte(karte2, ablageStapel);
+
+        // Überprüfung
+        assertTrue(result);
+    }
+
+    @Test
+    public void testPruefeKarte_unterschiedlich() {
+        // Vorbereitung
+        Karte karte1 = new Karte("Herz", "Acht");
+        Karte karte2 = new Karte("Karo", "Sieben");
+        ablageStapel.getAblagekarten().add(karte1);
+
+        // Ausführung
+        SpielerInterface  spieler = new VirtuellerSpieler();
+        boolean result = spielregelnService.pruefeKarte(karte2, ablageStapel);
+
+        // Überprüfung
+        assertFalse(result);
+    }
+
+
+
+    @Test
+    public void assGelegtTestTrue(){
         //Setup
         //Ablagestapel
         ablageStapelListe.add(dummyKarte);
@@ -214,8 +263,19 @@ public class SpielregelnServiceTest {
         boolean actual = spielregelnService.assGelegt(ablageStapel);
 
         //assert
-        Assertions.assertEquals(actual, erwartet);
+        assertEquals(actual, erwartet);
     }
+
+    @Test
+    public void testAssGelegtFalse() {
+
+        Karte keinAssKarte = new Karte("Karo", "5");
+
+        ablageStapel.getAblagekarten().add(keinAssKarte);
+
+        assertFalse(spielregelnService.assGelegt(ablageStapel));
+    }
+
 
     @Test
     public void mussSichFarbeWuenschenTest() {
@@ -231,7 +291,17 @@ public class SpielregelnServiceTest {
         boolean actual = spielregelnService.mussSichFarbeWuenschen(ablageStapel);
 
         //assertion
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void mussSichFarbeWuenschen_KeinBubeAufAblageStapel_False() {
+        Karte keinBubeKarte = new Karte("Herz", "10");
+        ablageStapel.getAblagekarten().add(keinBubeKarte);
+
+        boolean result = spielregelnService.mussSichFarbeWuenschen(ablageStapel);
+
+        assertFalse(result);
     }
 
     @Test
@@ -248,8 +318,21 @@ public class SpielregelnServiceTest {
         boolean actual = spielregelnService.richtungWechsel(ablageStapel);
 
         // assertion
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
 
+    }
+
+    @Test
+    public void testRichtungWechselFalse() {
+        // Vorbereitung
+        Karte karte = new Karte("Herz", "10");
+        ablageStapel.getAblagekarten().add(karte);
+
+        // Ausführung
+        boolean erwartetesErgebnis = false;
+        boolean tatsaechlichesErgebnis =  spielregelnService.richtungWechsel(ablageStapel);
+
+        assertEquals(erwartetesErgebnis, tatsaechlichesErgebnis);
     }
 
 }

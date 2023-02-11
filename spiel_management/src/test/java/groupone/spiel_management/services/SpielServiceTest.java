@@ -112,7 +112,7 @@ public class SpielServiceTest {
         spielerListe.add(spieler4);
 
         // erwartet
-        List<Spieler> spielerListe2 = new ArrayList<>();
+        List<SpielerInterface> spielerListe2 = new ArrayList<>();
 
         spielerListe2.add(spieler1);
         spielerListe2.add(spieler2);
@@ -126,8 +126,6 @@ public class SpielServiceTest {
         Assertions.assertNotEquals(spielerListe, spielerListe2);
 
     }
-
-
 
     @Test
     public void beendeSpielTest(){
@@ -187,7 +185,7 @@ public class SpielServiceTest {
 
         ZiehStapel ziehStapel = new ZiehStapel(32, ziehKarten);
         //erwartet
-        Spieler erwartet = spieler1;
+        SpielerInterface erwartet = spieler1;
 
         //actual
         Spiel spiel = spielService.erstelleSpiel(spielerListe, runde, ablageStapel, ziehStapel);

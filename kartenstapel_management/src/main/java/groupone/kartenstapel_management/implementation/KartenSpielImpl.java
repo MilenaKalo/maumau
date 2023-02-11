@@ -24,6 +24,8 @@ public class KartenSpielImpl implements KartenSpielService {
         ablageStapel.setAnzahlKarten(ablageStapel.getAnzahlKarten() + 1);
     }
 
+
+
     @Override
     public List<Karte> mischeKarten(List<Karte> karteList) {
        Collections.shuffle(karteList);

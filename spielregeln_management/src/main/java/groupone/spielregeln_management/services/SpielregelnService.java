@@ -6,6 +6,7 @@ import groupone.kartenstapel_management.classes.Karte;
 import groupone.spiel_management.classes.Spiel;
 import groupone.spieler_management.classes.Spieler;
 import groupone.kartenstapel_management.classes.ZiehStapel;
+import groupone.spieler_management.classes.SpielerInterface;
 
 public interface SpielregelnService {
 
@@ -23,14 +24,14 @@ public interface SpielregelnService {
      * @param spiel Spiel wo der nächste Spieler in der Liste genommen wird
      * @return der Spieler der nun an der Reihe ist
      */
-    Spieler nächsterSpielerIstDran(Spiel spiel);
+    SpielerInterface nächsterSpielerIstDran(Spiel spiel);
 
     /**
      * gibt den Spieler zurück der als nächstes dran ist bei Kartenwert 8
      * @param spiel Spiel in dem die Spielerreihenfole geprüft wird
      * @return der Spieler der nun dran ist
      */
-    Spieler aussetzen(Spiel spiel);
+    SpielerInterface aussetzen(Spiel spiel);
 
     /**
      * gibt dem Spieler zurück, ob eine Karte gelget werden kann.

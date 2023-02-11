@@ -1,10 +1,6 @@
 package groupone.spieler_management.services;
 
 
-import groupone.kartenstapel_management.classes.AblageStapel;
-import groupone.kartenstapel_management.classes.Karte;
-import groupone.kartenstapel_management.classes.SpielerHand;
-
 
 import groupone.spieler_management.classes.Spieler;
 
@@ -56,9 +52,8 @@ public class SpielerServiceTest {
 
     @Test
     public void testSpielerErstellen() {
-        Spieler newSpieler = spielerImpl.spielerErstellen(2, "Player 2", 5);
+        Spieler newSpieler = spielerImpl.spielerErstellen(2L, "Player 2");
         assertEquals(2, newSpieler.getId());
         assertEquals("Player 2", newSpieler.getName());
-        assertEquals(5, newSpieler.getPunkte());
     }
 }

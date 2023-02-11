@@ -14,6 +14,8 @@ import org.mockito.InjectMocks;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 public class KartenSpielServiceTest {
 
     @InjectMocks
@@ -55,6 +57,23 @@ public class KartenSpielServiceTest {
 
     }
 
+    @Test
+    public void legeErsteKarteAufAblagestapel_SadPath_ZiehStapelLeer() {
+        ZiehStapel ziehStapel = new ZiehStapel();
+        AblageStapel ablageStapel = new AblageStapel();
+
+        assertThrows(Exception.class, () -> {
+            kartenSpielService.legeErsteKarteAufAblagestapel(ziehStapel, ablageStapel);
+        });
+    }
+
+    @Test
+    public void sadPathTestMischeKarten() {
+
+        assertThrows(Exception.class, () -> {
+            kartenSpielService.mischeKarten(null);
+        });
+    }
 
 
     @Test
@@ -121,6 +140,7 @@ public class KartenSpielServiceTest {
 
         Assertions.assertEquals(anzahlZiehStapelErwartet, ziehStapel.getAnzahlKarten());
     }
+
 
     @Test
     void erstelleAblagestapelTest(){

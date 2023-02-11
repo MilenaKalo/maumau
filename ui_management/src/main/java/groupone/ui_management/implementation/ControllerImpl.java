@@ -1,14 +1,13 @@
 package groupone.ui_management.implementation;
 
-import groupone.virtuellerSpieler_management.classes.virtuellerSpieler;
-import groupone.virtuellerSpieler_management.implementation.virtuellerSpielerImpl;
-import groupone.virtuellerSpieler_management.service.virtuellerSpielerService;
 import groupone.kartenstapel_management.classes.AblageStapel;
 import groupone.kartenstapel_management.classes.Karte;
 import groupone.kartenstapel_management.classes.SpielerHand;
 import groupone.kartenstapel_management.classes.ZiehStapel;
 import groupone.kartenstapel_management.implementation.KartenSpielImpl;
 import groupone.kartenstapel_management.services.KartenSpielService;
+import groupone.spiel_management.DAO.ISpielDAO;
+import groupone.spiel_management.DAO.SpielDAO;
 import groupone.spiel_management.classes.Spiel;
 import groupone.spiel_management.implementation.KartenSpielerImpl;
 import groupone.spiel_management.implementation.SpielImpl;
@@ -23,7 +22,6 @@ import groupone.spielregeln_management.services.SpielregelnService;
 import groupone.ui_management.service.ControllerService;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 
@@ -32,7 +30,7 @@ public class ControllerImpl implements ControllerService {
     //Controller - kennt die schnittstellen der anwendungslogik
     private Spiel spiel;
     private View view = new View();
-    private List<Spieler> spielerList = new ArrayList<>();
+    private List<SpielerInterface> spielerList = new ArrayList<>();
     private KartenSpielService kartenSpiel;
     private AblageStapel ablageStapel;
     private ZiehStapel ziehStapel;
@@ -49,7 +47,6 @@ public class ControllerImpl implements ControllerService {
     }
 
     //TODO heute
-    // virtueller Spieler implementieren - Max
     // Exceptions abfangen und weitereinbauen
 
 
@@ -70,6 +67,8 @@ public class ControllerImpl implements ControllerService {
         if (x.equals("s")) {
             starteSpiel();
         } else if (x.equals("d")) {
+            Long z = view.idFürSpiel();
+            spielDAO.loescheSpiel(z);
             view.loescheSpiel();
         } else if (x.equals("e")) {
             System.exit(0);
@@ -92,6 +91,7 @@ public class ControllerImpl implements ControllerService {
             this.kartenSpielerService = new KartenSpielerImpl();
 
             // erster Spieler wird hinzugefügt
+            Long id2 = view.idFürSpiel();
             String spielername = view.spielerName();
             long id =view.spielerId();
             Spieler spieler = spielerService.spielerErstellen(id, spielername, 0);
@@ -119,14 +119,16 @@ public class ControllerImpl implements ControllerService {
                             break;
                         }
                     } else if (frage.equals("v")) {
-                        id =  view.spielerId();
-                        spielername = view.spielerName();
-                        virtuellerSpieler virtuellerSpieler = new virtuellerSpieler(id, spielername, 0);
-                        //spielerList.add(virtuellerSpieler);
+                        SpielerInterface virtuellerSpieler = virtuellerSpielerService.spielerErstellen();
+                        spielerList.add(virtuellerSpieler);
+                        if(spielerList.size() == 4) {
+                            break;
+                        }
                     }
 
             }
-             spiel = spielService.erstelleSpiel(spielerList, 0, ablageStapel, ziehStapel);
+            spiel = spielService.erstelleSpiel(spielerList, 0, ablageStapel, ziehStapel);
+            spiel.setId(id2);
              String z = frageNachSpielregeln();
              if(z.equals("einfach")){
                  spieleMitEinfachenRegeln(spiel);
@@ -134,8 +136,14 @@ public class ControllerImpl implements ControllerService {
              else if(z.equals("sonder")){
                  spieleMitSonderRegeln(spiel);
              }
+             else if(!z.equalsIgnoreCase("sonder") && !z.equalsIgnoreCase("einfach")){
+                 hauptMenue();
+             }
         } else if (x.equals("l")) {
             // lade aus DB und starte spiel
+            ISpielDAO spielDAO = new SpielDAO();
+            Long id = view.idFürSpiel();
+            spiel = spielDAO.findById(id);
         } else if (x.equals("h")) {
             hauptMenue();
         } else {
@@ -150,7 +158,7 @@ public class ControllerImpl implements ControllerService {
      */
     private void spieleMitEinfachenRegeln(Spiel spiel){
         SpielregelnService spielregelnEinfach = new SpielregelnImpl();
-        spiel.setAktiverSpieler((Spieler) spiel.getSpielerListe().get(0));
+        spiel.setAktiverSpieler(spiel.getSpielerListe().get(0));
         view.zeigeAktivenSpieler(spiel.getAktiverSpieler());
         boolean boo = true;
         boolean ersteRunde = true;
@@ -216,41 +224,11 @@ public class ControllerImpl implements ControllerService {
             System.out.println("Als nächstes gehe ich in die view");
             view.zeigeAktivenSpieler(spiel.getAktiverSpieler());
             System.out.println("Ich war in der View");
-
-        }
+           // spielDAO.speichereSpiel(spiel);
+            System.out.println("hier hier");
+        }}
     }
 
-
-
-
-
-        /*
-        SpielregelnService spielregelnEinfach = new SpielregelnImpl();
-        spiel.setAktiverSpieler((Spieler) spiel.getSpielerListe().get(0));
-        view.zeigeAktivenSpieler(spiel.getAktiverSpieler());
-        boolean boo = true;
-        while(boo) {
-            anzeigeObersteKarte(spiel);
-            zeigeKartenSpielerHand(spiel.getAktiverSpieler());
-            boolean machWeiter = true;
-            while (machWeiter) {
-                String antwortFrage = view.frageKarteZiehen();
-                if (antwortFrage.equalsIgnoreCase("A")) {
-                    prüfeKarte(spiel, spielregelnEinfach);
-                    machWeiter = false;
-                } else if (antwortFrage.equalsIgnoreCase("Z")) {
-                    zieheKarte(spiel.getAktiverSpieler());
-                    machWeiter = false;
-                } else {
-                    view.falscheAntwort();
-                }
-            }
-            prüfeMauUndMauMau(spiel);
-            spielregelnEinfach.nächsterSpielerIstDran(spiel);
-            view.zeigeAktivenSpieler(spiel.getAktiverSpieler());
-        }
-    }
-*/
 
     /**
      * der Spielablauf mit den Sonderregeln
@@ -403,6 +381,7 @@ public class ControllerImpl implements ControllerService {
 
     /**
      * fragt nach welcher Regel gespielt werden soll
+     * @return die gewählte Regel
      */
     private String frageNachSpielregeln() {
         boolean weitermachen = true;
@@ -459,10 +438,9 @@ public class ControllerImpl implements ControllerService {
 
     /**
      * Methode die eine Karte zur SpielerHand inzufügt und die Karte vom ZiehStapel entfernt
-     */
-    private void zieheKarte(Spieler spieler) {
+     * @param spieler - Spieler der eine Karte ziehen soll  */
+    private void zieheKarte(SpielerInterface spieler) {
         view.karteZiehen();
-        //zieheKarte(SpielerHand spielerhand, ZiehStapel ziehStapel)
         kartenSpielerService.zieheKarte(spieler.getSpielerHand(), spiel.getZiehStapel());
 
     }
@@ -470,6 +448,7 @@ public class ControllerImpl implements ControllerService {
     /**
      * Methode die prüft eine Fehlermeldung zur falschen Karte gibt
      * @param spiel, in welchem man sich gerade befindet
+     * @return true wenn abgelegt darf und false wenn nicht abgelegt werden darf
      */
     private boolean prüfeKarte(Spiel spiel, SpielregelnService spielregelnService) {
         boolean i = true;

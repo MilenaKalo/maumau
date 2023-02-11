@@ -5,6 +5,7 @@ import groupone.kartenstapel_management.classes.Karte;
 import groupone.spiel_management.classes.Spiel;
 import groupone.spieler_management.classes.Spieler;
 import groupone.kartenstapel_management.classes.ZiehStapel;
+import groupone.spieler_management.classes.SpielerInterface;
 import groupone.spielregeln_management.services.SpielregelnService;
 
 public class SpielregelnImpl implements SpielregelnService {
@@ -18,7 +19,7 @@ public class SpielregelnImpl implements SpielregelnService {
         //Sonderregel
 
     }
-    public Spieler aussetzen(Spiel spiel) {
+    public SpielerInterface aussetzen(Spiel spiel) {
         return null; //Sonderregel
     }
 
@@ -56,7 +57,7 @@ public class SpielregelnImpl implements SpielregelnService {
     }
 
     @Override
-    public Spieler nächsterSpielerIstDran(Spiel spiel) {
+    public SpielerInterface nächsterSpielerIstDran(Spiel spiel) {
         System.out.println("Ich bin in der Methode");
         Spieler aktiverSpieler = spiel.getAktiverSpieler();
         int aktiverSpielerIndex = spiel.getSpielerListe().indexOf(aktiverSpieler);

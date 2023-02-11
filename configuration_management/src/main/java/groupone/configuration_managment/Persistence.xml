@@ -6,7 +6,7 @@
     <persistence-unit name="jpaDemoPu" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <!-- <class>groupone.configuration_managment.model.User</class> -->
-        <class>groupone.spieler_management.classes.Spieler</class>
+        <class>groupone.spieler_management.classes.SpielerInterface</class>
         <class>groupone.spiel_management.classes.Spiel</class>
         <class>groupone.kartenstapel_management.classes.AblageStapel</class>
         <class>groupone.kartenstapel_management.classes.SpielerHand</class>

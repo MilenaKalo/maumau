@@ -51,11 +51,12 @@ public class SonderregelnImpl implements SpielregelnService {
         Karte karte = ziehStapel.getZiehkarten().get(ziehStapel.getZiehkarten().size()-1);
         spieler.getSpielerHand().getKarten().add(karte);
         spieler.getSpielerHand().setAnzahlKarten(spieler.getSpielerHand().getAnzahlKarten()+1);
+        ziehStapel.getZiehkarten().remove(karte);
     }
 
     @Override
-    public Spieler nächsterSpielerIstDran(Spiel spiel) {
-        Spieler aktiverSpieler = spiel.getAktiverSpieler();
+    public SpielerInterface nächsterSpielerIstDran(Spiel spiel) {
+        SpielerInterface aktiverSpieler = spiel.getAktiverSpieler();
         int aktiverSpielerIndex = spiel.getSpielerListe().indexOf(aktiverSpieler);
         //System.out.println(aktiverSpielerIndex);
         int naechsterSpielerIndex;
@@ -66,7 +67,7 @@ public class SonderregelnImpl implements SpielregelnService {
         // aussetzen
         if(spiel.getAblageStapel().getAblagekarten().get(spiel.getAblageStapel().getAblagekarten().size() - 1)
                 .getKartenWert().equals("8")) {
-            Spieler naechsterSpieler = aussetzen(spiel);
+            SpielerInterface naechsterSpieler = aussetzen(spiel);
             naechsterSpielerIndex = spiel.getSpielerListe().indexOf(naechsterSpieler);
             // Richtungswechsel
         } else if (richtungsWechsel) {
@@ -96,7 +97,7 @@ public class SonderregelnImpl implements SpielregelnService {
     }
 
     @Override
-    public Spieler aussetzen(Spiel spiel) {
+    public SpielerInterface aussetzen(Spiel spiel) {
        AblageStapel ablageStapel =  spiel.getAblageStapel();
        //System.out.println(ablageStapel.getAblagekarten());
        int anzahl = ablageStapel.getAblagekarten().size();

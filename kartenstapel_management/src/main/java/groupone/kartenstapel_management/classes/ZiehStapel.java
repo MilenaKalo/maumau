@@ -1,7 +1,7 @@
 package groupone.kartenstapel_management.classes;
 
 import groupone.kartenstapel_management.classes.Karte;
-import groupone.spiel_management.classes.Spiel;
+
 
 import javax.persistence.*;
 import java.util.List;
@@ -18,12 +18,6 @@ public class ZiehStapel {
 
     @OneToMany(mappedBy="ziehStapel")
     private List<Karte> ziehkarten;
-
-    @OneToOne
-    @MapsId
-    @JoinColumn(name="SID")
-    private Spiel spiel;
-
 
     public Long getId() {
         return id;

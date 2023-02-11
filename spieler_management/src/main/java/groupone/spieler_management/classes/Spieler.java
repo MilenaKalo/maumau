@@ -1,22 +1,6 @@
 package groupone.spieler_management.classes;
 
 import groupone.kartenstapel_management.classes.SpielerHand;
-import groupone.kartenstapel_management.classes.ZiehStapel;
-import groupone.spiel_management.classes.Spiel;
-
-import javax.persistence.*;
-
-@Entity
-@Table(name = "SPIELER")
-public class Spieler {
-
-    //Attribute
-    @Id
-    private long id;
-    @Column(name = "name")
-    private String name;
-    @Column(name = "punkte")
-    private int punkte;
 
     @ManyToOne
     @JoinColumn(name="SID", nullable = false)

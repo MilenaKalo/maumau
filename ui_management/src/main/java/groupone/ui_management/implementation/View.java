@@ -48,15 +48,10 @@ public class View {
     }
 
     /**
-     * fragt ob das Spiel gelöscht werden soll
-     *
-     * @return Das Spiel was gelöscht werden muss
+     *gibt an dass das Spiel gelöscht wurde
      */
-    public String loescheSpiel() {
-        System.out.println("Welchen Spielstand möchtest du löschen?");
-        // Spielstände aus der Datenbank auslesen
-        String x = scanner.next().toLowerCase();
-        return x;
+    public void loescheSpiel() {
+        System.out.println("Spiel ist gelöscht");
     }
 
     /**
@@ -230,12 +225,30 @@ public class View {
         return x;
     }
 
+    /**
+     * wird angezeigt wenn zu wenige Spieler im Spiel sind
+     * @param anzahlGegenwaertigeSpieler die Anzahl der Spieler die man mindestens  noch braucht
+     */
     public void zuWenigeSpieler(int anzahlGegenwaertigeSpieler) {
         System.out.println("Bisher gibt es " + anzahlGegenwaertigeSpieler + ". Es werden mindestens 2 Spieler benötigt. Bitte");
         System.out.println("Bitte erstelle noch mindestens " + (2-anzahlGegenwaertigeSpieler) + " Spieler.");
     }
+
+    /**
+     * gibt aus das der jetztige Spieler gewonnen hat
+     */
     public void spielerHatGewonnen() {
         System.out.println("Herzlichen Glückwunsch, du hast gewonnen!");
     }
 
+    /**
+     * fragt nach der Spiel ID
+     * @return die Spiel ID für ein Spiel
+     */
+    public Long idFürSpiel() {
+        System.out.println("Bitte gib eine ID für das Spiel ein.");
+        Long x = scanner.nextLong();
+        return x;
+
+    }
 }

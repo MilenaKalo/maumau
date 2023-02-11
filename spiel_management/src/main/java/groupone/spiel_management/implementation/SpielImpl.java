@@ -3,13 +3,12 @@ package groupone.spiel_management.implementation;
 import groupone.kartenstapel_management.classes.AblageStapel;
 import groupone.kartenstapel_management.classes.Karte;
 import groupone.kartenstapel_management.classes.SpielerHand;
-import groupone.kartenstapel_management.implementation.KartenSpielImpl;
 import groupone.kartenstapel_management.services.KartenSpielService;
 import groupone.spiel_management.classes.Spiel;
 import groupone.spieler_management.classes.Spieler;
 import groupone.kartenstapel_management.classes.ZiehStapel;
 import groupone.spiel_management.services.SpielService;
-import org.picocontainer.annotations.Inject;
+import groupone.spieler_management.classes.SpielerInterface;
 
 import java.util.*;
 
@@ -32,7 +31,7 @@ public class SpielImpl implements SpielService {
     }
 
     @Override
-    public List<Spieler> erstelleSpielerReihenfolge(List<Spieler> spielerliste) {
+    public List<SpielerInterface> erstelleSpielerReihenfolge(List<SpielerInterface> spielerliste) {
         Collections.shuffle(spielerliste);
         return spielerliste;
     }
@@ -55,7 +54,7 @@ public class SpielImpl implements SpielService {
     }
 
     @Override
-    public Spiel erstelleSpiel(List<Spieler> spielerListe, int runde, AblageStapel ablageStapel, ZiehStapel ziehStapel) {
+    public Spiel erstelleSpiel(List<SpielerInterface> spielerListe, int runde, AblageStapel ablageStapel, ZiehStapel ziehStapel) {
         int anzahlSpieler = spielerListe.size();
         Spiel spiel = new Spiel(spielerListe, runde, ablageStapel, ziehStapel);
 

@@ -4,6 +4,7 @@ import groupone.kartenstapel_management.classes.AblageStapel;
 import groupone.spiel_management.classes.Spiel;
 import groupone.spieler_management.classes.Spieler;
 import groupone.kartenstapel_management.classes.ZiehStapel;
+import groupone.spieler_management.classes.SpielerInterface;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public interface SpielService {
      * (Methode wird der Klasse Spiel zugeorndet)
      * @return  Liste der Reihenfolge der Spieler
      */
-    List<Spieler> erstelleSpielerReihenfolge(List<Spieler> spielerliste);
+    List<SpielerInterface> erstelleSpielerReihenfolge(List<SpielerInterface> spielerliste);
 
 
     /**
@@ -39,5 +40,5 @@ public interface SpielService {
      * @param ziehStapel Ziehstapel der Karten erhält
      * @return das vorbereitete Spiel
      */
-    Spiel erstelleSpiel(List<Spieler> spielerListe, int runde, AblageStapel ablageStapel, ZiehStapel ziehStapel);
+    Spiel erstelleSpiel(List<SpielerInterface> spielerListe, int runde, AblageStapel ablageStapel, ZiehStapel ziehStapel);
 }
