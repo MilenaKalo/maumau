@@ -11,7 +11,6 @@ public interface KartenSpielService {
 
     /**
      * Oberste Karte des Ziehstapels wird geöffnet
-     * (Methode der KLasse Spiel)
      * @param ziehStapel Stapel, von dem die oberste Karte entommen wird
      * @param ablageStapel Stapel, auf den die oberste Karte vom Ziehstapel abgelegt wird
      */
@@ -34,18 +33,24 @@ public interface KartenSpielService {
 
     /**
      * erstellt einen neuen Ziehstapel
+     * @param anzahlKarten Anzahl der Karten die im Ziehstapel enthalten sein sollen
+     * @param ziehkarten Liste aus Karten die im Ziehstapel enthalten sein sollen
      * @return der neue Ziehstapel
      */
     ZiehStapel erstelleZiehStapel(int anzahlKarten, List<Karte> ziehkarten);
 
     /**
      * erstellt einen neuen Ablagestapel
+     * @param anzahlKarten Anzahl der Karten die im Ablagestapel enthalten sein sollen
+     * @param ablagekarten Liste aus Karten die im Ablagestapel enthalten sein sollen
      * @return der neue Ablagestapel
      */
     AblageStapel erstelleAblageStapel(int anzahlKarten, List<Karte> ablagekarten);
 
     /**
      * erstellt einen neue Spielerhand
+     * @param anzahlKarten Anzahl der Karten die in der Spielerhand enthalten sein sollen
+     * @param spielerhandkarten Liste aus Karten die in der Spielerhand enthalten sein sollen
      * @return der neue Spielerhand
      */
     SpielerHand erstelleSpielerHand(int anzahlKarten, List<Karte> spielerhandkarten);

@@ -50,12 +50,6 @@ public class ControllerImpl implements ControllerService {
     }
 
 
-    //TODO morgen
-    // JavaDoc überprüfen und erstellen
-    // Diagramme aktualisieren - prüfen
-    // Dokumentation abschließen - Max
-
-
     /**
      * Die Methode startet das Hauptmenü des Spiels und verarbeitet die Eingaben des Nutzers.
      * Je nachdem was der Nutzer eingibt, wird eine neue View-Methode ausgeführt.
@@ -252,7 +246,7 @@ public class ControllerImpl implements ControllerService {
      */
     private void spieleMitSonderRegeln(Spiel spiel) {
         SpielregelnService spielregelnSonder = new SonderregelnImpl();
-        spiel.setAktiverSpieler((Spieler) spiel.getSpielerListe().get(0));
+        spiel.setAktiverSpieler(spiel.getSpielerListe().get(0));
         view.zeigeAktivenSpieler(spiel.getAktiverSpieler());
         boolean boo = true;
         boolean ersteRunde = true;
@@ -404,7 +398,6 @@ public class ControllerImpl implements ControllerService {
 
     /**
      * Methode die die oberste Karte des Ablagestapels zeigt
-     *
      * @param spiel - Spiel das den Ablagestapel liefert
      */
     private void anzeigeObersteKarte(Spiel spiel) {
@@ -450,6 +443,11 @@ public class ControllerImpl implements ControllerService {
         }
     }
 
+    /**
+     * prüft was der virtuelle Spieler gesagt hat
+     * @param aussage die Aussage des virtuellen Spielers
+     * @param spieler der dazugehörige virtuelle Spieler
+     */
     private void virtuellerSpielerHatWasGesagt(String aussage, VirtuellerSpieler spieler) {
         if(aussage.equals("mau")){
             virtuellerSpielerService.sageMau(spieler);
@@ -468,7 +466,7 @@ public class ControllerImpl implements ControllerService {
         String x = view.kartenAnzeigenSpielerHand();
         x.toLowerCase(); // falls der Spieler Großbuchstaben eingibt
         if (x.equals("y")){
-            System.out.println(spieler.getSpielerHand().getKarten().size());
+
             for (int i = 0; i < spieler.getSpielerHand().getKarten().size(); i++) {
                 String wert = spieler.getSpielerHand().getKarten().get(i).getKartenWert();
                 String farbe = spieler.getSpielerHand().getKarten().get(i).getKartenFarbe();
@@ -493,6 +491,7 @@ public class ControllerImpl implements ControllerService {
     /**
      * Methode die prüft eine Fehlermeldung zur falschen Karte gibt
      * @param spiel, in welchem man sich gerade befindet
+     * @param spielregelnService - Spielregeln die zum Spiel gehören
      * @return true wenn abgelegt darf und false wenn nicht abgelegt werden darf
      */
     private boolean prüfeKarte(Spiel spiel, SpielregelnService spielregelnService) {
@@ -508,10 +507,10 @@ public class ControllerImpl implements ControllerService {
             } else {
             Karte karte = spielerHand.getKarten().get(wert - 1);
             AblageStapel ablage = spiel.getAblageStapel();
-            System.out.println(spielerHand.getKarten().contains(karte));
+
             if (spielerHand.getKarten().contains(karte)) {
                 boolean x = spielregelnService.pruefeKarte(karte, ablage);
-                System.out.println("pruefekarte ist" + x);
+
                 if (x) {
                     kartenSpielerService.legeKarteAb(spielerHand, karte, ablage);
                     i = false;
@@ -537,6 +536,11 @@ public class ControllerImpl implements ControllerService {
     return rückgabe;
     }
 
+    /**
+     * prüft die Möglichkeit der Kartenablegung und des ziehens für den virtuellen Spieler
+     * @param spieler der virtuelle Spieler
+     * @param spiel das Spiel welches geprüft wird
+     */
     public void virtuellerSpielerIstDran(VirtuellerSpieler spieler, Spiel spiel) {
         for(int i = 0; i < spieler.getSpielerHand().getAnzahlKarten(); i++) {
             if(spieler.getSpielerHand().getKarten().get(i).getKartenWert().equals(spiel.getAblageStapel().getAblagekarten()
@@ -550,6 +554,11 @@ public class ControllerImpl implements ControllerService {
         }
     }
 
+    /**
+     * gibt die ANtwort des virtuellenSpielers
+     * @param spieler der virtuelle Spieler
+     * @param spiel in dem Spiel in dem er sich befindet
+     */
     public void virtuellerSpielerAntwortet(VirtuellerSpieler spieler, Spiel spiel) {
         if(spieler.getSpielerHand().getAnzahlKarten() == 1) {
             view.spielerHatMauGesagt();

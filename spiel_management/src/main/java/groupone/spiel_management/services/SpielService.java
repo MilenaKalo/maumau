@@ -13,6 +13,7 @@ public interface SpielService {
     /**
      *Erstellt eine zufällige Reihenfolge in der die Spieler zum Zug kommen
      * (Methode wird der Klasse Spiel zugeorndet)
+     * @param spielerliste Liste der Spieler, die an dem Spiel teilnehmen
      * @return  Liste der Reihenfolge der Spieler
      */
     List<SpielerInterface> erstelleSpielerReihenfolge(List<SpielerInterface> spielerliste);
@@ -20,14 +21,15 @@ public interface SpielService {
 
     /**
      * Spiel wird beendet
-     * (Methode die in der KLasse Spiel angesiedelt wird)
      * @param spiel Spiel das beendet wird
+     * @return String mit der Meldung, dass das Spiel beendet wurde
      */
      String beendeSpiel(Spiel spiel);
 
     /**
      * zeigt den Gewinner des Spiels an
      * @param spiel das Spiel wo der Gewinner ermittelt werden soll
+     * @return Spieler der das Spiel gewonnen hat
      */
     Spieler gibGewinneraus(Spiel spiel);
 

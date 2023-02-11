@@ -225,7 +225,6 @@ public class SpielregelnServiceTest {
         ablageStapel.getAblagekarten().add(karte1);
 
         // Ausführung
-        SpielerInterface  spieler = new VirtuellerSpieler();
         boolean result = spielregelnService.pruefeKarte(karte2, ablageStapel);
 
         // Überprüfung

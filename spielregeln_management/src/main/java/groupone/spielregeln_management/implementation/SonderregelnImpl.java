@@ -59,11 +59,11 @@ public class SonderregelnImpl implements SpielregelnService {
     public SpielerInterface nächsterSpielerIstDran(Spiel spiel) {
         SpielerInterface aktiverSpieler = spiel.getAktiverSpieler();
         int aktiverSpielerIndex = spiel.getSpielerListe().indexOf(aktiverSpieler);
-        //System.out.println(aktiverSpielerIndex);
+
         int naechsterSpielerIndex;
 
         boolean richtungsWechsel = richtungWechsel(spiel.getAblageStapel());
-        //System.out.println("Richtungswechsel " +richtungsWechsel);
+
 
         // aussetzen
         if(spiel.getAblageStapel().getAblagekarten().get(spiel.getAblageStapel().getAblagekarten().size() - 1)
@@ -72,27 +72,27 @@ public class SonderregelnImpl implements SpielregelnService {
             naechsterSpielerIndex = spiel.getSpielerListe().indexOf(naechsterSpieler);
             // Richtungswechsel
         } else if (richtungsWechsel) {
-            //System.out.println("erste if");
+
             Collections.reverse(spiel.getSpielerListe());
             aktiverSpielerIndex = spiel.getSpielerListe().indexOf(aktiverSpieler);
-            //System.out.println(aktiverSpielerIndex);
+
             if(aktiverSpielerIndex + 1 > spiel.getSpielerListe().size() - 1) {
-                //System.out.println("erste if if");
+
                 naechsterSpielerIndex = aktiverSpielerIndex - spiel.getSpielerListe().size() + 1;
             }else {
-                //System.out.println("erste if else");
+
                 naechsterSpielerIndex = spiel.getSpielerListe().indexOf(aktiverSpieler) + 1;
             }
         // nächster Spieler ist dran (Fall: aktiver Spieler ist Letzter in der Spielerliste)
         } else if (aktiverSpielerIndex + 1 > spiel.getSpielerListe().size() -1) {
             naechsterSpielerIndex = aktiverSpielerIndex+1-spiel.getSpielerListe().size();
-            //System.out.println("zweite if");
+
         // nächster Spieler ist dran (Fall: nicht am Ende der Spielerliste)
         } else {
             naechsterSpielerIndex = aktiverSpielerIndex+1;
-            // System.out.println("else ");
+
         }
-        // System.out.println(naechsterSpielerIndex);
+
         spiel.setAktiverSpieler(spiel.getSpielerListe().get(naechsterSpielerIndex));
         return spiel.getAktiverSpieler();
     }
@@ -100,27 +100,24 @@ public class SonderregelnImpl implements SpielregelnService {
     @Override
     public SpielerInterface aussetzen(Spiel spiel) {
        AblageStapel ablageStapel =  spiel.getAblageStapel();
-       //System.out.println(ablageStapel.getAblagekarten());
+
        int anzahl = ablageStapel.getAblagekarten().size();
        Karte karte = ablageStapel.getAblagekarten().get(anzahl - 1);
-       //System.out.println(karte.getKartenWert());
-       //System.out.println(karte.getKartenFarbe());
-       //System.out.println(anzahl);
+
        if (karte.getKartenWert().equals("8")) {
            SpielerInterface aktiverSpieler = spiel.getAktiverSpieler();
 
            int aktiverSpielerIndex =spiel.getSpielerListe().indexOf(aktiverSpieler);
-           //System.out.println("aktiver: "+ aktiverSpielerIndex);
+
            int naechsterSpielerIndex;
            if (aktiverSpielerIndex+2 > spiel.getSpielerListe().size()) {
                naechsterSpielerIndex = aktiverSpielerIndex+2-spiel.getSpielerListe().size();
            } else {
                naechsterSpielerIndex = aktiverSpielerIndex+2;
            }
-           //System.out.println("naechster: "+ naechsterSpielerIndex);
-           return (Spieler) spiel.getSpielerListe().get(naechsterSpielerIndex);
+
+           return spiel.getSpielerListe().get(naechsterSpielerIndex);
        } else {
-           System.out.println("keine Acht");
            return nächsterSpielerIstDran(spiel);
        }
     }

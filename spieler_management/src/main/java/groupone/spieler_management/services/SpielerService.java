@@ -33,6 +33,7 @@ public interface SpielerService {
      * Ein Spieler wird erstellt.
      * @param id Die id des Spielers
      * @param name Der Name des Spielers
+     * @return spieler der Spieler der erstellt wurde
      */
     Spieler spielerErstellen(long id, String name);
 

@@ -1,6 +1,6 @@
 package groupone.spieler_management.DAO;
 
-import groupone.kartenstapel_management.classes.ZiehStapel;
+
 import groupone.spieler_management.classes.SpielerInterface;
 
 public interface ISpielerInterfaceDAO {

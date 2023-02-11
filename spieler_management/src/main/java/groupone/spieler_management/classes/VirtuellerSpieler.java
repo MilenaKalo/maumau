@@ -1,11 +1,10 @@
 package groupone.spieler_management.classes;
 
-import groupone.kartenstapel_management.classes.SpielerHand;
-import javax.persistence.*;
+
 
 public class VirtuellerSpieler extends SpielerInterface {
 
-    // Konstruktor
+
     public VirtuellerSpieler() {
     }
 

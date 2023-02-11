@@ -24,14 +24,14 @@ public interface VirtuellerSpielerService {
 
     /**
      * Spieler bekommt einen Punkt dafür dass er gewonnen hat dazu.
-     * (Methode die der Klasse Spieler gehört)
      * @param spieler Spieler der einen Pnkt bekommt
      */
     void erhöhePunkt(VirtuellerSpieler spieler);
 
     /**
-     * Ein Spieler wird erstellt.
+     * Ein virtuellerSpieler wird erstellt.
+     * @return virtuellerSpieler der virtuelle Spieler der erstellt wurde
      */
-    VirtuellerSpieler spielerErstellen();
+     VirtuellerSpieler spielerErstellen();
 
 }

@@ -30,7 +30,7 @@ public class View {
 
     /**
      * fragt ob ein neues Spiel gestartet werden soll oder ein vorhandenes Spiel geladen werden soll
-     * @Return Die Eingabe des Spielers -> Wo soll es weitergehen
+     * @return Die Eingabe des Spielers -> Wo soll es weitergehen
      */
     public String startGame() {
         System.out.println("Möchtest du ein neues Spiel starten oder ein vorhandenes Spiel laden?");

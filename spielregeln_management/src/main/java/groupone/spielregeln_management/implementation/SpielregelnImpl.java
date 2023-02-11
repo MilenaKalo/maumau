@@ -61,21 +61,19 @@ public class SpielregelnImpl implements SpielregelnService {
         System.out.println("Ich bin in der Methode");
         SpielerInterface aktiverSpieler = spiel.getAktiverSpieler();
         int aktiverSpielerIndex = spiel.getSpielerListe().indexOf(aktiverSpieler);
-      //  System.out.println(aktiverSpielerIndex);
+
         int naechsterSpielerIndex;
-        System.out.println("Ich bin in der Methode und bin vor der if");
+
     if (aktiverSpielerIndex + 1 > spiel.getSpielerListe().size() -1) {
         naechsterSpielerIndex = aktiverSpielerIndex+1-spiel.getSpielerListe().size();
-        //System.out.println("zweite if");
+
         // nächster Spieler ist dran (Fall: nicht am Ende der Spielerliste)
     } else {
         naechsterSpielerIndex = aktiverSpielerIndex+1;
-        // System.out.println("else ");
+
     }
-        System.out.println("Ich bin in der Methode und nach der if");
-   //     System.out.println(naechsterSpielerIndex);
         spiel.setAktiverSpieler(spiel.getSpielerListe().get(naechsterSpielerIndex));
-        System.out.println("Ich bin am ende");
+
         return spiel.getAktiverSpieler();
     }
 }

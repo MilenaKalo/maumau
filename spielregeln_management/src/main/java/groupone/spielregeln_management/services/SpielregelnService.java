@@ -59,13 +59,14 @@ public interface SpielregelnService {
 
     /**
      * prüft ob der jetztige Spieler ein Ass gelegt hat und somit nochmal legen darf
-     * @param ablageStapel
+     * @param ablageStapel der Stapel auf dem die Karte liegt
      * @return true wenn er nochmal legen darf und false wenn nicht
      */
     boolean assGelegt(AblageStapel ablageStapel);
 
     /** Es wurde eine 7 gelegt: nächster Spieler der keine passende Karte hat muss zusätzlich 2 ziehen.
      @param spiel Spiel in dem die oberste Karte auf dem Ablagestapel geprüft wird
+     @return true wenn die oberste Karte eine 7 ist und false wenn nicht
      */
     boolean prüfeAufSiebenGelegt(Spiel spiel);
 }

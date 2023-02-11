@@ -93,7 +93,6 @@ public class SpielImpl implements SpielService {
                 spiel.getSpielerListe().get(3).setSpielerHand(spielerHand9);
             break;
         }
-       // SpielImpl spielImpl = new SpielImpl(kartenSpiel = new KartenSpielImpl());
 
         List<Karte> kartenDeck = kartenSpiel.erstelleKarten(); // do return when hier mocken
         kartenSpiel.mischeKarten(kartenDeck);
