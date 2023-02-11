@@ -158,7 +158,6 @@ public class ControllerImpl implements ControllerService {
         spiel.setAktiverSpieler(spiel.getSpielerListe().get(0));
         view.zeigeAktivenSpieler(spiel.getAktiverSpieler());
         boolean boo = true;
-        System.out.println("Ich bin hier angekommen!");
         while (boo) {
             anzeigeObersteKarte(spiel);
             if(spiel.getAktiverSpieler().isIstVirtuell() == true) {
@@ -224,18 +223,13 @@ public class ControllerImpl implements ControllerService {
                 virtuellerSpielerAntwortet((VirtuellerSpieler) spiel.getAktiverSpieler(), spiel);
                 spielregelnEinfach.nächsterSpielerIstDran(spiel);
                 view.zeigeAktivenSpieler(spiel.getAktiverSpieler());
-                System.out.println("Virtueller Spieler verlässt einsatz");
             } else{
             prüfeMauUndMauMau(spiel);
                 if(spiel.getAktiverSpieler().getSpielerHand().getAnzahlKarten() == 0){
                     spielService.gibGewinneraus(spiel);
                 } else{
             spielregelnEinfach.nächsterSpielerIstDran(spiel);
-            System.out.println("Als nächstes gehe ich in die view");
             view.zeigeAktivenSpieler(spiel.getAktiverSpieler());
-            System.out.println("Ich war in der View");
-           // spielDAO.speichereSpiel(spiel);
-            System.out.println("hier hier");
         }}}
     }
 
@@ -495,7 +489,6 @@ public class ControllerImpl implements ControllerService {
         boolean i = true;
         boolean rückgabe = false;
         while (i) {
-            System.out.println("Hallo Hierher");
             int wert = view.karteAblegen();
             SpielerInterface spieler = spiel.getAktiverSpieler();
             SpielerHand spielerHand = spieler.getSpielerHand();
