@@ -1,16 +1,15 @@
 package groupone.spiel_management.classes;
 
-import groupone.spieler_management.classes.Spieler;
 import groupone.kartenstapel_management.classes.AblageStapel;
 import groupone.kartenstapel_management.classes.ZiehStapel;
 import groupone.spieler_management.classes.SpielerInterface;
-
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "SPIEL")
 public class Spiel {
+
     @Id
     @Column(name = "SID", nullable = false)
     private Long id;
@@ -35,7 +34,6 @@ public class Spiel {
     public Spiel() {
 
     }
-
 
     public Long getId() {
         return id;

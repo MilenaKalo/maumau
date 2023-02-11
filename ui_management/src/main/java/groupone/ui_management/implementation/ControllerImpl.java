@@ -317,11 +317,9 @@ public class ControllerImpl implements ControllerService {
                 virtuellerSpielerAntwortet((VirtuellerSpieler) spiel.getAktiverSpieler(), spiel);
                 spielregelnSonder.nächsterSpielerIstDran(spiel);
                 view.zeigeAktivenSpieler(spiel.getAktiverSpieler());
-                System.out.println("Virtueller Spieler verlässt einsatz");
             } else{
             prüfeMauUndMauMau(spiel);
             if(spiel.getZiehStapel().getZiehkarten().size() == 1) {
-                System.out.println("Jezt wird abgegeben");
                 kartenSpiel.kartenDesAblagestapelsDemZiehstapelUebergeben(spiel.getAblageStapel(), spiel.getZiehStapel());
                 kartenSpiel.mischeKarten(spiel.getZiehStapel().getZiehkarten());
             }if(spiel.getAktiverSpieler().getSpielerHand().getAnzahlKarten() == 0){
@@ -343,7 +341,6 @@ public class ControllerImpl implements ControllerService {
             spielerHatWasGesagt(aussage, (Spieler) spiel.getAktiverSpieler());
         }
         if(aussage.equalsIgnoreCase("nein")) {
-           System.out.println("ok dann nicht");
         }
 
         //wenn Mau Mau gesagt wurde und rechtmäßig ist wird das Spiel beendet
@@ -565,7 +562,6 @@ public class ControllerImpl implements ControllerService {
         } else if(spieler.getSpielerHand().getAnzahlKarten() == 0) {
             view.spielerHatMauMauGesagt();
         } else{
-            System.out.println("Ich sage gar nix");
         }
     }
 

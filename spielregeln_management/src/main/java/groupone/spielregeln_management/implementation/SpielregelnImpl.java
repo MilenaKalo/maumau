@@ -58,7 +58,6 @@ public class SpielregelnImpl implements SpielregelnService {
 
     @Override
     public SpielerInterface nächsterSpielerIstDran(Spiel spiel) {
-        System.out.println("Ich bin in der Methode");
         SpielerInterface aktiverSpieler = spiel.getAktiverSpieler();
         int aktiverSpielerIndex = spiel.getSpielerListe().indexOf(aktiverSpieler);
 
