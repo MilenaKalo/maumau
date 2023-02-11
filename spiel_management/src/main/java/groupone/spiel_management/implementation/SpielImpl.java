@@ -44,9 +44,9 @@ public class SpielImpl implements SpielService {
     @Override
     public Spieler gibGewinneraus(Spiel spiel) {
         Map<Spieler, Integer> spielerpunkte = new HashMap<>();
-        for (Spieler spieler : spiel.getSpielerListe()) {
+        for (SpielerInterface spieler : spiel.getSpielerListe()) {
               int i = spieler.getPunkte();
-              spielerpunkte.put(spieler, i);
+              spielerpunkte.put((Spieler) spieler, i);
         }
         var x = spielerpunkte.entrySet().stream().max(Map.Entry.comparingByValue());
         return x.get().getKey();

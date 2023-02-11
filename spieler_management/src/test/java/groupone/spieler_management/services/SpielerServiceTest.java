@@ -3,27 +3,14 @@ package groupone.spieler_management.services;
 
 
 import groupone.spieler_management.classes.Spieler;
-
 import groupone.spieler_management.implementation.SpielerImpl;
-
-
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-
 import static org.junit.jupiter.api.Assertions.*;
 
 
 public class SpielerServiceTest {
-    private SpielerImpl spielerImpl;
-    private Spieler spieler;
-
-    @BeforeEach
-    public void setUp() {
-        spielerImpl = new SpielerImpl();
-        spieler = spielerImpl.spielerErstellen(1, "Player 1", 0);
-    }
+    private SpielerService spielerImpl = new SpielerImpl();
+    private Spieler spieler = spielerImpl.spielerErstellen(1L, "Player 1");
 
     @Test
     public void testErhöhePunkt() {

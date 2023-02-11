@@ -6,6 +6,7 @@ import groupone.kartenstapel_management.classes.ZiehStapel;
 import groupone.spiel_management.classes.Spiel;
 import groupone.spiel_management.services.KartenSpielerService;
 import groupone.spieler_management.classes.Spieler;
+import groupone.spieler_management.classes.SpielerInterface;
 import groupone.spielregeln_management.services.SpielregelnService;
 
 import java.util.Collections;
@@ -106,7 +107,7 @@ public class SonderregelnImpl implements SpielregelnService {
        //System.out.println(karte.getKartenFarbe());
        //System.out.println(anzahl);
        if (karte.getKartenWert().equals("8")) {
-           Spieler aktiverSpieler = spiel.getAktiverSpieler();
+           SpielerInterface aktiverSpieler = spiel.getAktiverSpieler();
 
            int aktiverSpielerIndex =spiel.getSpielerListe().indexOf(aktiverSpieler);
            //System.out.println("aktiver: "+ aktiverSpielerIndex);

@@ -7,6 +7,7 @@ import groupone.kartenstapel_management.services.KartenSpielService;
 import groupone.spiel_management.classes.Spiel;
 import groupone.spiel_management.implementation.SpielImpl;
 import groupone.spieler_management.classes.Spieler;
+import groupone.spieler_management.classes.SpielerInterface;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -43,12 +44,12 @@ public class SpielServiceTest {
 
     Karte dummyKarte = new Karte("Karo", "Ass");
 
-    Spieler spieler1 = new Spieler(1, "Max Mustermann", 0);
-    Spieler spieler2 = new Spieler(2, "Maxine Musterfrau", 0);
-    Spieler spieler3 = new Spieler(3, "Erik Mustermann", 0);
-    Spieler spieler4 = new Spieler(4, "Erika Musterfrau", 0);
+    SpielerInterface spieler1 = new Spieler(1, "Max Mustermann");
+    SpielerInterface spieler2 = new Spieler(2, "Maxine Musterfrau");
+    SpielerInterface spieler3 = new Spieler(3, "Erik Mustermann");
+    SpielerInterface spieler4 = new Spieler(4, "Erika Musterfrau");
 
-    List<Spieler> spielerListe = new ArrayList<>();
+    List<SpielerInterface> spielerListe = new ArrayList<>();
 
     @Test
     public void erstelleSpielTest() {

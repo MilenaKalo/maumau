@@ -46,11 +46,11 @@ public class Spiel {
     }
 
     //Getter und Setter
-    public List<Spieler> getSpielerListe() {
+    public List<SpielerInterface> getSpielerListe() {
         return spielerListe;
     }
 
-    public void setSpielerListe(List<Spieler> spielerListe) {
+    public void setSpielerListe(List<SpielerInterface> spielerListe) {
         this.spielerListe = spielerListe;
     }
 
@@ -78,7 +78,7 @@ public class Spiel {
         this.ziehStapel = ziehStapel;
     }
 
-    public Spieler getAktiverSpieler() {
+    public SpielerInterface getAktiverSpieler() {
         return aktiverSpieler;
     }
 
@@ -93,4 +93,5 @@ public class Spiel {
         this.ablageStapel = ablageStapel;
         this.ziehStapel = ziehStapel;
     }
+
 }

@@ -146,7 +146,7 @@ public class SpielregelnServiceTest {
 
         Spiel spiel = new Spiel (spielerListe, runde, stapel, ziehStapel);
         spiel.setAktiverSpieler(spieler1);
-        Spieler actual = spielregelnService.aussetzen(spiel);
+        SpielerInterface actual = spielregelnService.aussetzen(spiel);
 
         //assert
         assertEquals(erwartet, actual);
@@ -170,7 +170,7 @@ public class SpielregelnServiceTest {
         ablageStapel.getAblagekarten().add(karoNeun);
 
         //erwartet
-        Spieler erwartet = spieler4;
+        SpielerInterface erwartet = spieler4;
 
         //actual
         Spiel spiel = new Spiel (spielerListe, runde, ablageStapel, ziehStapel);
@@ -188,7 +188,7 @@ public class SpielregelnServiceTest {
         ablageStapelListe.add(herzAcht);
         AblageStapel ablageStapel = new AblageStapel(1, ablageStapelListe);
 
-        Spieler spieler = new Spieler(1, "Max Mustermann", 0);
+        SpielerInterface spieler = new Spieler(1, "Max Mustermann");
         spielerHandListe.add(karoNeun);
         SpielerHand spielerHand = new SpielerHand(1, spielerHandListe);
         spieler.setSpielerHand(spielerHand);

@@ -14,8 +14,12 @@ import groupone.spiel_management.implementation.SpielImpl;
 import groupone.spiel_management.services.KartenSpielerService;
 import groupone.spiel_management.services.SpielService;
 import groupone.spieler_management.classes.Spieler;
+import groupone.spieler_management.classes.SpielerInterface;
+import groupone.spieler_management.classes.VirtuellerSpieler;
 import groupone.spieler_management.implementation.SpielerImpl;
+import groupone.spieler_management.implementation.VirtuellerSpielerImpl;
 import groupone.spieler_management.services.SpielerService;
+import groupone.spieler_management.services.VirtuellerSpielerService;
 import groupone.spielregeln_management.implementation.SonderregelnImpl;
 import groupone.spielregeln_management.implementation.SpielregelnImpl;
 import groupone.spielregeln_management.services.SpielregelnService;
@@ -35,13 +39,12 @@ public class ControllerImpl implements ControllerService {
     private AblageStapel ablageStapel;
     private ZiehStapel ziehStapel;
     private SpielService spielService;
-    private SpielerService spielerService;
     private KartenSpielerService kartenSpielerService;
     private SpielregelnService spielregelnService;
     private int anzahlZiehen;
-
-
-    // DB
+    private ISpielDAO spielDAO;
+    private SpielerService spielerService = new SpielerImpl();
+    private VirtuellerSpielerService virtuellerSpielerService = new VirtuellerSpielerImpl();
 
     public ControllerImpl() {
     }
@@ -79,7 +82,7 @@ public class ControllerImpl implements ControllerService {
      * Methode läd ein existierendes Spiel aus der Datenbank oder erstellt ein neues Spiel
      */
     public void starteSpiel() {
-        //
+
         String x = view.startGame();
 
         if (x.equals("n")) {
@@ -87,16 +90,14 @@ public class ControllerImpl implements ControllerService {
             this.ziehStapel = new ZiehStapel();
             this.kartenSpiel = new KartenSpielImpl();
             this.spielService = new SpielImpl(this.kartenSpiel);
-            this.spielerService = new SpielerImpl();
             this.kartenSpielerService = new KartenSpielerImpl();
 
             // erster Spieler wird hinzugefügt
             Long id2 = view.idFürSpiel();
             String spielername = view.spielerName();
             long id =view.spielerId();
-            Spieler spieler = spielerService.spielerErstellen(id, spielername, 0);
+            Spieler spieler = spielerService.spielerErstellen(id, spielername);
             spielerList.add(spieler);
-
 
             //weiterer Spieler wird hinzugefügt
             boolean weitermachen = true;
@@ -109,15 +110,16 @@ public class ControllerImpl implements ControllerService {
                         } else {
                             weitermachen = false;
                         }
+
                     } else if (frage.equals("m")) {
                          spielername = view.spielerName();
                          id =  view.spielerId();
-
-                        spieler = spielerService.spielerErstellen(id, spielername, 0);
+                        spieler = spielerService.spielerErstellen(id, spielername);
                         spielerList.add(spieler);
                         if (spielerList.size() == 4) {
                             break;
                         }
+
                     } else if (frage.equals("v")) {
                         SpielerInterface virtuellerSpieler = virtuellerSpielerService.spielerErstellen();
                         spielerList.add(virtuellerSpieler);
@@ -161,15 +163,17 @@ public class ControllerImpl implements ControllerService {
         spiel.setAktiverSpieler(spiel.getSpielerListe().get(0));
         view.zeigeAktivenSpieler(spiel.getAktiverSpieler());
         boolean boo = true;
-        boolean ersteRunde = true;
+        System.out.println("Ich bin hier angekommen!");
         while (boo) {
             anzeigeObersteKarte(spiel);
-
+            if(spiel.getAktiverSpieler().isIstVirtuell() == true) {
+                virtuellerSpielerIstDran((VirtuellerSpieler) spiel.getAktiverSpieler(), spiel);
+            } else {
             zeigeKartenSpielerHand(spiel.getAktiverSpieler());
             boolean machWeiter = true;
             while (machWeiter) {
-                boolean u =  spielregelnEinfach.prüfeAufSiebenGelegt(spiel);
-                if (u){
+                boolean u = spielregelnEinfach.prüfeAufSiebenGelegt(spiel);
+                if (u) {
                     anzahlZiehen = 2;
                     for (int i = 0; i < anzahlZiehen; i++) {
                         kartenSpielerService.zieheKarte(spiel.getAktiverSpieler().getSpielerHand(), spiel.getZiehStapel());
@@ -178,25 +182,23 @@ public class ControllerImpl implements ControllerService {
                 String antwortFrage = view.frageKarteZiehen();
                 antwortFrage.toLowerCase();
                 if (antwortFrage.equals("a")) {
-                    boolean r =  prüfeKarte(spiel, spielregelnEinfach);
-                    if (r){
+                    boolean r = prüfeKarte(spiel, spielregelnEinfach);
+                    if (r) {
                         wunschFarbe(spiel, spielregelnEinfach);
                         boolean nurFuerAss = true;
-                        if(spielregelnEinfach.assGelegt(spiel.getAblageStapel())){
-                            while(nurFuerAss) {
+                        if (spielregelnEinfach.assGelegt(spiel.getAblageStapel())) {
+                            while (nurFuerAss) {
                                 String antwortFrage2 = view.frageKarteZiehen();
                                 antwortFrage2.toLowerCase();
                                 if (antwortFrage2.equals("a")) {
-                                    boolean t =  prüfeKarte(spiel, spielregelnEinfach);
-                                    if(t){
+                                    boolean t = prüfeKarte(spiel, spielregelnEinfach);
+                                    if (t) {
                                         wunschFarbe(spiel, spielregelnEinfach);
-                                        if(spielregelnEinfach.assGelegt(spiel.getAblageStapel())){
-                                        }
-                                        else{
+                                        if (spielregelnEinfach.assGelegt(spiel.getAblageStapel())) {
+                                        } else {
                                             nurFuerAss = false;
                                         }
-                                    }
-                                    else {
+                                    } else {
                                         view.falscheKarte();
                                         // nurFuerAss = false;
                                     }
@@ -206,19 +208,25 @@ public class ControllerImpl implements ControllerService {
                                 } else {
                                     view.falscheAntwort();
                                 }
-                            }}
+                            }
+                        }
                         machWeiter = false;
-                    }
-                    else{
+                    } else {
                         view.falscheKarte();
                     }
-                }else if (antwortFrage.equals("z")) {
+                } else if (antwortFrage.equals("z")) {
                     zieheKarte(spiel.getAktiverSpieler());
                     machWeiter = false;
                 } else {
                     view.falscheAntwort();
                 }
-            }
+            }}
+            if(spiel.getAktiverSpieler().isIstVirtuell() == true){
+                virtuellerSpielerAntwortet((VirtuellerSpieler) spiel.getAktiverSpieler(), spiel);
+                spielregelnEinfach.nächsterSpielerIstDran(spiel);
+                view.zeigeAktivenSpieler(spiel.getAktiverSpieler());
+                System.out.println("Virtueller Spieler verlässt einsatz");
+            } else{
             prüfeMauUndMauMau(spiel);
             spielregelnEinfach.nächsterSpielerIstDran(spiel);
             System.out.println("Als nächstes gehe ich in die view");
@@ -242,7 +250,9 @@ public class ControllerImpl implements ControllerService {
         boolean ersteRunde = true;
         while (boo) {
             anzeigeObersteKarte(spiel);
-
+            if(spiel.getAktiverSpieler().isIstVirtuell() == true) {
+                virtuellerSpielerIstDran((VirtuellerSpieler) spiel.getAktiverSpieler(), spiel);
+            } else {
             zeigeKartenSpielerHand(spiel.getAktiverSpieler());
             boolean machWeiter = true;
             while (machWeiter) {
@@ -296,11 +306,17 @@ public class ControllerImpl implements ControllerService {
                 } else {
                     view.falscheAntwort();
                 }
-            }
+            }}
+            if(spiel.getAktiverSpieler().isIstVirtuell() == true){
+                virtuellerSpielerAntwortet((VirtuellerSpieler) spiel.getAktiverSpieler(), spiel);
+                spielregelnSonder.nächsterSpielerIstDran(spiel);
+                view.zeigeAktivenSpieler(spiel.getAktiverSpieler());
+                System.out.println("Virtueller Spieler verlässt einsatz");
+            } else{
             prüfeMauUndMauMau(spiel);
             spielregelnSonder.nächsterSpielerIstDran(spiel);
             view.zeigeAktivenSpieler(spiel.getAktiverSpieler());
-        }
+        }}
     }
 
     /**
@@ -311,7 +327,7 @@ public class ControllerImpl implements ControllerService {
         String aussage = view.wasSagen();
 
         if(aussage.equalsIgnoreCase("mau") || aussage.equalsIgnoreCase("maumau")){
-            spielerHatWasGesagt(aussage, spiel.getAktiverSpieler());
+            spielerHatWasGesagt(aussage, (Spieler) spiel.getAktiverSpieler());
         }
         if(aussage.equalsIgnoreCase("nein")) {
            System.out.println("ok dann nicht");
@@ -415,11 +431,21 @@ public class ControllerImpl implements ControllerService {
         }
     }
 
+    private void virtuellerSpielerHatWasGesagt(String aussage, VirtuellerSpieler spieler) {
+        if(aussage.equals("mau")){
+            virtuellerSpielerService.sageMau(spieler);
+            view.spielerHatMauGesagt();
+        }else if(aussage.equals("maumau")) {
+            virtuellerSpielerService.maumau(spieler);
+            view.spielerHatMauMauGesagt();
+        }
+    }
+
     /**
      * Methode die die Karten der Spielerhand des Spielers anzeigt
      * @param spieler - Spieler dessen Hand angezeigt werden soll
      */
-    private void zeigeKartenSpielerHand(Spieler spieler) {
+    private void zeigeKartenSpielerHand(SpielerInterface spieler) {
         String x = view.kartenAnzeigenSpielerHand();
         x.toLowerCase(); // falls der Spieler Großbuchstaben eingibt
         if (x.equals("y")){
@@ -455,7 +481,7 @@ public class ControllerImpl implements ControllerService {
         boolean rückgabe = false;
         while (i) {
             int wert = view.karteAblegen();
-            Spieler spieler = spiel.getAktiverSpieler();
+            SpielerInterface spieler = spiel.getAktiverSpieler();
             SpielerHand spielerHand = spieler.getSpielerHand();
             Karte karte = spielerHand.getKarten().get(wert - 1);
             AblageStapel ablage = spiel.getAblageStapel();
@@ -485,5 +511,30 @@ public class ControllerImpl implements ControllerService {
         }
         return rückgabe;
     }
+
+    public void virtuellerSpielerIstDran(VirtuellerSpieler spieler, Spiel spiel) {
+        for(int i = 0; i < spieler.getSpielerHand().getAnzahlKarten(); i++) {
+            if(spieler.getSpielerHand().getKarten().get(i).getKartenWert().equals(spiel.getAblageStapel().getAblagekarten()
+                    .get(spiel.getAblageStapel().getAblagekarten().size() - 1).getKartenWert()) || spieler.getSpielerHand().getKarten().get(i).getKartenFarbe().equals(spiel.getAblageStapel().getAblagekarten()
+                    .get(spiel.getAblageStapel().getAblagekarten().size() - 1).getKartenFarbe())) {
+                kartenSpielerService.legeKarteAb(spieler.getSpielerHand(), spieler.getSpielerHand().getKarten().get(i), spiel.getAblageStapel());
+            } else{
+                kartenSpielerService.zieheKarte(spieler.getSpielerHand(), spiel.getZiehStapel());
+            }
+            break;
+        }
+    }
+
+    public void virtuellerSpielerAntwortet(VirtuellerSpieler spieler, Spiel spiel) {
+        if(spieler.getSpielerHand().getAnzahlKarten() == 1) {
+            view.spielerHatMauGesagt();
+        } else if(spieler.getSpielerHand().getAnzahlKarten() == 0) {
+            view.spielerHatMauMauGesagt();
+        } else{
+            System.out.println("Ich sage gar nix");
+        }
+    }
+
+
     }
 

@@ -3,6 +3,7 @@ package groupone.ui_management.implementation;
 
 
 import groupone.spieler_management.classes.Spieler;
+import groupone.spieler_management.classes.SpielerInterface;
 
 import java.util.List;
 import java.util.Scanner;
@@ -43,7 +44,7 @@ public class View {
      * zeigt den Namen des aktiven Spielers an
      * @param spieler der aktive Spieler
      */
-    public void zeigeAktivenSpieler(Spieler spieler) {
+    public void zeigeAktivenSpieler(SpielerInterface spieler) {
         System.out.println("Spieler " + spieler.getName() + " ist am Zug!");
     }
 

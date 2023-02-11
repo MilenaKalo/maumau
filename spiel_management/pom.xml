@@ -12,12 +12,6 @@
     <artifactId>spiel_management</artifactId>
     <dependencies>
         <dependency>
-            <groupId>org.groupone</groupId>
-            <artifactId>spieler_management</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
             <groupId>com.microsoft.sqlserver</groupId>
             <artifactId>mssql-jdbc</artifactId>
             <version>9.5.0.jre8-preview</version>
